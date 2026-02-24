@@ -1,4 +1,4 @@
-import { StaggerContainer } from "lambchop";
+import { StaggerContainer } from "lmbchp";
 
 export default function StaggerContainerDemo() {
   return (

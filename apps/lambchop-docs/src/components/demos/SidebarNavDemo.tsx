@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SidebarNav, type NavItem } from "lambchop";
+import { SidebarNav, type NavItem } from "lmbchp";
 
 const items: NavItem[] = [
   {

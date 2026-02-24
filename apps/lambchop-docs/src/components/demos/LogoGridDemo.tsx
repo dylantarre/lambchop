@@ -1,4 +1,4 @@
-import { LogoGrid } from "lambchop";
+import { LogoGrid } from "lmbchp";
 
 const logos = [
   { src: "https://placehold.co/120x40/1a1a1a/e6ddd0?text=lambgoat", alt: "lambgoat" },

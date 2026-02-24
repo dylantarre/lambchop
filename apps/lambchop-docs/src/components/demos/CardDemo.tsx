@@ -1,4 +1,4 @@
-import { Card } from "lambchop";
+import { Card } from "lmbchp";
 
 export default function CardDemo() {
   return (

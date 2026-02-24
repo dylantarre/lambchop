@@ -1,4 +1,4 @@
-import { DataTable } from "lambchop";
+import { DataTable } from "lmbchp";
 import { createColumnHelper } from "@tanstack/react-table";
 
 interface ArticleRow {

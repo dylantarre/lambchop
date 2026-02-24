@@ -14,7 +14,7 @@
     "@astrojs/mdx": "^4.1.0",
     "@astrojs/tailwind": "^6.0.0",
     "@tailwindcss/typography": "^0.5.16",
-    "lambchop": "workspace:*",
+    "lmbchp": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "@types/react": "^19.0.8",

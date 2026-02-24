@@ -1,4 +1,4 @@
-import { MetricTrend } from "lambchop";
+import { MetricTrend } from "lmbchp";
 
 export default function MetricTrendDemo() {
   return (

@@ -1,4 +1,4 @@
-import { TestimonialCard } from "lambchop";
+import { TestimonialCard } from "lmbchp";
 
 export default function TestimonialCardDemo() {
   return (

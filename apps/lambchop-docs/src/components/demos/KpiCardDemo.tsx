@@ -1,4 +1,4 @@
-import { KpiCard } from "lambchop";
+import { KpiCard } from "lmbchp";
 
 const sparklineData = [1250, 1380, 1420, 1290, 1510, 1620, 1580, 1690, 1750, 1820, 1780, 1910, 1950, 2050];
 

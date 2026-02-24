@@ -37,7 +37,7 @@ export function TestimonialCard({
           {Array.from({ length: 5 }, (_, i) => (
             <svg
               key={i}
-              className={cn("h-4 w-4", i < rating ? "text-primary" : "text-muted")}
+              className={cn("h-4 w-4", i < rating ? "text-primary" : "text-muted-foreground")}
               viewBox="0 0 20 20"
               fill="currentColor"
             >

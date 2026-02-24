@@ -1,4 +1,4 @@
-import { LineChart } from "lambchop";
+import { LineChart } from "lmbchp";
 
 const dailyData = [
   { date: "Jan 1", noecho: 820, theneedledrop: 340, melodicmag: 140 },

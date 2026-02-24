@@ -1,4 +1,4 @@
-import { ComparisonRow } from "lambchop";
+import { ComparisonRow } from "lmbchp";
 
 const fmt = (v: number) =>
   v.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 });

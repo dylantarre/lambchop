@@ -1,4 +1,4 @@
-import { StatCard } from "lambchop";
+import { StatCard } from "lmbchp";
 
 export default function StatCardDemo() {
   return (

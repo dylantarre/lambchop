@@ -1,4 +1,4 @@
-import { FadeIn } from "lambchop";
+import { FadeIn } from "lmbchp";
 
 export default function FadeInDemo() {
   return (

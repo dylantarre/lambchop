@@ -1,4 +1,4 @@
-import { AreaChart } from "lambchop";
+import { AreaChart } from "lmbchp";
 
 const revenueBySource = [
   { date: "Jan 1", playwire: 820, stripe: 310, partnerize: 120 },

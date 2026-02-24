@@ -1,4 +1,4 @@
-import { Section } from "lambchop";
+import { Section } from "lmbchp";
 
 export default function SectionDemo() {
   return (

@@ -1,4 +1,4 @@
-import { BarChart } from "lambchop";
+import { BarChart } from "lmbchp";
 
 const multiSiteData = [
   { month: "Sep", noecho: 8200, theneedledrop: 4100, melodicmag: 1900 },

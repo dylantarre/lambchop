@@ -1,4 +1,4 @@
-import { PricingCard } from "lambchop";
+import { PricingCard } from "lmbchp";
 
 export default function PricingCardDemo() {
   return (

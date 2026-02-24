@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DateRangePicker } from "lambchop";
+import { DateRangePicker } from "lmbchp";
 
 export default function DateRangePickerDemo() {
   const [range, setRange] = useState({

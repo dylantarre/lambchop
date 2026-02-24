@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FilterBar, type FilterDef } from "lambchop";
+import { FilterBar, type FilterDef } from "lmbchp";
 
 const filters: FilterDef[] = [
   {

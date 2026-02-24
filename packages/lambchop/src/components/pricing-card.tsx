@@ -73,7 +73,7 @@ export function PricingCard({
         {features.map((feature) => (
           <li key={feature} className="flex items-start gap-2 text-sm">
             <svg
-              className={cn("mt-0.5 h-4 w-4 shrink-0", featured ? "text-primary" : "text-primary")}
+              className={cn("mt-0.5 h-4 w-4 shrink-0", featured ? "text-primary" : "text-foreground")}
               viewBox="0 0 20 20"
               fill="currentColor"
             >

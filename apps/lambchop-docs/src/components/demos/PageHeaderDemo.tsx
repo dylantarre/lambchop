@@ -1,4 +1,4 @@
-import { PageHeader } from "lambchop";
+import { PageHeader } from "lmbchp";
 
 export default function PageHeaderDemo() {
   return (

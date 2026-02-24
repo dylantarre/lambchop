@@ -1,4 +1,4 @@
-import { Sparkline } from "lambchop";
+import { Sparkline } from "lmbchp";
 
 const revenueData = [1250, 1380, 1420, 1290, 1510, 1620, 1580, 1690, 1750, 1820, 1780, 1910, 1950, 2050];
 const flatData = [500, 502, 498, 501, 499, 500, 503, 497, 500, 501];

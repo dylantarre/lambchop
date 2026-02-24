@@ -17,8 +17,8 @@ const slug = entry.id.replace(/\.mdx?$/, "");
 const { Content } = await entry.render();
 const meta = components.find((c) => c.slug === slug);
 
-const githubBase = "https://github.com/lambgoatdotcom/lambchop/blob/main/packages/lambchop/src/components";
-const storybookBase = "https://lambchop-djy.pages.dev";
+const githubBase = "https://github.com/dylantarre/lambchop/blob/main/packages/lambchop/src/components";
+const storybookBase = "https://storybook.lg.media";
 ---
 
 <DocsLayout title={entry.data.name} description={entry.data.description}>
@@ -37,7 +37,7 @@ const storybookBase = "https://lambchop-djy.pages.dev";
     <!-- Import -->
     <div class="mb-8">
       <div class="code-block">
-        <span class="text-text-tertiary">import</span> {"{"} {entry.data.name} {"}"} <span class="text-text-tertiary">from</span> <span class="text-accent">"lambchop"</span>;
+        <span class="text-text-tertiary">import</span> {"{"} {entry.data.name} {"}"} <span class="text-text-tertiary">from</span> <span class="text-accent">"lmbchp"</span>;
       </div>
     </div>
 

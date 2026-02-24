@@ -1,4 +1,4 @@
-import { Badge } from "lambchop";
+import { Badge } from "lmbchp";
 
 export default function BadgeDemo() {
   return (

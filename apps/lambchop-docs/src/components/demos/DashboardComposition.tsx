@@ -1,4 +1,4 @@
-import { KpiCard, AreaChart, DataTable } from "lambchop";
+import { KpiCard, AreaChart, DataTable } from "lmbchp";
 import { createColumnHelper } from "@tanstack/react-table";
 
 interface TopArticle {

@@ -1,4 +1,4 @@
-import { ScaleIn } from "lambchop";
+import { ScaleIn } from "lmbchp";
 
 export default function ScaleInDemo() {
   return (

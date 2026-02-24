@@ -1,4 +1,4 @@
-import { Footer } from "lambchop";
+import { Footer } from "lmbchp";
 
 export default function FooterDemo() {
   return (

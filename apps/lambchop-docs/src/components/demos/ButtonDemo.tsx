@@ -1,4 +1,4 @@
-import { Button } from "lambchop";
+import { Button } from "lmbchp";
 
 export default function ButtonDemo() {
   return (
