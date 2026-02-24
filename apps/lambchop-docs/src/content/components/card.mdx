@@ -1,0 +1,41 @@
+---
+name: Card
+description: Compound component with Header, Title, Description, Content, and Footer sub-components.
+category: Primitives
+sourceFile: card.tsx
+storyId: components-card
+---
+
+## Usage
+
+```tsx
+import { Card } from "lambchop";
+
+<Card>
+  <Card.Header>
+    <Card.Title>Monthly Revenue</Card.Title>
+    <Card.Description>January 2026 performance</Card.Description>
+  </Card.Header>
+  <Card.Content>
+    <p className="text-3xl font-semibold">$24,680</p>
+  </Card.Content>
+  <Card.Footer>
+    <p className="text-xs text-muted-foreground">Updated 2 hours ago</p>
+  </Card.Footer>
+</Card>
+```
+
+## Sub-components
+
+| Component | Description |
+|-----------|-------------|
+| `Card` | Root container with border-2 and card background |
+| `Card.Header` | Top section with vertical gap |
+| `Card.Title` | Font-display uppercase heading |
+| `Card.Description` | Muted description text |
+| `Card.Content` | Main content area |
+| `Card.Footer` | Bottom section |
+
+## Props
+
+All sub-components accept `className` and standard HTML div attributes.

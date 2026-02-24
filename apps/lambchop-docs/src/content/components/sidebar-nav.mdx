@@ -1,0 +1,45 @@
+---
+name: SidebarNav
+description: Collapsible sidebar navigation with icons and active states.
+category: Layout
+sourceFile: sidebar-nav.tsx
+storyId: components-sidebarnav
+---
+
+## Usage
+
+```tsx
+import { SidebarNav, type NavItem } from "lambchop";
+
+const items: NavItem[] = [
+  { label: "Dashboard", href: "/", icon: <DashboardIcon />, active: true },
+  { label: "Revenue", href: "/revenue", icon: <RevenueIcon /> },
+  { label: "Writers", href: "/writers", icon: <WritersIcon /> },
+];
+
+<SidebarNav
+  items={items}
+  collapsed={false}
+  onToggleCollapse={() => setCollapsed(!collapsed)}
+  header={<span>LGM Dashboard</span>}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `NavItem[]` | — | Navigation items |
+| `collapsed` | `boolean` | `false` | Whether sidebar is collapsed |
+| `onToggleCollapse` | `() => void` | — | Toggle collapse callback |
+| `header` | `React.ReactNode` | — | Optional header slot (logo, title) |
+| `className` | `string` | — | Additional CSS classes |
+
+### NavItem
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `label` | `string` | — | Navigation label |
+| `href` | `string` | — | Link destination |
+| `icon` | `React.ReactNode` | — | Optional icon element |
+| `active` | `boolean` | `false` | Whether this item is active |

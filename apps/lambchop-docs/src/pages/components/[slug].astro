@@ -1,0 +1,87 @@
+---
+import { getCollection } from "astro:content";
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import { components } from "../../data/component-meta";
+import DemoRenderer from "../../components/demos/DemoRenderer.tsx";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("components");
+  return entries.map((entry) => ({
+    params: { slug: entry.id.replace(/\.mdx?$/, "") },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const slug = entry.id.replace(/\.mdx?$/, "");
+const { Content } = await entry.render();
+const meta = components.find((c) => c.slug === slug);
+
+const githubBase = "https://github.com/lambgoatdotcom/lambchop/blob/main/packages/lambchop/src/components";
+const storybookBase = "https://lambchop-djy.pages.dev";
+---
+
+<DocsLayout title={entry.data.name} description={entry.data.description}>
+  <div class="max-w-3xl">
+    <!-- Header -->
+    <div class="mb-8">
+      <div class="mb-2 flex items-center gap-2">
+        <span class="rounded-full bg-surface-tertiary px-2.5 py-0.5 text-xs font-medium text-accent">
+          {entry.data.category}
+        </span>
+      </div>
+      <h1 class="mb-2 text-3xl font-bold text-text">{entry.data.name}</h1>
+      <p class="text-text-secondary">{entry.data.description}</p>
+    </div>
+
+    <!-- Import -->
+    <div class="mb-8">
+      <div class="code-block">
+        <span class="text-text-tertiary">import</span> {"{"} {entry.data.name} {"}"} <span class="text-text-tertiary">from</span> <span class="text-accent">"lambchop"</span>;
+      </div>
+    </div>
+
+    <!-- Live Demo -->
+    <div class="mb-8">
+      <h2 class="mb-4 text-lg font-semibold text-text">Live Demo</h2>
+      <div class="rounded-xl border border-surface-border bg-surface-secondary p-6">
+        <DemoRenderer slug={slug} client:visible />
+      </div>
+    </div>
+
+    <!-- MDX Content (Props table, variants, usage) -->
+    <div class="prose prose-sm max-w-none prose-headings:text-text prose-p:text-text-secondary prose-code:text-accent prose-code:before:content-none prose-code:after:content-none prose-th:text-text-secondary prose-td:text-text-secondary prose-a:text-accent">
+      <Content />
+    </div>
+
+    <!-- External Links -->
+    <div class="mt-10 flex gap-4 border-t border-surface-border pt-6">
+      {meta && (
+        <>
+          <a
+            href={`${storybookBase}/?path=/story/${meta.storyId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 rounded-button border border-surface-border bg-surface px-4 py-2 text-sm text-text-secondary shadow-sm hover:bg-surface-hover transition-colors"
+          >
+            Open in Storybook
+            <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3.5 1.5h7v7M10.5 1.5L1.5 10.5" />
+            </svg>
+          </a>
+          <a
+            href={`${githubBase}/${meta.sourceFile}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 rounded-button border border-surface-border bg-surface px-4 py-2 text-sm text-text-secondary shadow-sm hover:bg-surface-hover transition-colors"
+          >
+            View Source on GitHub
+            <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3.5 1.5h7v7M10.5 1.5L1.5 10.5" />
+            </svg>
+          </a>
+        </>
+      )}
+    </div>
+  </div>
+</DocsLayout>

@@ -1,0 +1,39 @@
+---
+name: KpiCard
+description: Key performance indicator card with optional trend, sparkline, and icon.
+category: Data Display
+sourceFile: kpi-card.tsx
+storyId: components-kpicard
+---
+
+## Usage
+
+```tsx
+import { KpiCard } from "lambchop";
+
+<KpiCard
+  label="Total Revenue"
+  value="$18,230"
+  trend={{ value: 12.4, isPositive: true }}
+  sparklineData={[1250, 1380, 1420, 1510, 1620, 1750, 1910, 2050]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Metric label displayed above the value |
+| `value` | `string \| number` | — | The main KPI value |
+| `trend` | `{ value: number; isPositive: boolean }` | — | Optional trend indicator with percentage |
+| `sparklineData` | `number[]` | — | Optional array of numbers for inline sparkline |
+| `icon` | `React.ReactNode` | — | Optional icon displayed in the card |
+| `className` | `string` | — | Additional CSS classes |
+
+## Variants
+
+- **Basic** — Label and value only
+- **With Trend** — Shows a percentage change indicator (green for positive, red for negative)
+- **With Sparkline** — Renders a mini area chart inline
+- **With Icon** — Displays a custom icon alongside the metric
+- **All Features** — Combines trend, sparkline, and icon

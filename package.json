@@ -1,0 +1,18 @@
+{
+  "name": "lgm-dashboard-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "storybook": "pnpm --filter lambchop storybook",
+    "build-storybook": "pnpm --filter lambchop build-storybook",
+    "docs": "pnpm --filter lambchop-docs dev",
+    "build-docs": "pnpm --filter lambchop-docs build"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.4",
+    "typescript": "^5.7.3"
+  },
+  "packageManager": "pnpm@9.15.4"
+}

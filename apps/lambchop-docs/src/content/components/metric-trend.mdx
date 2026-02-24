@@ -1,0 +1,32 @@
+---
+name: MetricTrend
+description: Compact metric display with delta percentage indicator.
+category: Data Display
+sourceFile: metric-trend.tsx
+storyId: components-metrictrend
+---
+
+## Usage
+
+```tsx
+import { MetricTrend } from "lambchop";
+
+<MetricTrend value="$14,520" delta={8.3} deltaLabel="vs last month" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string \| number` | — | The metric value to display |
+| `delta` | `number` | — | Percentage change (positive or negative) |
+| `deltaLabel` | `string` | — | Optional label next to the delta |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size variant |
+| `className` | `string` | — | Additional CSS classes |
+
+## Variants
+
+- **Positive** — Green delta indicator for growth
+- **Negative** — Red delta indicator for decline
+- **Zero** — Neutral indicator for no change
+- **With Label** — Shows contextual label like "vs last month"

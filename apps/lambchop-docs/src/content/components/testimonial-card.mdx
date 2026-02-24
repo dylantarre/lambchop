@@ -1,0 +1,38 @@
+---
+name: TestimonialCard
+description: Quote card with decorative mark, star rating, and author attribution.
+category: Marketing
+sourceFile: testimonial-card.tsx
+storyId: components-testimonialcard
+---
+
+## Usage
+
+```tsx
+import { TestimonialCard } from "lambchop";
+
+<TestimonialCard
+  quote="The analytics dashboard transformed how we track content performance."
+  author="Alex Rivera"
+  role="Content Director"
+  rating={5}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `quote` | `string` | — | Testimonial quote text |
+| `author` | `string` | — | Author name |
+| `role` | `string` | — | Author role/title |
+| `avatarUrl` | `string` | — | URL for author avatar image |
+| `rating` | `1 \| 2 \| 3 \| 4 \| 5` | — | Star rating |
+| `className` | `string` | — | Additional CSS classes |
+
+## Features
+
+- Decorative opening quote mark in primary color
+- Optional 1-5 star rating with primary/muted colors
+- Author section with optional avatar
+- Border-2 card styling

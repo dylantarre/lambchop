@@ -1,0 +1,50 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { getComponentsByCategory } from "../data/component-meta";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const grouped = getComponentsByCategory();
+const currentPath = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="mx-auto flex max-w-7xl">
+    <aside class="sticky top-14 hidden h-[calc(100vh-3.5rem)] w-56 shrink-0 overflow-y-auto border-r border-surface-border py-6 pr-4 pl-page-x lg:block">
+      <nav class="space-y-6">
+        {grouped.map(({ category, items }) => (
+          <div>
+            <h4 class="mb-2 text-xs font-semibold uppercase tracking-wider text-text-tertiary">
+              {category}
+            </h4>
+            <ul class="space-y-0.5">
+              {items.map((item) => (
+                <li>
+                  <a
+                    href={`/components/${item.slug}/`}
+                    class:list={[
+                      "block rounded-button px-2.5 py-1.5 text-sm transition-colors",
+                      currentPath.includes(item.slug)
+                        ? "bg-surface-hover text-text font-medium border-l-2 border-accent"
+                        : "text-text-secondary hover:text-text hover:bg-surface-hover",
+                    ]}
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
+    </aside>
+
+    <div class="min-w-0 flex-1 px-page-x py-8 lg:px-10">
+      <slot />
+    </div>
+  </div>
+</BaseLayout>

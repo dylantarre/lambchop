@@ -1,0 +1,49 @@
+---
+name: DataTable
+description: Feature-rich table with sorting, pagination, and search.
+category: Data Management
+sourceFile: data-table.tsx
+storyId: components-datatable
+---
+
+## Usage
+
+```tsx
+import { DataTable, type ColumnDef } from "lambchop";
+import { createColumnHelper } from "@tanstack/react-table";
+
+interface Row {
+  title: string;
+  revenue: number;
+}
+
+const columnHelper = createColumnHelper<Row>();
+const columns = [
+  columnHelper.accessor("title", { header: "Title" }),
+  columnHelper.accessor("revenue", {
+    header: "Revenue",
+    cell: (info) => `$${info.getValue().toFixed(2)}`,
+  }),
+];
+
+<DataTable columns={columns} data={rows} searchable pageSize={10} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `columns` | `ColumnDef<TData, any>[]` | — | TanStack React Table column definitions |
+| `data` | `TData[]` | — | Array of row data objects |
+| `pageSize` | `number` | `20` | Rows per page |
+| `searchable` | `boolean` | `false` | Enable global search input |
+| `searchPlaceholder` | `string` | `"Search..."` | Placeholder text for search |
+| `className` | `string` | — | Additional CSS classes |
+
+## Features
+
+- **Sorting** — Click column headers to sort ascending/descending
+- **Pagination** — Automatic page controls when data exceeds pageSize
+- **Global Search** — Filter rows across all columns
+- **Custom Cells** — Full control over cell rendering via TanStack column definitions
+- **Tabular Numbers** — Fixed-width numerals for aligned columns

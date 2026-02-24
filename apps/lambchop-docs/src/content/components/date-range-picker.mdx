@@ -1,0 +1,39 @@
+---
+name: DateRangePicker
+description: Date range selector with configurable presets.
+category: Data Management
+sourceFile: date-range-picker.tsx
+storyId: components-daterangepicker
+---
+
+## Usage
+
+```tsx
+import { DateRangePicker } from "lambchop";
+
+const [range, setRange] = useState({
+  start: new Date(2026, 0, 1),
+  end: new Date(2026, 0, 31),
+});
+
+<DateRangePicker value={range} onChange={setRange} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `{ start: Date; end: Date }` | — | Current date range |
+| `onChange` | `(range: DateRange) => void` | — | Called when range changes |
+| `onPresetChange` | `(preset: string) => void` | — | Called when a preset is selected |
+| `presets` | `DateRangePreset[]` | See below | Available quick-select presets |
+| `className` | `string` | — | Additional CSS classes |
+
+### Default Presets
+
+- **MTD** — Month to date
+- **Last Month** — Previous calendar month
+- **Last 30 Days** — Rolling 30-day window
+- **Last 90 Days** — Rolling 90-day window
+- **YTD** — Year to date
+- **Custom** — Manual date selection

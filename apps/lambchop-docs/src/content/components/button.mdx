@@ -1,0 +1,32 @@
+---
+name: Button
+description: Multi-variant button with CVA styling and Radix Slot for asChild composition.
+category: Primitives
+sourceFile: button.tsx
+storyId: components-button
+---
+
+## Usage
+
+```tsx
+import { Button } from "lambchop";
+
+<Button variant="primary" size="md">Get Started</Button>
+<Button variant="secondary">Learn More</Button>
+<Button variant="ghost">Cancel</Button>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"primary" \| "secondary" \| "ghost"` | `"primary"` | Visual style variant |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Button size |
+| `asChild` | `boolean` | `false` | Render as child element via Radix Slot |
+| `className` | `string` | — | Additional CSS classes |
+
+## Variants
+
+- **Primary** — Gold background, uppercase display font, brand CTA
+- **Secondary** — Border-2, inverts on hover for strong contrast
+- **Ghost** — Text-only, subtle hover background

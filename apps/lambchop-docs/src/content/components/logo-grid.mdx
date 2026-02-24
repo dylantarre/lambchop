@@ -1,0 +1,38 @@
+---
+name: LogoGrid
+description: Responsive logo grid with grayscale-to-color hover effect.
+category: Marketing
+sourceFile: logo-grid.tsx
+storyId: components-logogrid
+---
+
+## Usage
+
+```tsx
+import { LogoGrid } from "lambchop";
+
+<LogoGrid
+  columns={4}
+  logos={[
+    { src: "/logos/lambgoat.svg", alt: "lambgoat" },
+    { src: "/logos/noecho.svg", alt: "noecho" },
+    { src: "/logos/ghostcult.svg", alt: "ghost cult" },
+    { src: "/logos/metalinsider.svg", alt: "metal insider" },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `logos` | `Array<{ src: string; alt: string; href?: string }>` | — | Logo entries |
+| `columns` | `3 \| 4 \| 5 \| 6` | `4` | Number of grid columns |
+| `className` | `string` | — | Additional CSS classes |
+
+## Features
+
+- Grayscale by default, color on hover
+- Scale-110 hover animation
+- Responsive column breakpoints
+- Optional link wrapping per logo

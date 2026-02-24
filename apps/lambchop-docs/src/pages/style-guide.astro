@@ -1,0 +1,361 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Style Guide" description="The complete lg.media visual language reference.">
+  <div class="mx-auto max-w-7xl px-page-x py-12">
+    <div class="mb-16">
+      <h1 class="font-display text-5xl uppercase tracking-wider text-text">Style Guide</h1>
+      <p class="mt-2 text-lg text-text-secondary">
+        The complete lg.media visual language — typography, color, components, and motion.
+      </p>
+    </div>
+
+    <!-- Typography -->
+    <section class="mb-20">
+      <h2 class="mb-8 font-display text-3xl uppercase tracking-wider text-text">Typography</h2>
+
+      <div class="space-y-10">
+        <div>
+          <p class="mb-3 text-xs font-medium uppercase tracking-widest text-text-tertiary">Display — Bebas Neue</p>
+          <p class="font-display text-6xl uppercase tracking-wider text-text">The Quick Brown Fox</p>
+          <p class="font-display text-4xl uppercase tracking-wider text-text">Jumps Over The Lazy Dog</p>
+          <p class="font-display text-2xl uppercase tracking-wider text-text">ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789</p>
+        </div>
+
+        <div>
+          <p class="mb-3 text-xs font-medium uppercase tracking-widest text-text-tertiary">Body — DM Sans</p>
+          <p class="text-xl text-text">The quick brown fox jumps over the lazy dog.</p>
+          <p class="text-base text-text">Typography is the craft of endowing human language with a durable visual form.</p>
+          <p class="text-sm text-text-secondary">Used for body copy, descriptions, and UI text throughout the system.</p>
+          <p class="text-xs text-text-tertiary">Available in weights from 100 to 1000, with italic variants.</p>
+        </div>
+
+        <div>
+          <p class="mb-3 text-xs font-medium uppercase tracking-widest text-text-tertiary">Accent — Permanent Marker</p>
+          <p class="font-accent text-3xl text-text">Hand-drawn emphasis</p>
+          <p class="font-accent text-xl text-accent">Used sparingly for personality</p>
+        </div>
+
+        <div>
+          <p class="mb-3 text-xs font-medium uppercase tracking-widest text-text-tertiary">Tracking</p>
+          <div class="space-y-2">
+            <p class="font-display text-xl uppercase text-text" style="letter-spacing: 0.05em;">tracking-wider (0.05em) — default for display</p>
+            <p class="font-display text-xl uppercase text-text" style="letter-spacing: 0.1em;">tracking-widest (0.1em) — labels & overlines</p>
+            <p class="text-base text-text" style="letter-spacing: 0;">tracking-normal (0) — body text</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Color System -->
+    <section class="mb-20">
+      <h2 class="mb-8 font-display text-3xl uppercase tracking-wider text-text">Color System</h2>
+
+      <p class="mb-6 text-sm text-text-secondary">
+        Alias tokens map to the existing surface/text/accent system. Raw hex values enable Tailwind opacity modifiers like <code class="code-block inline px-1.5 py-0.5">border-foreground/40</code>.
+      </p>
+
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div>
+          <p class="mb-3 text-xs font-medium uppercase tracking-widest text-text-tertiary">Core Aliases</p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8 rounded-card border border-surface-border" style="background: var(--foreground);"></div>
+              <div>
+                <p class="text-sm font-medium text-text">foreground</p>
+                <p class="text-xs text-text-tertiary">Primary text color</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8 rounded-card border border-surface-border" style="background: var(--background);"></div>
+              <div>
+                <p class="text-sm font-medium text-text">background</p>
+                <p class="text-xs text-text-tertiary">Page background</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8 rounded-card border border-surface-border" style="background: var(--primary);"></div>
+              <div>
+                <p class="text-sm font-medium text-text">primary</p>
+                <p class="text-xs text-text-tertiary">Gold accent / CTAs</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8 rounded-card border border-surface-border" style="background: var(--muted);"></div>
+              <div>
+                <p class="text-sm font-medium text-text">muted</p>
+                <p class="text-xs text-text-tertiary">Subtle backgrounds</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8 rounded-card border border-surface-border" style="background: var(--card);"></div>
+              <div>
+                <p class="text-sm font-medium text-text">card</p>
+                <p class="text-xs text-text-tertiary">Card surface</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8 rounded-card" style="background: var(--border);"></div>
+              <div>
+                <p class="text-sm font-medium text-text">border</p>
+                <p class="text-xs text-text-tertiary">Default border color</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="mb-3 text-xs font-medium uppercase tracking-widest text-text-tertiary">Semantic Colors</p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8 rounded-card" style="background: var(--revenue);"></div>
+              <div>
+                <p class="text-sm font-medium text-text">revenue</p>
+                <p class="text-xs text-text-tertiary">Positive / revenue</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8 rounded-card" style="background: var(--loss);"></div>
+              <div>
+                <p class="text-sm font-medium text-text">loss</p>
+                <p class="text-xs text-text-tertiary">Negative / loss</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8 rounded-card" style="background: var(--warning);"></div>
+              <div>
+                <p class="text-sm font-medium text-text">warning</p>
+                <p class="text-xs text-text-tertiary">Warning states</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8 rounded-card" style="background: var(--accent);"></div>
+              <div>
+                <p class="text-sm font-medium text-text">accent</p>
+                <p class="text-xs text-text-tertiary">Gold accent (original token)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Industrial Aesthetic -->
+    <section class="mb-20">
+      <h2 class="mb-8 font-display text-3xl uppercase tracking-wider text-text">The Industrial Aesthetic</h2>
+
+      <div class="grid gap-8 sm:grid-cols-2">
+        <div>
+          <p class="mb-3 text-xs font-medium uppercase tracking-widest text-text-tertiary">Border-2 Pattern</p>
+          <p class="mb-4 text-sm text-text-secondary">Heavy 2px borders define the lg.media look. Used on cards, sections, and interactive elements.</p>
+          <div class="space-y-3">
+            <div class="rounded-card border-2 border-foreground/100 p-4">
+              <p class="text-sm text-text">border-2 border-foreground</p>
+            </div>
+            <div class="rounded-card border-2 border-foreground/40 p-4">
+              <p class="text-sm text-text">border-2 border-foreground/40</p>
+            </div>
+            <div class="rounded-card border-2 border-foreground/20 p-4">
+              <p class="text-sm text-text">border-2 border-foreground/20</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="mb-3 text-xs font-medium uppercase tracking-widest text-text-tertiary">Minimal Radius</p>
+          <p class="mb-4 text-sm text-text-secondary">Near-zero border radius (2px) keeps things sharp. No shadows — structure comes from borders alone.</p>
+          <div class="space-y-3">
+            <div class="rounded-card border-2 border-foreground/40 p-4">
+              <p class="text-sm text-text">rounded-card (0.125rem / 2px)</p>
+            </div>
+            <div class="rounded-none border-2 border-foreground/40 p-4">
+              <p class="text-sm text-text">rounded-none (0px)</p>
+            </div>
+            <div class="rounded-full border-2 border-foreground/40 px-4 py-2 text-center">
+              <p class="text-sm text-text">rounded-full (pills only)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Button Variants -->
+    <section class="mb-20">
+      <h2 class="mb-8 font-display text-3xl uppercase tracking-wider text-text">Button Variants</h2>
+
+      <div class="flex flex-wrap items-center gap-4">
+        <button class="rounded-button bg-accent px-5 py-2.5 font-display uppercase tracking-wider text-text-inverse text-sm">Primary</button>
+        <button class="rounded-button border-2 border-text px-5 py-2.5 text-sm font-medium text-text hover:bg-text hover:text-surface transition-colors">Secondary</button>
+        <button class="rounded-button px-5 py-2.5 text-sm font-medium text-text hover:bg-surface-tertiary transition-colors">Ghost</button>
+      </div>
+
+      <div class="mt-6 flex flex-wrap items-center gap-4">
+        <button class="rounded-button bg-accent px-3 py-1.5 font-display uppercase tracking-wider text-text-inverse text-xs">Small</button>
+        <button class="rounded-button bg-accent px-5 py-2.5 font-display uppercase tracking-wider text-text-inverse text-sm">Medium</button>
+        <button class="rounded-button bg-accent px-8 py-3 font-display uppercase tracking-wider text-text-inverse text-base">Large</button>
+      </div>
+    </section>
+
+    <!-- Card Composition -->
+    <section class="mb-20">
+      <h2 class="mb-8 font-display text-3xl uppercase tracking-wider text-text">Card Composition</h2>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Standard Card -->
+        <div class="rounded-card border-2 border-foreground/40">
+          <div class="flex flex-col gap-1.5 p-6 pb-0">
+            <h3 class="font-display text-xl uppercase tracking-wider text-text">Standard Card</h3>
+            <p class="text-sm text-text-muted">With header, content, and footer</p>
+          </div>
+          <div class="p-6">
+            <p class="text-3xl font-semibold text-text">$24,680</p>
+          </div>
+          <div class="flex items-center p-6 pt-0">
+            <p class="text-xs text-text-muted">Updated 2 hours ago</p>
+          </div>
+        </div>
+
+        <!-- Stat Card -->
+        <div class="relative rounded-card bg-foreground p-6 text-background">
+          <span class="absolute top-2 left-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <span class="absolute top-2 right-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <span class="absolute bottom-2 left-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <span class="absolute bottom-2 right-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <div class="font-display text-4xl uppercase tracking-wider">2.4M</div>
+          <div class="mt-1 text-sm uppercase tracking-wider text-background/70">Monthly Pageviews</div>
+        </div>
+
+        <!-- Badge Examples -->
+        <div class="rounded-card border-2 border-foreground/40 p-6 flex flex-col gap-4">
+          <h3 class="font-display text-xl uppercase tracking-wider text-text">Badges</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="rounded-full bg-foreground text-background px-2.5 py-0.5 text-xs font-medium">Default</span>
+            <span class="rounded-full bg-accent text-text-inverse px-2.5 py-0.5 text-xs font-medium">Primary</span>
+            <span class="rounded-full border-2 border-text text-text px-2.5 py-0.5 text-xs font-medium">Outline</span>
+            <span class="rounded-full bg-surface-tertiary text-text-muted px-2.5 py-0.5 text-xs font-medium">Muted</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marketing Sections -->
+    <section class="mb-20">
+      <h2 class="mb-8 font-display text-3xl uppercase tracking-wider text-text">Marketing Composition</h2>
+
+      <div class="mb-8 grid gap-4 sm:grid-cols-3">
+        <div class="relative rounded-card bg-foreground p-6 text-background">
+          <span class="absolute top-2 left-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <span class="absolute top-2 right-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <span class="absolute bottom-2 left-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <span class="absolute bottom-2 right-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <div class="font-display text-4xl uppercase tracking-wider">$84K</div>
+          <div class="mt-1 text-sm uppercase tracking-wider text-background/70">Monthly Revenue</div>
+        </div>
+        <div class="relative rounded-card bg-foreground p-6 text-background">
+          <span class="absolute top-2 left-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <span class="absolute top-2 right-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <span class="absolute bottom-2 left-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <span class="absolute bottom-2 right-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <div class="font-display text-4xl uppercase tracking-wider">9</div>
+          <div class="mt-1 text-sm uppercase tracking-wider text-background/70">Network Sites</div>
+        </div>
+        <div class="relative rounded-card bg-foreground p-6 text-background">
+          <span class="absolute top-2 left-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <span class="absolute top-2 right-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <span class="absolute bottom-2 left-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <span class="absolute bottom-2 right-2 h-1 w-1 rounded-full bg-background/40"></span>
+          <div class="font-display text-4xl uppercase tracking-wider">42</div>
+          <div class="mt-1 text-sm uppercase tracking-wider text-background/70">Active Writers</div>
+        </div>
+      </div>
+
+      <!-- Testimonial -->
+      <div class="rounded-card border-2 border-foreground/40 p-6 max-w-lg">
+        <span class="font-display text-4xl leading-none text-accent">&ldquo;</span>
+        <div class="mb-3 flex gap-0.5">
+          <svg class="h-4 w-4 text-accent" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="h-4 w-4 text-accent" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="h-4 w-4 text-accent" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="h-4 w-4 text-accent" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="h-4 w-4 text-accent" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <blockquote class="text-sm leading-relaxed text-text">
+          The analytics dashboard transformed how we track our content performance across all nine sites. Revenue attribution is finally clear.
+        </blockquote>
+        <div class="mt-4">
+          <div class="text-sm font-semibold text-text">Alex Rivera</div>
+          <div class="text-xs text-text-muted">Content Director, lg.media</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Animation -->
+    <section class="mb-20">
+      <h2 class="mb-8 font-display text-3xl uppercase tracking-wider text-text">Animation</h2>
+      <p class="mb-6 text-sm text-text-secondary">
+        Pure CSS keyframes triggered by IntersectionObserver. No runtime animation library required.
+      </p>
+
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div>
+          <p class="mb-3 text-xs font-medium uppercase tracking-widest text-text-tertiary">Available Animations</p>
+          <div class="space-y-2 text-sm text-text">
+            <div class="flex items-center gap-2">
+              <code class="code-block inline px-1.5 py-0.5">fade-in-up</code>
+              <span class="text-text-tertiary">— default entrance</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <code class="code-block inline px-1.5 py-0.5">fade-in-down</code>
+              <span class="text-text-tertiary">— top entrance</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <code class="code-block inline px-1.5 py-0.5">fade-in-left</code>
+              <span class="text-text-tertiary">— side entrance</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <code class="code-block inline px-1.5 py-0.5">fade-in-right</code>
+              <span class="text-text-tertiary">— side entrance</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <code class="code-block inline px-1.5 py-0.5">scale-in</code>
+              <span class="text-text-tertiary">— emphasis entrance</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="mb-3 text-xs font-medium uppercase tracking-widest text-text-tertiary">Components</p>
+          <div class="space-y-2 text-sm text-text">
+            <div class="flex items-center gap-2">
+              <code class="code-block inline px-1.5 py-0.5">&lt;FadeIn&gt;</code>
+              <span class="text-text-tertiary">— directional fade wrapper</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <code class="code-block inline px-1.5 py-0.5">&lt;ScaleIn&gt;</code>
+              <span class="text-text-tertiary">— scale entrance wrapper</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <code class="code-block inline px-1.5 py-0.5">&lt;StaggerContainer&gt;</code>
+              <span class="text-text-tertiary">— cascading children</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live animation demo -->
+      <div class="mt-8 space-y-4">
+        <p class="text-xs font-medium uppercase tracking-widest text-text-tertiary">Live Demo — Scroll to trigger</p>
+        <div class="rounded-card border-2 border-foreground/40 p-6">
+          <div class="animate-fade-in-up text-sm text-text">This element uses <code class="code-block inline px-1.5 py-0.5">animate-fade-in-up</code></div>
+        </div>
+        <div class="rounded-card border-2 border-foreground/40 p-6" style="animation: fade-in-left 0.5s ease-out both; animation-delay: 200ms;">
+          <div class="text-sm text-text">This element uses <code class="code-block inline px-1.5 py-0.5">animate-fade-in-left</code> with 200ms delay</div>
+        </div>
+        <div class="rounded-card border-2 border-foreground/40 p-6" style="animation: scale-in 0.5s ease-out both; animation-delay: 400ms;">
+          <div class="text-sm text-text">This element uses <code class="code-block inline px-1.5 py-0.5">animate-scale-in</code> with 400ms delay</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

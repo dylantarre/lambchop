@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import DashboardComposition from "../components/demos/DashboardComposition.tsx";
+import KpiCardDemo from "../components/demos/KpiCardDemo.tsx";
+---
+
+<BaseLayout title="Lambchop" description="Open-source React component library for analytics dashboards. 12 components, 2 hooks, 1 Tailwind preset.">
+
+  <!-- Hero -->
+  <section class="border-b border-surface-border bg-gradient-to-b from-surface-secondary to-surface">
+    <div class="mx-auto max-w-7xl px-page-x py-16 lg:py-24">
+      <div class="max-w-2xl">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-surface-border bg-surface px-3 py-1 text-xs text-text-secondary shadow-sm">
+          <span class="inline-block h-1.5 w-1.5 rounded-full bg-revenue"></span>
+          12 components &middot; 2 hooks &middot; 1 Tailwind preset
+        </div>
+        <h1 class="mb-4 text-4xl font-bold tracking-tight text-text lg:text-5xl">
+          Analytics dashboard components for React
+        </h1>
+        <p class="mb-8 text-lg text-text-secondary leading-relaxed">
+          Production-ready React components built with Tailwind CSS, Radix UI, Recharts, and TanStack Table.
+          Fully typed, accessible, and designed for data-dense interfaces.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/getting-started/" class="inline-flex items-center rounded-button bg-accent px-5 py-2.5 text-sm font-medium text-text-inverse shadow-sm hover:bg-accent-dark transition-colors">
+            Get Started
+          </a>
+          <a href="/components/" class="inline-flex items-center rounded-button border border-surface-border bg-surface px-5 py-2.5 text-sm font-medium text-text shadow-sm hover:bg-surface-hover transition-colors">
+            Browse Components
+          </a>
+          <a href="https://lambchop-djy.pages.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 rounded-button px-5 py-2.5 text-sm text-text-secondary hover:text-text transition-colors">
+            Storybook
+            <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3.5 1.5h7v7M10.5 1.5L1.5 10.5" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Dashboard Demo -->
+  <section class="border-b border-surface-border bg-surface-secondary">
+    <div class="mx-auto max-w-7xl px-page-x py-12">
+      <h2 class="mb-2 text-center text-sm font-semibold uppercase tracking-wider text-text-tertiary">
+        Live Demo
+      </h2>
+      <p class="mb-8 text-center text-text-secondary">
+        Real lambchop components rendering with mock data
+      </p>
+      <div class="rounded-xl border border-surface-border bg-surface p-6 shadow-card">
+        <DashboardComposition client:visible />
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Cards -->
+  <section class="border-b border-surface-border">
+    <div class="mx-auto max-w-7xl px-page-x py-16">
+      <h2 class="mb-8 text-center text-2xl font-bold text-text">Built for dashboards</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-card border border-surface-border bg-surface p-card-p shadow-card">
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-surface-tertiary text-accent">
+            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4zm0 6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6zm10 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-6z" />
+            </svg>
+          </div>
+          <h3 class="mb-1 font-semibold text-text">Design Tokens</h3>
+          <p class="text-sm text-text-secondary">Comprehensive Tailwind preset with colors, typography, spacing, and shadows.</p>
+        </div>
+
+        <div class="rounded-card border border-surface-border bg-surface p-card-p shadow-card">
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-surface-tertiary text-accent">
+            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 0 1 .633 1.265l-4 12a1 1 0 1 1-1.898-.632l4-12a1 1 0 0 1 1.265-.633zM5.707 6.293a1 1 0 0 1 0 1.414L3.414 10l2.293 2.293a1 1 0 1 1-1.414 1.414l-3-3a1 1 0 0 1 0-1.414l3-3a1 1 0 0 1 1.414 0zm8.586 0a1 1 0 0 1 1.414 0l3 3a1 1 0 0 1 0 1.414l-3 3a1 1 0 0 1-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 0 1 0-1.414z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <h3 class="mb-1 font-semibold text-text">Fully Typed</h3>
+          <p class="text-sm text-text-secondary">Complete TypeScript definitions with exported interfaces for every component.</p>
+        </div>
+
+        <div class="rounded-card border border-surface-border bg-surface p-card-p shadow-card">
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-surface-tertiary text-accent">
+            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M5 3a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5zm0 8a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2H5zm6-6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V5zm2 6a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2z" />
+            </svg>
+          </div>
+          <h3 class="mb-1 font-semibold text-text">Tailwind Native</h3>
+          <p class="text-sm text-text-secondary">Built on Tailwind CSS with a shared preset. No CSS-in-JS runtime.</p>
+        </div>
+
+        <div class="rounded-card border border-surface-border bg-surface p-card-p shadow-card">
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-surface-tertiary text-accent">
+            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 9a1 1 0 0 0 0 2v3a1 1 0 0 0 1 1h1a1 1 0 1 0 0-2v-3a1 1 0 0 0-1-1H9z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <h3 class="mb-1 font-semibold text-text">Accessible</h3>
+          <p class="text-sm text-text-secondary">Built on Radix UI primitives with proper ARIA attributes and keyboard navigation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Install -->
+  <section>
+    <div class="mx-auto max-w-7xl px-page-x py-16 text-center">
+      <h2 class="mb-4 text-2xl font-bold text-text">Get started in seconds</h2>
+      <div class="mx-auto max-w-md">
+        <div class="code-block text-left">
+          <span class="text-text-tertiary">$</span> pnpm add lambchop
+        </div>
+      </div>
+      <a href="/getting-started/" class="mt-6 inline-flex items-center gap-1 text-sm text-accent hover:text-accent-dark transition-colors">
+        Read the setup guide
+        <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 6h8M6 2l4 4-4 4" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

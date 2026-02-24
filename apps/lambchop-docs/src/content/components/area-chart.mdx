@@ -1,0 +1,52 @@
+---
+name: AreaChart
+description: Stacked area chart with gradient fills.
+category: Charts
+sourceFile: area-chart.tsx
+storyId: components-areachart
+---
+
+## Usage
+
+```tsx
+import { AreaChart } from "lambchop";
+
+<AreaChart
+  data={[
+    { date: "Jan 1", playwire: 820, stripe: 310 },
+    { date: "Jan 2", playwire: 910, stripe: 340 },
+  ]}
+  xKey="date"
+  areas={[
+    { key: "playwire", label: "Playwire" },
+    { key: "stripe", label: "Stripe" },
+  ]}
+  stacked
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `Record<string, unknown>[]` | — | Array of data objects |
+| `xKey` | `string` | — | Key for the x-axis |
+| `areas` | `AreaDefinition[]` | — | Area series definitions |
+| `height` | `number` | `300` | Chart height in pixels |
+| `stacked` | `boolean` | `true` | Whether areas are stacked |
+| `className` | `string` | — | Additional CSS classes |
+
+### AreaDefinition
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `key` | `string` | — | Data key for this area series |
+| `label` | `string` | — | Legend label |
+| `color` | `string` | auto | Override the default color |
+
+## Variants
+
+- **Single Area** — Track one metric with gradient fill
+- **Stacked** — Show composition over time (default)
+- **Unstacked** — Overlapping areas for comparison
+- **Custom Colors** — Override the default palette

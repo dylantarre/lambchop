@@ -1,0 +1,125 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Getting Started" description="Install and configure lambchop in your React project.">
+  <div class="mx-auto max-w-3xl px-page-x py-12">
+    <h1 class="mb-2 text-3xl font-bold text-text">Getting Started</h1>
+    <p class="mb-10 text-text-secondary">
+      Install lambchop and start building analytics dashboards in minutes.
+    </p>
+
+    <!-- Step 1: Install -->
+    <section class="mb-10">
+      <h2 class="mb-4 text-xl font-semibold text-text">1. Install the package</h2>
+      <div class="code-block">
+        <span class="text-text-tertiary">$</span> pnpm add lmbchp
+      </div>
+      <p class="mt-3 text-sm text-text-secondary">
+        Or use your preferred package manager: <code class="rounded bg-surface-tertiary px-1.5 py-0.5 text-xs font-mono text-accent">npm install lmbchp</code> or <code class="rounded bg-surface-tertiary px-1.5 py-0.5 text-xs font-mono text-accent">yarn add lmbchp</code>
+      </p>
+    </section>
+
+    <!-- Step 2: Tailwind -->
+    <section class="mb-10">
+      <h2 class="mb-4 text-xl font-semibold text-text">2. Configure Tailwind CSS</h2>
+      <p class="mb-4 text-sm text-text-secondary">
+        Import the lambchop preset in your <code class="rounded bg-surface-tertiary px-1.5 py-0.5 text-xs font-mono text-accent">tailwind.config.ts</code> to get the full design system.
+      </p>
+      <div class="code-block whitespace-pre"><span class="text-text-tertiary">// tailwind.config.ts</span>
+import type {"{"} Config {"}"} from "tailwindcss";
+import lambchopPreset from "lmbchp/tailwind-preset";
+
+const config: Config = {"{"}
+  content: [
+    "./src/**/*.{"{"}ts,tsx{"}"}",
+    "./node_modules/lmbchp/dist/**/*.js",
+  ],
+  presets: [lambchopPreset as Config],
+{"}"};
+
+export default config;</div>
+    </section>
+
+    <!-- Step 3: CSS -->
+    <section class="mb-10">
+      <h2 class="mb-4 text-xl font-semibold text-text">3. Import styles</h2>
+      <p class="mb-4 text-sm text-text-secondary">
+        Add the lambchop base styles to your CSS entry point.
+      </p>
+      <div class="code-block whitespace-pre"><span class="text-text-tertiary">/* globals.css */</span>
+@import "lmbchp/styles.css";</div>
+    </section>
+
+    <!-- Step 4: Use -->
+    <section class="mb-10">
+      <h2 class="mb-4 text-xl font-semibold text-text">4. Use a component</h2>
+      <div class="code-block whitespace-pre">import {"{"} KpiCard {"}"} from "lmbchp";
+
+export default function Dashboard() {"{"}
+  return (
+    &lt;KpiCard
+      label="Total Revenue"
+      value="$18,230"
+      trend={"{"}{"{"} value: 12.4, isPositive: true {"}"}{"}"}
+    /&gt;
+  );
+{"}"}</div>
+    </section>
+
+    <!-- Peer Dependencies -->
+    <section class="mb-10">
+      <h2 class="mb-4 text-xl font-semibold text-text">Peer dependencies</h2>
+      <p class="mb-4 text-sm text-text-secondary">
+        Lambchop requires React 18+ or 19+ as a peer dependency. These are not bundled with the library.
+      </p>
+      <div class="overflow-x-auto rounded-card border border-surface-border">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-surface-border bg-surface-secondary">
+              <th class="px-4 py-2.5 text-left font-medium text-text-secondary">Package</th>
+              <th class="px-4 py-2.5 text-left font-medium text-text-secondary">Version</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-surface-border">
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">react</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">^18.0.0 || ^19.0.0</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">react-dom</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">^18.0.0 || ^19.0.0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- What's Included -->
+    <section class="mb-10">
+      <h2 class="mb-4 text-xl font-semibold text-text">What's included</h2>
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="rounded-card border border-surface-border bg-surface p-card-p">
+          <p class="mb-1 text-2xl font-bold text-accent">12</p>
+          <p class="text-sm text-text-secondary">React components</p>
+        </div>
+        <div class="rounded-card border border-surface-border bg-surface p-card-p">
+          <p class="mb-1 text-2xl font-bold text-accent">2</p>
+          <p class="text-sm text-text-secondary">Custom hooks</p>
+        </div>
+        <div class="rounded-card border border-surface-border bg-surface p-card-p">
+          <p class="mb-1 text-2xl font-bold text-accent">1</p>
+          <p class="text-sm text-text-secondary">Tailwind preset</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next -->
+    <div class="rounded-card border border-surface-border bg-surface-secondary p-6">
+      <p class="mb-2 text-sm font-semibold text-text">Ready to build?</p>
+      <p class="text-sm text-text-secondary">
+        Browse the <a href="/components/" class="text-accent hover:text-accent-dark">component library</a> or explore the <a href="/design-tokens/" class="text-accent hover:text-accent-dark">design token system</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

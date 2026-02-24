@@ -1,0 +1,30 @@
+---
+name: StatCard
+description: Inverted display card with large value and decorative corner dots.
+category: Marketing
+sourceFile: stat-card.tsx
+storyId: components-statcard
+---
+
+## Usage
+
+```tsx
+import { StatCard } from "lambchop";
+
+<StatCard value="2.4M" label="Monthly Pageviews" />
+<StatCard value="$84K" label="Monthly Revenue" notched />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | Large display value |
+| `label` | `string` | — | Uppercase label below value |
+| `notched` | `boolean` | `false` | Adds ticket-stub semicircle cutouts on left and right edges |
+| `className` | `string` | — | Additional CSS classes |
+
+## Variants
+
+- **Default** — Inverted card with decorative corner dots
+- **Notched** — Adds semicircular cutouts on left and right edges for a ticket/stub aesthetic

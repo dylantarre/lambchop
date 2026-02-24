@@ -1,0 +1,51 @@
+---
+name: BarChart
+description: Multi-series bar chart with vertical and horizontal layouts.
+category: Charts
+sourceFile: bar-chart.tsx
+storyId: components-barchart
+---
+
+## Usage
+
+```tsx
+import { BarChart } from "lambchop";
+
+<BarChart
+  data={[
+    { month: "Sep", lambgoat: 8200, metalinjection: 4100 },
+    { month: "Oct", lambgoat: 9100, metalinjection: 4500 },
+  ]}
+  xKey="month"
+  bars={[
+    { key: "lambgoat", label: "lambgoat.com" },
+    { key: "metalinjection", label: "metalinjection.net" },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `Record<string, unknown>[]` | — | Array of data objects |
+| `xKey` | `string` | — | Key for the x-axis category |
+| `bars` | `BarDefinition[]` | — | Bar series definitions |
+| `height` | `number` | `300` | Chart height in pixels |
+| `layout` | `"vertical" \| "horizontal"` | `"vertical"` | Bar orientation |
+| `className` | `string` | — | Additional CSS classes |
+
+### BarDefinition
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `key` | `string` | — | Data key for this bar series |
+| `label` | `string` | — | Legend label |
+| `color` | `string` | auto | Override the default color |
+
+## Variants
+
+- **Single Bar** — One metric per category
+- **Multi-Series** — Compare multiple metrics side by side
+- **Horizontal** — Horizontal bar layout
+- **Custom Colors** — Override the default palette

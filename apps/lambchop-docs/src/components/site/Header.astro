@@ -1,0 +1,81 @@
+---
+const navLinks = [
+  { label: "Components", href: "/components/" },
+  { label: "Style Guide", href: "/style-guide/" },
+  { label: "Design Tokens", href: "/design-tokens/" },
+  { label: "Getting Started", href: "/getting-started/" },
+];
+
+const externalLinks = [
+  { label: "Storybook", href: "https://lambchop-djy.pages.dev" },
+  { label: "GitHub", href: "https://github.com/lambgoatdotcom/lambchop" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 border-b border-surface-border bg-surface/95 backdrop-blur">
+  <div class="mx-auto flex h-14 max-w-7xl items-center justify-between px-page-x">
+    <a href="/" class="flex items-center gap-2 font-semibold text-text">
+      <svg class="h-7 w-7" viewBox="0 0 32 32" fill="none">
+        <rect width="32" height="32" rx="6" fill="currentColor" class="text-accent" />
+        <path d="M8 22V10h3v9h5v3H8z" fill="var(--text-inverse)" />
+        <path d="M18 22V10h3v12h-3z" fill="var(--text-inverse)" opacity="0.7" />
+      </svg>
+      Lambchop
+    </a>
+
+    <nav class="flex items-center gap-1">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            "rounded-button px-3 py-1.5 text-sm transition-colors",
+            currentPath.startsWith(link.href)
+              ? "bg-surface-hover text-text font-medium"
+              : "text-text-secondary hover:text-text hover:bg-surface-hover",
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <span class="mx-2 h-4 w-px bg-surface-border" />
+      {externalLinks.map((link) => (
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-1 rounded-button px-3 py-1.5 text-sm text-text-secondary hover:text-text hover:bg-surface-hover transition-colors"
+        >
+          {link.label}
+          <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3.5 1.5h7v7M10.5 1.5L1.5 10.5" />
+          </svg>
+        </a>
+      ))}
+      <span class="mx-2 h-4 w-px bg-surface-border" />
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Toggle dark mode"
+        class="rounded-button p-1.5 text-text-secondary hover:text-text hover:bg-surface-hover transition-colors"
+      >
+        <!-- Sun icon (shown in dark mode) -->
+        <svg class="h-4 w-4 hidden dark:block" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+        </svg>
+        <!-- Moon icon (shown in light mode) -->
+        <svg class="h-4 w-4 block dark:hidden" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  document.getElementById("theme-toggle")?.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.toggle("dark");
+    localStorage.setItem("lambchop-theme", isDark ? "dark" : "light");
+  });
+</script>

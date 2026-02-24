@@ -1,0 +1,44 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0e0e0e"/>
+
+  <!-- Decorative border -->
+  <rect x="16" y="16" width="1168" height="598" rx="2" stroke="rgba(230,221,208,0.15)" stroke-width="2" fill="none"/>
+
+  <!-- Corner dots -->
+  <circle cx="27" cy="27" r="3" fill="rgba(230,221,208,0.3)"/>
+  <circle cx="1173" cy="27" r="3" fill="rgba(230,221,208,0.3)"/>
+  <circle cx="27" cy="603" r="3" fill="rgba(230,221,208,0.3)"/>
+  <circle cx="1173" cy="603" r="3" fill="rgba(230,221,208,0.3)"/>
+
+  <!-- Logo mark — yellow square with emoji -->
+  <g transform="translate(64, 64)">
+    <rect width="48" height="48" rx="4" fill="#fcd34d"/>
+    <text x="24" y="36" text-anchor="middle" font-size="28">🥩</text>
+  </g>
+
+  <!-- "LAMBCHOP" label -->
+  <text x="124" y="97" font-family="Bebas Neue, Impact, sans-serif" font-size="24" letter-spacing="0.1em" fill="rgba(230,221,208,0.5)">LAMBCHOP</text>
+
+  <!-- "DESIGN SYSTEM" title -->
+  <text x="64" y="250" font-family="Bebas Neue, Impact, sans-serif" font-size="96" letter-spacing="0.05em" fill="#e6ddd0">DESIGN</text>
+  <text x="64" y="340" font-family="Bebas Neue, Impact, sans-serif" font-size="96" letter-spacing="0.05em" fill="#e6ddd0">SYSTEM</text>
+
+  <!-- Stats -->
+  <g transform="translate(64, 480)">
+    <!-- 24 Components -->
+    <text x="0" y="0" font-family="Bebas Neue, Impact, sans-serif" font-size="40" letter-spacing="0.05em" fill="#fcd34d">24</text>
+    <text x="0" y="20" font-family="DM Sans, sans-serif" font-size="11" letter-spacing="0.15em" fill="rgba(230,221,208,0.5)">COMPONENTS</text>
+
+    <!-- 3 Font Families -->
+    <text x="140" y="0" font-family="Bebas Neue, Impact, sans-serif" font-size="40" letter-spacing="0.05em" fill="#fcd34d">3</text>
+    <text x="140" y="20" font-family="DM Sans, sans-serif" font-size="11" letter-spacing="0.15em" fill="rgba(230,221,208,0.5)">FONT FAMILIES</text>
+
+    <!-- 9 Chart Colors -->
+    <text x="310" y="0" font-family="Bebas Neue, Impact, sans-serif" font-size="40" letter-spacing="0.05em" fill="#fcd34d">9</text>
+    <text x="310" y="20" font-family="DM Sans, sans-serif" font-size="11" letter-spacing="0.15em" fill="rgba(230,221,208,0.5)">CHART COLORS</text>
+  </g>
+
+  <!-- Gold accent bar -->
+  <rect x="1056" y="558" width="80" height="4" rx="2" fill="#fcd34d"/>
+</svg>

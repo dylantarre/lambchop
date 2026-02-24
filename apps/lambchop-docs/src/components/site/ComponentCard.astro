@@ -1,0 +1,30 @@
+---
+interface Props {
+  name: string;
+  slug: string;
+  description: string;
+  category: string;
+}
+
+const { name, slug, description, category } = Astro.props;
+---
+
+<a
+  href={`/components/${slug}/`}
+  class="group block rounded-card border border-surface-border bg-surface p-card-p shadow-card transition-all hover:shadow-card-hover hover:border-accent/30"
+>
+  <div class="mb-3 flex items-center justify-between">
+    <h3 class="font-semibold text-text group-hover:text-accent transition-colors">
+      {name}
+    </h3>
+    <span class="rounded-full bg-surface-tertiary px-2 py-0.5 text-2xs text-text-tertiary">
+      {category}
+    </span>
+  </div>
+  <p class="text-sm text-text-secondary leading-relaxed">{description}</p>
+  <div class="mt-4 overflow-hidden rounded-lg bg-surface-secondary border border-surface-border">
+    <div class="flex items-center justify-center p-4">
+      <slot />
+    </div>
+  </div>
+</a>

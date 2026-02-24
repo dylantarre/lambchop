@@ -1,0 +1,21 @@
+---
+interface Props {
+  label: string;
+  cssVar?: string;
+}
+
+const { label, cssVar } = Astro.props;
+const varName = `--${label}`;
+---
+
+<div class="flex items-center gap-3">
+  <div
+    class="h-10 w-10 rounded-lg border border-surface-border shadow-sm"
+    style={`background-color: var(${varName})`}
+  />
+  <div>
+    <p class="text-sm font-medium text-text">{label}</p>
+    <p class="font-mono text-xs text-text-tertiary">var({varName})</p>
+    {cssVar && <p class="font-mono text-xs text-text-muted">{cssVar}</p>}
+  </div>
+</div>

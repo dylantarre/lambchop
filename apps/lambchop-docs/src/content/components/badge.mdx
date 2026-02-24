@@ -1,0 +1,32 @@
+---
+name: Badge
+description: Rounded pill label with default, primary, outline, and muted variants.
+category: Primitives
+sourceFile: badge.tsx
+storyId: components-badge
+---
+
+## Usage
+
+```tsx
+import { Badge } from "lambchop";
+
+<Badge>Default</Badge>
+<Badge variant="primary">Featured</Badge>
+<Badge variant="outline">Outline</Badge>
+<Badge variant="muted">Archived</Badge>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "primary" \| "outline" \| "muted"` | `"default"` | Visual style variant |
+| `className` | `string` | — | Additional CSS classes |
+
+## Variants
+
+- **Default** — Inverted colors (foreground bg, background text)
+- **Primary** — Gold accent background
+- **Outline** — Border-2 with transparent background
+- **Muted** — Subtle muted background

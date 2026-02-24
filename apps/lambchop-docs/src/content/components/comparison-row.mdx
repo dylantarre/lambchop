@@ -1,0 +1,37 @@
+---
+name: ComparisonRow
+description: Side-by-side comparison of current vs previous values with delta.
+category: Data Display
+sourceFile: comparison-row.tsx
+storyId: components-comparisonrow
+---
+
+## Usage
+
+```tsx
+import { ComparisonRow } from "lambchop";
+
+<ComparisonRow
+  label="lambgoat.com"
+  current={18230}
+  previous={15400}
+  format={(v) => `$${v.toLocaleString()}`}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Row label (e.g., site name) |
+| `current` | `number` | — | Current period value |
+| `previous` | `number` | — | Previous period value for comparison |
+| `format` | `(v: number) => string` | `toLocaleString()` | Custom value formatter |
+| `className` | `string` | — | Additional CSS classes |
+
+## Variants
+
+- **Positive** — Current exceeds previous (green delta)
+- **Negative** — Current below previous (red delta)
+- **Equal** — No change between periods
+- **Currency Format** — Custom USD formatting

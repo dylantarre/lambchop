@@ -1,0 +1,34 @@
+---
+name: ScaleIn
+description: Scroll-triggered scale entrance animation.
+category: Animation
+sourceFile: scale-in.tsx
+storyId: components-scalein
+---
+
+## Usage
+
+```tsx
+import { ScaleIn } from "lambchop";
+
+<ScaleIn>
+  <div className="p-8 border-2 border-foreground/40">
+    Scales in when scrolled into view
+  </div>
+</ScaleIn>
+
+<ScaleIn delay={300}>
+  <p>Delayed scale entrance</p>
+</ScaleIn>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `delay` | `number` | `0` | Delay in milliseconds |
+| `className` | `string` | — | Additional CSS classes |
+
+## How It Works
+
+Uses `IntersectionObserver` to detect viewport entry, then applies the `scale-in` CSS animation (0.9 to 1.0 scale with fade). Triggers once.

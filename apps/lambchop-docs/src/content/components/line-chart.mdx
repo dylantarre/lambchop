@@ -1,0 +1,46 @@
+---
+name: LineChart
+description: Line chart with multiple lines, tooltips, and legends.
+category: Charts
+sourceFile: line-chart.tsx
+storyId: components-linechart
+---
+
+## Usage
+
+```tsx
+import { LineChart } from "lambchop";
+
+<LineChart
+  data={[
+    { date: "Jan 1", revenue: 1250 },
+    { date: "Jan 2", revenue: 1380 },
+  ]}
+  xKey="date"
+  lines={[{ key: "revenue", label: "Revenue" }]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `Record<string, unknown>[]` | — | Array of data objects |
+| `xKey` | `string` | — | Key for the x-axis |
+| `lines` | `LineDefinition[]` | — | Line series definitions |
+| `height` | `number` | `300` | Chart height in pixels |
+| `className` | `string` | — | Additional CSS classes |
+
+### LineDefinition
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `key` | `string` | — | Data key for this line series |
+| `label` | `string` | — | Legend label |
+| `color` | `string` | auto | Override the default color |
+
+## Variants
+
+- **Single Line** — Track one metric over time
+- **Multiple Lines** — Compare multiple series with tooltips and legend
+- **Custom Colors** — Override the default palette

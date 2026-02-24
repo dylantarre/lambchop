@@ -1,0 +1,59 @@
+---
+name: FilterBar
+description: Dropdown filter system with single and multi-select.
+category: Data Management
+sourceFile: filter-bar.tsx
+storyId: components-filterbar
+---
+
+## Usage
+
+```tsx
+import { FilterBar, type FilterDef } from "lambchop";
+
+const filters: FilterDef[] = [
+  {
+    id: "site",
+    label: "Site",
+    options: [
+      { label: "lambgoat.com", value: "lambgoat" },
+      { label: "metalinjection.net", value: "metalinjection" },
+    ],
+  },
+  {
+    id: "author",
+    label: "Author",
+    multiple: true,
+    options: [
+      { label: "Alex H.", value: "alex" },
+      { label: "Jordan P.", value: "jordan" },
+    ],
+  },
+];
+
+<FilterBar
+  filters={filters}
+  values={values}
+  onChange={(id, val) => setValues({ ...values, [id]: val })}
+  onClear={() => setValues({})}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `filters` | `FilterDef[]` | — | Filter definitions |
+| `values` | `Record<string, string \| string[]>` | — | Current filter values |
+| `onChange` | `(id: string, value: string \| string[]) => void` | — | Called when a filter changes |
+| `onClear` | `() => void` | — | Called when clear button is clicked |
+| `className` | `string` | — | Additional CSS classes |
+
+### FilterDef
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `id` | `string` | — | Unique filter identifier |
+| `label` | `string` | — | Display label |
+| `options` | `{ label: string; value: string }[]` | — | Available options |
+| `multiple` | `boolean` | `false` | Allow multiple selections |

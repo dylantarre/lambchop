@@ -1,0 +1,33 @@
+---
+name: FadeIn
+description: Scroll-triggered fade animation with directional variants.
+category: Animation
+sourceFile: fade-in.tsx
+storyId: components-fadein
+---
+
+## Usage
+
+```tsx
+import { FadeIn } from "lambchop";
+
+<FadeIn direction="up">
+  <h2>This fades in from below</h2>
+</FadeIn>
+
+<FadeIn direction="left" delay={200}>
+  <p>Delayed fade from left</p>
+</FadeIn>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `direction` | `"up" \| "down" \| "left" \| "right"` | `"up"` | Animation direction |
+| `delay` | `number` | `0` | Delay in milliseconds |
+| `className` | `string` | — | Additional CSS classes |
+
+## How It Works
+
+Uses `IntersectionObserver` to detect when the element enters the viewport, then applies the corresponding CSS animation class. Triggers once by default.

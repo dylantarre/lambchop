@@ -1,0 +1,49 @@
+---
+name: Footer
+description: Multi-column footer with link groups and bottom bar.
+category: Marketing
+sourceFile: footer.tsx
+storyId: components-footer
+---
+
+## Usage
+
+```tsx
+import { Footer } from "lambchop";
+
+<Footer
+  columns={[
+    {
+      heading: "Network",
+      links: [
+        { label: "lambgoat", href: "https://lambgoat.com" },
+        { label: "noecho", href: "https://noecho.net" },
+      ],
+    },
+    {
+      heading: "Company",
+      links: [
+        { label: "About", href: "/about" },
+        { label: "Contact", href: "/contact" },
+      ],
+    },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `columns` | `FooterColumn[]` | — | Array of link column groups |
+| `bottomContent` | `React.ReactNode` | — | Custom bottom bar content (defaults to copyright) |
+| `className` | `string` | — | Additional CSS classes |
+
+## FooterColumn
+
+```ts
+interface FooterColumn {
+  heading: string;
+  links: Array<{ label: string; href: string }>;
+}
+```

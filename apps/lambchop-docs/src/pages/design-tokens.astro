@@ -1,0 +1,245 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TokenSwatch from "../components/site/TokenSwatch.astro";
+---
+
+<BaseLayout title="Design Tokens" description="Visual reference for the lambchop design token system.">
+  <div class="mx-auto max-w-4xl px-page-x py-12">
+    <h1 class="mb-2 text-3xl font-bold text-text">Design Tokens</h1>
+    <p class="mb-10 text-text-secondary">
+      The lambchop Tailwind preset defines a comprehensive token system for analytics dashboards.
+      All colors respond to the dark/light theme toggle via CSS custom properties.
+      Import it as a preset to use these values in your Tailwind classes.
+    </p>
+
+    <!-- Colors: Surface -->
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-semibold text-text">Surface</h2>
+      <p class="mb-6 text-sm text-text-secondary">Neutral background and border colors for cards, panels, and page elements.</p>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <TokenSwatch label="surface" cssVar="bg-surface" />
+        <TokenSwatch label="surface-secondary" cssVar="bg-surface-secondary" />
+        <TokenSwatch label="surface-tertiary" cssVar="bg-surface-tertiary" />
+        <TokenSwatch label="surface-border" cssVar="border-surface-border" />
+        <TokenSwatch label="surface-hover" cssVar="bg-surface-hover" />
+        <TokenSwatch label="surface-inverse" cssVar="bg-surface-inverse" />
+      </div>
+    </section>
+
+    <!-- Colors: Text -->
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-semibold text-text">Text</h2>
+      <p class="mb-6 text-sm text-text-secondary">Text color hierarchy from primary to muted.</p>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <TokenSwatch label="text" cssVar="text-text" />
+        <TokenSwatch label="text-secondary" cssVar="text-text-secondary" />
+        <TokenSwatch label="text-tertiary" cssVar="text-text-tertiary" />
+        <TokenSwatch label="text-muted" cssVar="text-text-muted" />
+        <TokenSwatch label="text-inverse" cssVar="text-text-inverse" />
+      </div>
+    </section>
+
+    <!-- Colors: Accent -->
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-semibold text-text">Accent</h2>
+      <p class="mb-6 text-sm text-text-secondary">Warm gold accent palette used for interactive elements and highlights.</p>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <TokenSwatch label="accent-light" cssVar="bg-accent-light" />
+        <TokenSwatch label="accent" cssVar="bg-accent" />
+        <TokenSwatch label="accent-dark" cssVar="bg-accent-dark" />
+      </div>
+    </section>
+
+    <!-- Colors: Semantic -->
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-semibold text-text">Semantic</h2>
+      <p class="mb-6 text-sm text-text-secondary">Semantic colors for revenue (positive), loss (negative), and warning states.</p>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <TokenSwatch label="revenue" cssVar="text-revenue" />
+        <TokenSwatch label="revenue-bg" cssVar="bg-revenue-bg" />
+        <TokenSwatch label="loss" cssVar="text-loss" />
+        <TokenSwatch label="loss-bg" cssVar="bg-loss-bg" />
+        <TokenSwatch label="warning" cssVar="text-warning" />
+        <TokenSwatch label="warning-bg" cssVar="bg-warning-bg" />
+      </div>
+    </section>
+
+    <!-- Colors: Chart -->
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-semibold text-text">Chart Series</h2>
+      <p class="mb-6 text-sm text-text-secondary">Nine distinct series colors for multi-line charts and data visualization.</p>
+      <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-3">
+        <TokenSwatch label="chart-1" cssVar="chart series 1" />
+        <TokenSwatch label="chart-2" cssVar="chart series 2" />
+        <TokenSwatch label="chart-3" cssVar="chart series 3" />
+        <TokenSwatch label="chart-4" cssVar="chart series 4" />
+        <TokenSwatch label="chart-5" cssVar="chart series 5" />
+        <TokenSwatch label="chart-6" cssVar="chart series 6" />
+        <TokenSwatch label="chart-7" cssVar="chart series 7" />
+        <TokenSwatch label="chart-8" cssVar="chart series 8" />
+        <TokenSwatch label="chart-9" cssVar="chart series 9" />
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-semibold text-text">Typography</h2>
+      <p class="mb-6 text-sm text-text-secondary">Three font families: DM Sans for body, Bebas Neue for display, Permanent Marker for accent, and JetBrains Mono for code.</p>
+
+      <div class="space-y-4">
+        <div class="rounded-card border border-surface-border bg-surface p-card-p">
+          <p class="mb-2 text-sm font-medium text-text-tertiary">Body &mdash; DM Sans</p>
+          <div class="space-y-3">
+            <div class="flex items-baseline gap-4">
+              <span class="w-16 text-xs text-text-tertiary font-mono">4xl</span>
+              <span class="text-4xl font-semibold text-text">$142,800</span>
+              <span class="text-xs text-text-muted">2rem</span>
+            </div>
+            <div class="flex items-baseline gap-4">
+              <span class="w-16 text-xs text-text-tertiary font-mono">3xl</span>
+              <span class="text-3xl font-semibold text-text">$142,800</span>
+              <span class="text-xs text-text-muted">1.5rem</span>
+            </div>
+            <div class="flex items-baseline gap-4">
+              <span class="w-16 text-xs text-text-tertiary font-mono">2xl</span>
+              <span class="text-2xl font-semibold text-text">$142,800</span>
+              <span class="text-xs text-text-muted">1.25rem</span>
+            </div>
+            <div class="flex items-baseline gap-4">
+              <span class="w-16 text-xs text-text-tertiary font-mono">base</span>
+              <span class="text-base text-text">$142,800</span>
+              <span class="text-xs text-text-muted">0.875rem</span>
+            </div>
+            <div class="flex items-baseline gap-4">
+              <span class="w-16 text-xs text-text-tertiary font-mono">sm</span>
+              <span class="text-sm text-text">$142,800</span>
+              <span class="text-xs text-text-muted">0.8125rem</span>
+            </div>
+            <div class="flex items-baseline gap-4">
+              <span class="w-16 text-xs text-text-tertiary font-mono">xs</span>
+              <span class="text-xs text-text">$142,800</span>
+              <span class="text-xs text-text-muted">0.75rem</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-card border border-surface-border bg-surface p-card-p">
+          <p class="mb-2 text-sm font-medium text-text-tertiary">Display &mdash; Bebas Neue</p>
+          <p class="font-display text-4xl text-text" style="font-family: 'Bebas Neue', sans-serif;">REVENUE DASHBOARD</p>
+        </div>
+
+        <div class="rounded-card border border-surface-border bg-surface p-card-p">
+          <p class="mb-2 text-sm font-medium text-text-tertiary">Accent &mdash; Permanent Marker</p>
+          <p class="text-2xl text-accent" style="font-family: 'Permanent Marker', cursive;">lambchop</p>
+        </div>
+
+        <div class="rounded-card border border-surface-border bg-surface p-card-p">
+          <p class="mb-2 text-sm font-medium text-text-tertiary">Monospace &mdash; JetBrains Mono</p>
+          <p class="font-mono text-sm text-text-secondary">JetBrains Mono, Fira Code, monospace</p>
+          <p class="mt-2 font-mono text-text">0123456789 $18,230.45</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spacing -->
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-semibold text-text">Spacing</h2>
+      <p class="mb-6 text-sm text-text-secondary">Custom spacing tokens for consistent dashboard layouts.</p>
+      <div class="overflow-x-auto rounded-card border border-surface-border">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-surface-border bg-surface-secondary">
+              <th class="px-4 py-2.5 text-left font-medium text-text-secondary">Token</th>
+              <th class="px-4 py-2.5 text-left font-medium text-text-secondary">Value</th>
+              <th class="px-4 py-2.5 text-left font-medium text-text-secondary">Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-surface-border">
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">sidebar-w</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">16rem (256px)</td>
+              <td class="px-4 py-2.5 text-text-secondary">Expanded sidebar width</td>
+            </tr>
+            <tr class="border-b border-surface-border bg-surface-secondary/50">
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">sidebar-collapsed</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">4rem (64px)</td>
+              <td class="px-4 py-2.5 text-text-secondary">Collapsed sidebar width</td>
+            </tr>
+            <tr class="border-b border-surface-border">
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">page-x</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">1.5rem (24px)</td>
+              <td class="px-4 py-2.5 text-text-secondary">Page horizontal padding</td>
+            </tr>
+            <tr class="border-b border-surface-border bg-surface-secondary/50">
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">page-y</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">1.25rem (20px)</td>
+              <td class="px-4 py-2.5 text-text-secondary">Page vertical padding</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">card-p</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">1.25rem (20px)</td>
+              <td class="px-4 py-2.5 text-text-secondary">Card internal padding</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Border Radius & Shadows -->
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-semibold text-text">Borders & Shadows</h2>
+      <p class="mb-6 text-sm text-text-secondary">Consistent corner radius and elevation tokens.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-card border border-surface-border bg-surface p-card-p">
+          <h3 class="mb-3 text-sm font-semibold text-text">Border Radius</h3>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-card border-2 border-accent bg-surface-tertiary"></div>
+              <div>
+                <p class="text-sm font-medium text-text">rounded-card</p>
+                <p class="text-xs text-text-tertiary font-mono">0.125rem</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-button border-2 border-accent bg-surface-tertiary"></div>
+              <div>
+                <p class="text-sm font-medium text-text">rounded-button</p>
+                <p class="text-xs text-text-tertiary font-mono">0.125rem</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-card border border-surface-border bg-surface p-card-p">
+          <h3 class="mb-3 text-sm font-semibold text-text">Shadows</h3>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-card border border-surface-border bg-surface shadow-card"></div>
+              <div>
+                <p class="text-sm font-medium text-text">shadow-card</p>
+                <p class="text-xs text-text-tertiary">none</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-card border border-surface-border bg-surface shadow-card-hover"></div>
+              <div>
+                <p class="text-sm font-medium text-text">shadow-card-hover</p>
+                <p class="text-xs text-text-tertiary">none</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage -->
+    <section>
+      <h2 class="mb-4 text-xl font-semibold text-text">Using the preset</h2>
+      <div class="code-block whitespace-pre"><span class="text-text-tertiary">// tailwind.config.ts</span>
+import lambchopPreset from "lambchop/tailwind-preset";
+
+export default {"{"}
+  presets: [lambchopPreset],
+{"}"} satisfies Config;</div>
+    </section>
+  </div>
+</BaseLayout>

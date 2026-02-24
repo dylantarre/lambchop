@@ -1,0 +1,47 @@
+---
+export interface PropDef {
+  name: string;
+  type: string;
+  default?: string;
+  description: string;
+  required?: boolean;
+}
+
+interface Props {
+  props: PropDef[];
+}
+
+const { props } = Astro.props;
+---
+
+<div class="overflow-x-auto rounded-card border border-surface-border">
+  <table class="w-full text-sm">
+    <thead>
+      <tr class="border-b border-surface-border bg-surface-secondary">
+        <th class="px-4 py-2.5 text-left font-medium text-text-secondary">Prop</th>
+        <th class="px-4 py-2.5 text-left font-medium text-text-secondary">Type</th>
+        <th class="px-4 py-2.5 text-left font-medium text-text-secondary">Default</th>
+        <th class="px-4 py-2.5 text-left font-medium text-text-secondary">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {props.map((prop, i) => (
+        <tr class:list={["border-b border-surface-border last:border-0", i % 2 === 1 && "bg-surface-secondary/50"]}>
+          <td class="px-4 py-2.5">
+            <code class="rounded bg-surface-tertiary px-1.5 py-0.5 text-xs font-mono text-accent">
+              {prop.name}
+            </code>
+            {prop.required && <span class="ml-1 text-loss text-xs">*</span>}
+          </td>
+          <td class="px-4 py-2.5">
+            <code class="text-xs font-mono text-text-secondary">{prop.type}</code>
+          </td>
+          <td class="px-4 py-2.5 text-text-tertiary">
+            {prop.default ? <code class="text-xs font-mono">{prop.default}</code> : "—"}
+          </td>
+          <td class="px-4 py-2.5 text-text-secondary">{prop.description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

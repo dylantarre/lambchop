@@ -1,0 +1,40 @@
+---
+name: Section
+description: Page section wrapper with default, muted, and bordered variants.
+category: Layout
+sourceFile: section.tsx
+storyId: components-section
+---
+
+## Usage
+
+```tsx
+import { Section } from "lambchop";
+
+<Section>
+  <h2>Default Section</h2>
+  <p>Content with built-in container.</p>
+</Section>
+
+<Section variant="muted">
+  <h2>Muted Background</h2>
+</Section>
+
+<Section variant="bordered" noContainer>
+  <h2>Full-width bordered section</h2>
+</Section>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "muted" \| "bordered"` | `"default"` | Visual style variant |
+| `noContainer` | `boolean` | `false` | Skip the built-in max-width container |
+| `className` | `string` | — | Additional CSS classes |
+
+## Variants
+
+- **Default** — Standard section with vertical padding
+- **Muted** — Subtle background tint for visual separation
+- **Bordered** — Industrial border-top and border-bottom

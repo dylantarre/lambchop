@@ -1,0 +1,30 @@
+---
+name: StaggerContainer
+description: Container that staggers child entrance animations with configurable delay.
+category: Animation
+sourceFile: stagger-container.tsx
+storyId: components-staggercontainer
+---
+
+## Usage
+
+```tsx
+import { StaggerContainer } from "lambchop";
+
+<StaggerContainer stagger={100} className="grid grid-cols-3 gap-4">
+  <div>First (0ms)</div>
+  <div>Second (100ms)</div>
+  <div>Third (200ms)</div>
+</StaggerContainer>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `stagger` | `number` | `100` | Delay between each child in milliseconds |
+| `className` | `string` | — | Additional CSS classes |
+
+## How It Works
+
+Uses `IntersectionObserver` to detect when the container enters the viewport. Each child receives an incrementing `transitionDelay` via inline styles, creating a cascading entrance effect.

@@ -1,0 +1,41 @@
+---
+name: PageHeader
+description: Page title with breadcrumbs, description, and action slots.
+category: Layout
+sourceFile: page-header.tsx
+storyId: components-pageheader
+---
+
+## Usage
+
+```tsx
+import { PageHeader } from "lambchop";
+
+<PageHeader
+  title="January 2026 Revenue"
+  description="Revenue breakdown across all sites."
+  breadcrumbs={[
+    { label: "Dashboard", href: "/" },
+    { label: "Revenue", href: "/revenue" },
+    { label: "January 2026" },
+  ]}
+  actions={<button>Export CSV</button>}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | — | Page title |
+| `description` | `string` | — | Optional description text |
+| `breadcrumbs` | `PageHeaderBreadcrumb[]` | — | Optional breadcrumb trail |
+| `actions` | `React.ReactNode` | — | Optional action buttons slot |
+| `className` | `string` | — | Additional CSS classes |
+
+### PageHeaderBreadcrumb
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `label` | `string` | — | Breadcrumb text |
+| `href` | `string` | — | Optional link (last item is plain text) |

@@ -1,0 +1,42 @@
+---
+name: PricingCard
+description: Pricing tier card with feature list, badge, and CTA button.
+category: Marketing
+sourceFile: pricing-card.tsx
+storyId: components-pricingcard
+---
+
+## Usage
+
+```tsx
+import { PricingCard } from "lambchop";
+
+<PricingCard
+  name="Pro"
+  price="$99"
+  featured
+  badge="Most Popular"
+  description="Everything you need to scale."
+  features={["Unlimited sites", "Advanced analytics", "Priority support"]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | `string` | — | Tier name |
+| `price` | `string` | — | Display price |
+| `unit` | `string` | `"/mo"` | Price unit suffix |
+| `description` | `string` | — | Description in highlighted box |
+| `features` | `string[]` | — | Feature list with star bullets |
+| `ctaLabel` | `string` | `"Get Started"` | CTA button text |
+| `ctaHref` | `string` | — | Optional link for CTA |
+| `onCtaClick` | `() => void` | — | Click handler for CTA |
+| `featured` | `boolean` | `false` | Inverted featured styling |
+| `badge` | `string` | — | Optional badge text |
+| `className` | `string` | — | Additional CSS classes |
+
+## Composition
+
+Internally composes Button and Badge components.
