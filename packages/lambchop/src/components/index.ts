@@ -10,6 +10,12 @@ export { ComparisonRow, type ComparisonRowProps } from "./comparison-row";
 export { DateRangePicker, type DateRangePickerProps } from "./date-range-picker";
 export { FilterBar, type FilterBarProps, type FilterDef } from "./filter-bar";
 export { SidebarNav, type SidebarNavProps, type NavItem } from "./sidebar-nav";
+export { BottomNav, type BottomNavProps } from "./bottom-nav";
+export {
+  ResponsiveSidebarNav,
+  type ResponsiveSidebarNavProps,
+  type ResponsiveNavBreakpoint,
+} from "./responsive-sidebar-nav";
 export { PageHeader, type PageHeaderProps } from "./page-header";
 
 // Primitives

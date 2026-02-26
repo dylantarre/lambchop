@@ -3,6 +3,13 @@ import type { Config } from "tailwindcss";
 const lambchopPreset: Partial<Config> = {
   theme: {
     extend: {
+      screens: {
+        mobile: "480px",
+        tablet: "768px",
+        nav: "960px",
+        desktop: "1024px",
+        wide: "1280px",
+      },
       colors: {
         // Surface / background
         surface: {
@@ -90,7 +97,10 @@ const lambchopPreset: Partial<Config> = {
         // Dashboard-specific spacing
         "sidebar-w": "16rem",
         "sidebar-collapsed": "4rem",
+        "bottom-nav-h": "4.75rem",
+        "bottom-nav-item": "4.5rem",
         "page-x": "1.5rem",
+        "page-x-mobile": "1rem",
         "page-y": "1.25rem",
         "card-p": "1.25rem",
       },

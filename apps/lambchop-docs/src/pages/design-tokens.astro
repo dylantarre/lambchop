@@ -175,10 +175,64 @@ import TokenSwatch from "../components/site/TokenSwatch.astro";
               <td class="px-4 py-2.5 text-text-secondary">1.25rem (20px)</td>
               <td class="px-4 py-2.5 text-text-secondary">Page vertical padding</td>
             </tr>
+            <tr class="border-b border-surface-border">
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">bottom-nav-h</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">4.75rem (76px)</td>
+              <td class="px-4 py-2.5 text-text-secondary">Mobile bottom navigation height</td>
+            </tr>
+            <tr class="border-b border-surface-border bg-surface-secondary/50">
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">bottom-nav-item</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">4.5rem (72px)</td>
+              <td class="px-4 py-2.5 text-text-secondary">Minimum width for bottom nav items</td>
+            </tr>
             <tr>
               <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">card-p</code></td>
               <td class="px-4 py-2.5 text-text-secondary">1.25rem (20px)</td>
               <td class="px-4 py-2.5 text-text-secondary">Card internal padding</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Breakpoints -->
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-semibold text-text">Breakpoints</h2>
+      <p class="mb-6 text-sm text-text-secondary">Named responsive tokens for mobile, tablet, and navigation collapse behavior.</p>
+      <div class="overflow-x-auto rounded-card border border-surface-border">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-surface-border bg-surface-secondary">
+              <th class="px-4 py-2.5 text-left font-medium text-text-secondary">Token</th>
+              <th class="px-4 py-2.5 text-left font-medium text-text-secondary">Min Width</th>
+              <th class="px-4 py-2.5 text-left font-medium text-text-secondary">Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-surface-border">
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">mobile:</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">480px</td>
+              <td class="px-4 py-2.5 text-text-secondary">Large phone layouts</td>
+            </tr>
+            <tr class="border-b border-surface-border bg-surface-secondary/50">
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">tablet:</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">768px</td>
+              <td class="px-4 py-2.5 text-text-secondary">Tablet and small desktop transitions</td>
+            </tr>
+            <tr class="border-b border-surface-border">
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">nav:</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">960px</td>
+              <td class="px-4 py-2.5 text-text-secondary">Recommended sidebar to bottom-nav collapse point</td>
+            </tr>
+            <tr class="border-b border-surface-border bg-surface-secondary/50">
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">desktop:</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">1024px</td>
+              <td class="px-4 py-2.5 text-text-secondary">Desktop layout breakpoint</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2.5"><code class="text-xs font-mono text-accent">wide:</code></td>
+              <td class="px-4 py-2.5 text-text-secondary">1280px</td>
+              <td class="px-4 py-2.5 text-text-secondary">Wide desktop layouts</td>
             </tr>
           </tbody>
         </table>

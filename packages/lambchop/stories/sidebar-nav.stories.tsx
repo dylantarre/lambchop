@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
+import { ResponsiveSidebarNav } from "../src/components/responsive-sidebar-nav";
 import { SidebarNav } from "../src/components/sidebar-nav";
 
 const DashboardIcon = () => (
@@ -101,4 +102,17 @@ export const WithHeader: Story = {
       </div>
     ),
   },
+};
+
+export const ResponsiveBottomNav: Story = {
+  render: () => (
+    <div style={{ height: 560, width: 390, border: "1px solid #d6cfc5" }}>
+      <ResponsiveSidebarNav
+        items={defaultItems}
+        onToggleCollapse={() => {}}
+        header={<span style={{ fontWeight: 600, fontSize: 14 }}>LGM Dashboard</span>}
+        desktopBreakpoint="nav"
+      />
+    </div>
+  ),
 };
