@@ -1,6 +1,6 @@
 {
   "name": "lmbchp",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "React design system for analytics dashboards and marketing sites",
   "type": "module",
   "main": "./dist/index.js",
