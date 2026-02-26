@@ -37,7 +37,7 @@ export function PricingCard({
         "relative flex flex-col rounded-card border-2 p-6",
         featured
           ? "border-primary bg-foreground text-background"
-          : "border-foreground/20",
+          : "border-foreground/40",
         className,
       )}
       {...props}

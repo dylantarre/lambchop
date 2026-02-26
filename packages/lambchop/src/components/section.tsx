@@ -7,7 +7,7 @@ const sectionVariants = cva("py-16 md:py-24", {
     variant: {
       default: "",
       muted: "bg-muted/30",
-      bordered: "border-y-2 border-foreground/20",
+      bordered: "border-y-2 border-foreground/40",
     },
   },
   defaultVariants: {

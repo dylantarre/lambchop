@@ -22,7 +22,7 @@ export function TestimonialCard({
   return (
     <div
       className={cn(
-        "rounded-card border-2 border-foreground/20 p-6",
+        "rounded-card border-2 border-foreground/40 p-6",
         className,
       )}
       {...props}

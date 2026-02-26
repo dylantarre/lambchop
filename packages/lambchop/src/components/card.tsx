@@ -50,7 +50,7 @@ function CardRoot({ className, ...props }: CardProps) {
   return (
     <div
       className={cn(
-        "rounded-card border-2 border-foreground/20 bg-card text-card-foreground",
+        "rounded-card border-2 border-foreground/40 bg-card text-card-foreground",
         className,
       )}
       {...props}
