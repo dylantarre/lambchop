@@ -22,6 +22,7 @@ export interface DataTableProps<TData> {
   loading?: boolean;
   bordered?: boolean;
   hidePagination?: boolean;
+  tableFixed?: boolean;
 }
 
 export function DataTable<TData>({
@@ -34,6 +35,7 @@ export function DataTable<TData>({
   loading = false,
   bordered = true,
   hidePagination = false,
+  tableFixed = false,
 }: DataTableProps<TData>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = React.useState("");
@@ -124,7 +126,7 @@ export function DataTable<TData>({
           </div>
         )}
 
-        <table className="w-full border-collapse text-sm">
+        <table className={cn("w-full border-collapse text-sm", tableFixed && "table-fixed")}>
           <thead className="sticky top-0 z-10 bg-surface-secondary">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -135,7 +137,7 @@ export function DataTable<TData>({
                   return (
                     <th
                       key={header.id}
-                      style={{ width: header.getSize() }}
+                      style={tableFixed && header.getSize() >= 999 ? undefined : { width: header.getSize() }}
                       className={cn(
                         "border-b border-surface-border px-3 py-2 text-left font-medium text-text-secondary",
                         canSort && "cursor-pointer select-none",
