@@ -19,6 +19,9 @@ export interface DataTableProps<TData> {
   searchable?: boolean;
   searchPlaceholder?: string;
   className?: string;
+  loading?: boolean;
+  bordered?: boolean;
+  hidePagination?: boolean;
 }
 
 export function DataTable<TData>({
@@ -28,9 +31,22 @@ export function DataTable<TData>({
   searchable = false,
   searchPlaceholder = "Search...",
   className,
+  loading = false,
+  bordered = true,
+  hidePagination = false,
 }: DataTableProps<TData>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = React.useState("");
+
+  // Increment generation when loading transitions false → triggers row re-animation
+  const [generation, setGeneration] = React.useState(0);
+  const prevLoadingRef = React.useRef(loading);
+  React.useEffect(() => {
+    if (prevLoadingRef.current && !loading) {
+      setGeneration((g) => g + 1);
+    }
+    prevLoadingRef.current = loading;
+  }, [loading]);
 
   const table = useReactTable({
     data,
@@ -70,7 +86,23 @@ export function DataTable<TData>({
         </div>
       )}
 
-      <div className="overflow-auto rounded-card border border-surface-border">
+      <div className={cn("relative overflow-auto", bordered && "rounded-card border border-surface-border")}>
+        {loading && (
+          <div className={cn("absolute inset-0 z-20 flex items-center justify-center bg-surface/50", bordered && "rounded-card")}>
+            <div className="flex items-center gap-2">
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="h-2.5 w-2.5 rounded-full bg-accent"
+                  style={{
+                    animation: `lmbchp-dot-bounce 0.7s ease-in-out ${i * 0.13}s infinite`,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
         <table className="w-full border-collapse text-sm">
           <thead className="sticky top-0 z-10 bg-surface-secondary">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -82,6 +114,7 @@ export function DataTable<TData>({
                   return (
                     <th
                       key={header.id}
+                      style={{ width: header.getSize() }}
                       className={cn(
                         "border-b border-surface-border px-3 py-2 text-left font-medium text-text-secondary",
                         canSort && "cursor-pointer select-none",
@@ -133,7 +166,10 @@ export function DataTable<TData>({
               </tr>
             ))}
           </thead>
-          <tbody>
+          <tbody
+            key={generation}
+            className={cn(loading && "opacity-30 pointer-events-none")}
+          >
             {table.getRowModel().rows.length === 0 ? (
               <tr>
                 <td
@@ -151,6 +187,13 @@ export function DataTable<TData>({
                     "border-b border-surface-border transition-colors hover:bg-surface-hover",
                     index % 2 === 1 && "bg-surface-secondary",
                   )}
+                  style={{
+                    animationName: "lmbchp-row-in",
+                    animationDuration: "260ms",
+                    animationTimingFunction: "ease",
+                    animationDelay: `${Math.min(index, 24) * 28}ms`,
+                    animationFillMode: "backwards",
+                  }}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <td key={cell.id} className="px-3 py-2 text-text">
@@ -167,40 +210,42 @@ export function DataTable<TData>({
         </table>
       </div>
 
-      <div className="flex items-center justify-between px-1 text-sm text-text-secondary">
-        <span>
-          Page {table.getState().pagination.pageIndex + 1} of{" "}
-          {table.getPageCount() || 1}
-        </span>
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-            aria-label="Go to previous page"
-            className={cn(
-              "rounded-button border border-surface-border bg-surface px-3 py-1 text-sm",
-              "hover:bg-surface-hover",
-              "disabled:cursor-not-allowed disabled:text-text-muted disabled:border-surface-border/50",
-            )}
-          >
-            Previous
-          </button>
-          <button
-            type="button"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-            aria-label="Go to next page"
-            className={cn(
-              "rounded-button border border-surface-border bg-surface px-3 py-1 text-sm",
-              "hover:bg-surface-hover",
-              "disabled:cursor-not-allowed disabled:text-text-muted disabled:border-surface-border/50",
-            )}
-          >
-            Next
-          </button>
+      {!hidePagination && (
+        <div className="flex items-center justify-between px-1 text-sm text-text-secondary">
+          <span>
+            Page {table.getState().pagination.pageIndex + 1} of{" "}
+            {table.getPageCount() || 1}
+          </span>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+              aria-label="Go to previous page"
+              className={cn(
+                "rounded-button border border-surface-border bg-surface px-3 py-1 text-sm",
+                "hover:bg-surface-hover",
+                "disabled:cursor-not-allowed disabled:text-text-muted disabled:border-surface-border/50",
+              )}
+            >
+              Previous
+            </button>
+            <button
+              type="button"
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+              aria-label="Go to next page"
+              className={cn(
+                "rounded-button border border-surface-border bg-surface px-3 py-1 text-sm",
+                "hover:bg-surface-hover",
+                "disabled:cursor-not-allowed disabled:text-text-muted disabled:border-surface-border/50",
+              )}
+            >
+              Next
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

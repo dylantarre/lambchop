@@ -39,7 +39,11 @@ const DARK_FALLBACK: ChartColors = {
 };
 
 function readVar(el: Element, name: string): string {
-  return getComputedStyle(el).getPropertyValue(name).trim();
+  const raw = getComputedStyle(el).getPropertyValue(name).trim();
+  // Tailwind CSS variables store RGB triplets like "252 211 77"
+  // which are not valid CSS colors — wrap them in rgb()
+  if (/^\d+\s+\d+\s+\d+$/.test(raw)) return `rgb(${raw.replace(/\s+/g, ", ")})`;
+  return raw;
 }
 
 export function useChartColors(): ChartColors {
