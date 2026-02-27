@@ -1,7 +1,19 @@
 import type { Config } from "tailwindcss";
 
+const withOpacity = (variable: string) => `rgb(var(${variable}) / <alpha-value>)`;
+
+const BREAKPOINTS = {
+  xs: "480px",
+  sm: "640px",
+  md: "768px",
+  lg: "1024px",
+  xl: "1280px",
+  "2xl": "1536px",
+};
+
 const lambchopPreset: Partial<Config> = {
   theme: {
+    screens: BREAKPOINTS,
     extend: {
       screens: {
         mobile: "480px",
@@ -13,58 +25,58 @@ const lambchopPreset: Partial<Config> = {
       colors: {
         // Surface / background
         surface: {
-          DEFAULT: "var(--surface)",
-          secondary: "var(--surface-secondary)",
-          tertiary: "var(--surface-tertiary)",
-          border: "var(--surface-border)",
-          hover: "var(--surface-hover)",
-          inverse: "var(--surface-inverse)",
+          DEFAULT: withOpacity("--surface"),
+          secondary: withOpacity("--surface-secondary"),
+          tertiary: withOpacity("--surface-tertiary"),
+          border: withOpacity("--surface-border"),
+          hover: withOpacity("--surface-hover"),
+          inverse: withOpacity("--surface-inverse"),
         },
         // Text
         text: {
-          DEFAULT: "var(--text)",
-          secondary: "var(--text-secondary)",
-          tertiary: "var(--text-tertiary)",
-          inverse: "var(--text-inverse)",
-          muted: "var(--text-muted)",
+          DEFAULT: withOpacity("--text"),
+          secondary: withOpacity("--text-secondary"),
+          tertiary: withOpacity("--text-tertiary"),
+          inverse: withOpacity("--text-inverse"),
+          muted: withOpacity("--text-muted"),
         },
         // Accent (gold)
         accent: {
-          DEFAULT: "var(--accent)",
-          light: "var(--accent-light)",
-          dark: "var(--accent-dark)",
+          DEFAULT: withOpacity("--accent"),
+          light: withOpacity("--accent-light"),
+          dark: withOpacity("--accent-dark"),
         },
         // Semantic: revenue
         revenue: {
-          DEFAULT: "var(--revenue)",
-          bg: "var(--revenue-bg)",
+          DEFAULT: withOpacity("--revenue"),
+          bg: withOpacity("--revenue-bg"),
         },
         // Semantic: loss
         loss: {
-          DEFAULT: "var(--loss)",
-          bg: "var(--loss-bg)",
+          DEFAULT: withOpacity("--loss"),
+          bg: withOpacity("--loss-bg"),
         },
         // Semantic: warning
         warning: {
-          DEFAULT: "var(--warning)",
-          bg: "var(--warning-bg)",
+          DEFAULT: withOpacity("--warning"),
+          bg: withOpacity("--warning-bg"),
         },
         // shadcn-style aliases (raw hex vars for opacity modifier support)
-        foreground: "var(--foreground)",
-        background: "var(--background)",
+        foreground: withOpacity("--foreground"),
+        background: withOpacity("--background"),
         primary: {
-          DEFAULT: "var(--primary)",
-          foreground: "var(--primary-foreground)",
+          DEFAULT: withOpacity("--primary"),
+          foreground: withOpacity("--primary-foreground"),
         },
         muted: {
-          DEFAULT: "var(--muted)",
-          foreground: "var(--muted-foreground)",
+          DEFAULT: withOpacity("--muted"),
+          foreground: withOpacity("--muted-foreground"),
         },
         card: {
-          DEFAULT: "var(--card)",
-          foreground: "var(--card-foreground)",
+          DEFAULT: withOpacity("--card"),
+          foreground: withOpacity("--card-foreground"),
         },
-        border: "var(--border)",
+        border: withOpacity("--border"),
       },
       fontFamily: {
         display: ["Bebas Neue", "Impact", "sans-serif"],

@@ -3,6 +3,21 @@ import { withThemeByClassName } from "@storybook/addon-themes";
 import "../src/styles.css";
 
 const preview: Preview = {
+  globalTypes: {
+    theme: {
+      description: "Global theme for Lambchop components",
+      defaultValue: "light",
+      toolbar: {
+        title: "Theme",
+        icon: "mirror",
+        items: [
+          { value: "light", title: "Light" },
+          { value: "dark", title: "Dark" },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
   parameters: {
     controls: {
       matchers: {
@@ -23,11 +38,11 @@ const preview: Preview = {
         dark: "dark",
         light: "",
       },
-      defaultTheme: "dark",
+      defaultTheme: "light",
       parentSelector: "html",
     }),
     (Story, context) => {
-      const theme = context.globals.theme || "dark";
+      const theme = (context.globals.theme as string) || "light";
       const isDark = theme === "dark";
 
       return (

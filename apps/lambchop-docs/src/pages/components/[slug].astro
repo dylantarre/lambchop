@@ -45,12 +45,12 @@ const storybookBase = "https://storybook.lg.media";
     <div class="mb-8">
       <h2 class="mb-4 text-lg font-semibold text-text">Live Demo</h2>
       <div class="rounded-xl border border-surface-border bg-surface-secondary p-6">
-        <DemoRenderer slug={slug} client:visible />
+        <DemoRenderer slug={slug} client:only="react" />
       </div>
     </div>
 
     <!-- MDX Content (Props table, variants, usage) -->
-    <div class="prose prose-sm max-w-none prose-headings:text-text prose-p:text-text-secondary prose-code:text-accent prose-code:before:content-none prose-code:after:content-none prose-th:text-text-secondary prose-td:text-text-secondary prose-a:text-accent">
+    <div class="prose prose-sm max-w-none dark:prose-invert prose-headings:text-text prose-p:text-text-secondary prose-code:text-accent prose-code:before:content-none prose-code:after:content-none prose-th:text-text-secondary prose-td:text-text-secondary prose-a:text-accent prose-li:text-text-secondary prose-strong:text-text prose-blockquote:text-text-secondary prose-pre:bg-surface-tertiary prose-pre:text-text">
       <Content />
     </div>
 
