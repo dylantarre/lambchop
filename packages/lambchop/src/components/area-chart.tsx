@@ -27,6 +27,9 @@ export interface AreaChartProps {
   height?: number;
   stacked?: boolean;
   className?: string;
+  xTickFormatter?: (value: string) => string;
+  yTickFormatter?: (value: number) => string;
+  tooltipFormatter?: (value: number) => string;
 }
 
 export function AreaChart({
@@ -36,6 +39,9 @@ export function AreaChart({
   height = 300,
   stacked = true,
   className,
+  xTickFormatter,
+  yTickFormatter,
+  tooltipFormatter,
 }: AreaChartProps) {
   const gradientId = React.useId();
   const colors = useChartColors();
@@ -76,11 +82,13 @@ export function AreaChart({
             tick={{ fontSize: 12, fill: colors.tick }}
             axisLine={{ stroke: colors.grid }}
             tickLine={false}
+            tickFormatter={xTickFormatter}
           />
           <YAxis
             tick={{ fontSize: 12, fill: colors.tick }}
             axisLine={false}
             tickLine={false}
+            tickFormatter={yTickFormatter}
           />
           <Tooltip
             contentStyle={{
@@ -92,6 +100,7 @@ export function AreaChart({
               color: colors.tooltipText,
             }}
             cursor={{ stroke: colors.cursor, strokeDasharray: "3 3" }}
+            formatter={tooltipFormatter ? (value: unknown) => tooltipFormatter(Number(value)) : undefined}
           />
           <Legend
             wrapperStyle={{ fontSize: 12, paddingTop: 8 }}

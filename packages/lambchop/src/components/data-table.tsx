@@ -23,6 +23,7 @@ export interface DataTableProps<TData> {
   bordered?: boolean;
   hidePagination?: boolean;
   tableFixed?: boolean;
+  initialSorting?: SortingState;
 }
 
 export function DataTable<TData>({
@@ -36,8 +37,9 @@ export function DataTable<TData>({
   bordered = true,
   hidePagination = false,
   tableFixed = false,
+  initialSorting,
 }: DataTableProps<TData>) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>(initialSorting ?? []);
   const [globalFilter, setGlobalFilter] = React.useState("");
 
   // Increment generation when loading transitions false → triggers row re-animation
