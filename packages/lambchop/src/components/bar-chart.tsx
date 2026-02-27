@@ -93,6 +93,10 @@ export function BarChart({
               fontSize: 12,
               color: colors.tooltipText,
             }}
+            labelFormatter={(_label, payload) => {
+              const entry = payload?.[0]?.payload;
+              return entry?.[xKey] ?? _label;
+            }}
             cursor={{ fill: colors.barCursor }}
           />
           <Legend
