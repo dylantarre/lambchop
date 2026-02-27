@@ -71,18 +71,39 @@ export function DataTable<TData>({
   return (
     <div className={cn("flex flex-col gap-3", className)}>
       {searchable && (
-        <div className="flex items-center">
+        <div className="relative w-full max-w-sm">
+          <svg
+            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
           <input
             type="text"
             value={globalFilter}
             onChange={(e) => setGlobalFilter(e.target.value)}
             placeholder={searchPlaceholder}
             className={cn(
-              "w-full max-w-sm rounded-button border border-surface-border bg-surface px-3 py-1.5",
+              "w-full rounded-button border border-surface-border bg-surface pl-9 pr-8 py-1.5",
               "text-sm text-text placeholder:text-text-muted",
               "outline-none focus:border-accent focus:ring-1 focus:ring-accent",
             )}
           />
+          {globalFilter && (
+            <button
+              type="button"
+              onClick={() => setGlobalFilter("")}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-text-muted hover:text-text"
+              aria-label="Clear search"
+            >
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+          )}
         </div>
       )}
 
