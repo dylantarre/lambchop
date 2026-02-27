@@ -9,6 +9,7 @@ import DataTableDemo from "./DataTableDemo";
 import FilterBarDemo from "./FilterBarDemo";
 import DateRangePickerDemo from "./DateRangePickerDemo";
 import SidebarNavDemo from "./SidebarNavDemo";
+import BottomNavDemo from "./BottomNavDemo";
 import PageHeaderDemo from "./PageHeaderDemo";
 import ButtonDemo from "./ButtonDemo";
 import BadgeDemo from "./BadgeDemo";
@@ -35,6 +36,7 @@ const demoMap: Record<string, React.ComponentType> = {
   "filter-bar": FilterBarDemo,
   "date-range-picker": DateRangePickerDemo,
   "sidebar-nav": SidebarNavDemo,
+  "bottom-nav": BottomNavDemo,
   "page-header": PageHeaderDemo,
   button: ButtonDemo,
   badge: BadgeDemo,

@@ -1,0 +1,47 @@
+---
+name: BottomNav
+description: Mobile bottom navigation bar with icon + label items and safe area inset support.
+category: Layout
+sourceFile: bottom-nav.tsx
+storyId: components-bottomnav
+---
+
+## Usage
+
+```tsx
+import { BottomNav, type NavItem } from "lmbchp";
+
+const items: NavItem[] = [
+  { label: "Dashboard", href: "/", icon: <DashboardIcon />, active: true },
+  { label: "Revenue", href: "/revenue", icon: <RevenueIcon /> },
+  { label: "Writers", href: "/writers", icon: <WritersIcon /> },
+  { label: "Articles", href: "/articles", icon: <ArticlesIcon /> },
+  { label: "Settings", href: "/settings", icon: <SettingsIcon /> },
+];
+
+<BottomNav items={items} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `NavItem[]` | — | Navigation items |
+| `fixed` | `boolean` | `true` | Fixed to bottom of viewport via `position: fixed` |
+| `ariaLabel` | `string` | `"Bottom navigation"` | Accessible label for the `<nav>` element |
+| `className` | `string` | — | Additional CSS classes |
+
+### NavItem
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `label` | `string` | — | Navigation label shown below the icon |
+| `href` | `string` | — | Link destination |
+| `icon` | `React.ReactNode` | — | Icon element (16×16 recommended) |
+| `active` | `boolean` | `false` | Highlights item and sets `aria-current="page"` |
+
+## Notes
+
+- Uses `env(safe-area-inset-bottom)` padding for iPhone home indicator
+- Items auto-size via CSS Grid `auto-cols-fr` — works with 3–5 items
+- Pair with `ResponsiveSidebarNav` to automatically swap between sidebar (desktop) and bottom nav (mobile)

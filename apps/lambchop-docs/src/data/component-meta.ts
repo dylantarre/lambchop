@@ -130,6 +130,14 @@ export const components: ComponentMeta[] = [
     storyId: "components-sidebarnav",
   },
   {
+    name: "BottomNav",
+    slug: "bottom-nav",
+    description: "Mobile bottom navigation bar with icon + label items and safe area inset support.",
+    category: "Layout",
+    sourceFile: "bottom-nav.tsx",
+    storyId: "components-bottomnav",
+  },
+  {
     name: "PageHeader",
     slug: "page-header",
     description: "Page title with breadcrumbs, description, and action slots.",
