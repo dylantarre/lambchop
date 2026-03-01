@@ -35,10 +35,10 @@ function DialogContent({
 }: DialogContentProps) {
   return (
     <RadixDialog.Portal>
-      <RadixDialog.Overlay className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
+      <RadixDialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" />
       <RadixDialog.Content
         className={cn(
-          "fixed left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 rounded-card border border-surface-border bg-surface p-6 shadow-card focus:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+          "fixed left-1/2 top-1/2 z-50 w-full -translate-x-1/2 -translate-y-1/2 rounded-card border border-surface-border bg-surface p-6 shadow-card focus:outline-none focus-visible:ring-2 focus-visible:ring-accent",
           "max-h-[90vh] overflow-y-auto",
           CONTENT_WIDTHS[maxWidth],
           className,
