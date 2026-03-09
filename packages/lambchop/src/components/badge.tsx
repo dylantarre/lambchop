@@ -11,6 +11,9 @@ const badgeVariants = cva(
         primary: "bg-primary text-primary-foreground",
         outline: "border-2 border-foreground text-foreground bg-transparent",
         muted: "bg-muted text-muted-foreground",
+        success: "bg-revenue-bg text-revenue",
+        warning: "bg-warning-bg text-warning",
+        danger: "bg-loss-bg text-loss",
       },
     },
     defaultVariants: {
