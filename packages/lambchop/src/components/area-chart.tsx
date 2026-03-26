@@ -45,6 +45,16 @@ export function AreaChart({
 }: AreaChartProps) {
   const gradientId = React.useId();
   const colors = useChartColors();
+  const [hidden, setHidden] = React.useState<Set<string>>(new Set());
+
+  const toggleSeries = React.useCallback((dataKey: string) => {
+    setHidden((prev) => {
+      const next = new Set(prev);
+      if (next.has(dataKey)) next.delete(dataKey);
+      else next.add(dataKey);
+      return next;
+    });
+  }, []);
 
   return (
     <div className={cn("w-full", className)} role="img" aria-label="Area chart">
@@ -66,8 +76,8 @@ export function AreaChart({
                   x2="0"
                   y2="1"
                 >
-                  <stop offset="0%" stopColor={color} stopOpacity={0.3} />
-                  <stop offset="95%" stopColor={color} stopOpacity={0.02} />
+                  <stop offset="0%" stopColor={color} stopOpacity={stacked ? 0.85 : 0.3} />
+                  <stop offset="95%" stopColor={color} stopOpacity={stacked ? 0.7 : 0.02} />
                 </linearGradient>
               );
             })}
@@ -101,11 +111,24 @@ export function AreaChart({
             }}
             cursor={{ stroke: colors.cursor, strokeDasharray: "3 3" }}
             formatter={tooltipFormatter ? (value: unknown) => tooltipFormatter(Number(value)) : undefined}
+            itemSorter={stacked ? () => -1 : undefined}
           />
           <Legend
-            wrapperStyle={{ fontSize: 12, paddingTop: 8 }}
+            wrapperStyle={{ fontSize: 12, paddingTop: 8, cursor: "pointer" }}
             iconType="circle"
             iconSize={8}
+            onClick={(e) => e.dataKey && toggleSeries(e.dataKey as string)}
+            formatter={(value, entry) => (
+              <span style={{ color: hidden.has(entry.dataKey as string) ? colors.tick : undefined, opacity: hidden.has(entry.dataKey as string) ? 0.4 : 1 }}>{value}</span>
+            )}
+            payload={stacked
+              ? [...areas].reverse().map((area, i) => {
+                  const origIndex = areas.length - 1 - i;
+                  const color = area.color ?? colors.series[origIndex % colors.series.length];
+                  return { value: area.label, type: "circle" as const, id: area.key, dataKey: area.key, color, inactive: hidden.has(area.key) };
+                })
+              : undefined
+            }
           />
           {areas.map((area, index) => {
             const color =
@@ -117,10 +140,12 @@ export function AreaChart({
                 name={area.label}
                 type="monotone"
                 stroke={color}
-                strokeWidth={2}
-                fill={`url(#${gradientId}-${area.key})`}
+                strokeWidth={stacked ? 1.5 : 2}
+                fill={stacked ? color : `url(#${gradientId}-${area.key})`}
+                fillOpacity={stacked ? 0.75 : 1}
                 stackId={stacked ? "stack" : undefined}
                 dot={false}
+                hide={hidden.has(area.key)}
                 activeDot={{
                   r: 4,
                   fill: color,
