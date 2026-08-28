@@ -6,6 +6,14 @@ export { Sparkline, type SparklineProps } from "./sparkline";
 export { BarChart, type BarChartProps } from "./bar-chart";
 export { LineChart, type LineChartProps } from "./line-chart";
 export { AreaChart, type AreaChartProps } from "./area-chart";
+export {
+  ComposedChart,
+  type ComposedChartProps,
+  type ComposedBarDefinition,
+  type ComposedLineDefinition,
+} from "./composed-chart";
+export { PieChart, type PieChartProps } from "./pie-chart";
+export { ScatterChart, type ScatterChartProps } from "./scatter-chart";
 export { ComparisonRow, type ComparisonRowProps } from "./comparison-row";
 export { DateRangePicker, type DateRangePickerProps } from "./date-range-picker";
 export { FilterBar, type FilterBarProps, type FilterDef } from "./filter-bar";
