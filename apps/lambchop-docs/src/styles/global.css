@@ -51,6 +51,15 @@
     --chart-7: #9e4b6b;
     --chart-8: #3d7a9e;
     --chart-9: #7a6b2d;
+    /* Categorical series (validated: CVD + lightness + contrast). Order matters. */
+    --chart-cat-1: #b47a09;
+    --chart-cat-2: #2a78d6;
+    --chart-cat-3: #1baf7a;
+    --chart-cat-4: #eb6834;
+    --chart-cat-5: #6250d6;
+    --chart-cat-6: #e87ba4;
+    --chart-cat-7: #008300;
+    --chart-cat-8: #e34948;
 
     /* shadcn-style aliases (RGB triplets for Tailwind opacity modifiers) */
     --foreground: 26 26 26;
@@ -108,6 +117,15 @@
     --chart-7: #d47b9b;
     --chart-8: #7bc4d4;
     --chart-9: #e6ddd0;
+    /* Categorical series (validated: CVD + lightness + contrast). Order matters. */
+    --chart-cat-1: #c98500;
+    --chart-cat-2: #3987e5;
+    --chart-cat-3: #199e70;
+    --chart-cat-4: #d95926;
+    --chart-cat-5: #9085e9;
+    --chart-cat-6: #d55181;
+    --chart-cat-7: #008300;
+    --chart-cat-8: #e66767;
 
     /* shadcn-style aliases (RGB triplets for Tailwind opacity modifiers) */
     --foreground: 230 221 208;

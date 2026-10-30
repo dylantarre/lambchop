@@ -1,0 +1,31 @@
+---
+name: Callout
+description: Highlighted takeaway paragraph with an accent rule and eyebrow label.
+category: Generative
+sourceFile: callout.tsx
+storyId: components-callout
+---
+
+## Usage
+
+```tsx
+import { Callout } from "lmbchp";
+
+<Callout label="Insight">
+  Lambgoat drives <strong>66%</strong> of October revenue.
+</Callout>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Small uppercase eyebrow, such as "Insight" |
+| `tone` | `"accent" \| "positive" \| "negative" \| "neutral"` | `"accent"` | Rule and eyebrow color |
+| `icon` | `ReactNode` | — | Optional icon before the label |
+
+## Guidance
+
+- One Callout per answer, at the end. It is the sentence a reader remembers.
+- Ask Lambert renders `TextBlock(text, "insight")` as a Callout.
+- Tone is never the only signal: the label says what kind of note it is.

@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { cn } from "../lib/cn";
 import { useChartColors } from "../lib/use-chart-colors";
+import { legendFormatter, seriesColor, tooltipLabelStyle, tooltipStyle } from "../lib/chart-style";
 
 export interface ScatterChartProps {
   data: Record<string, unknown>[];
@@ -23,6 +24,11 @@ export interface ScatterChartProps {
   yLabel?: string;
   height?: number;
   className?: string;
+  xTickFormatter?: (value: number) => string;
+  yTickFormatter?: (value: number) => string;
+  /** Key holding each point's display name (shown as tooltip title). */
+  nameKey?: string;
+  color?: string;
 }
 
 export function ScatterChart({
@@ -34,6 +40,10 @@ export function ScatterChart({
   yLabel,
   height = 300,
   className,
+  xTickFormatter,
+  yTickFormatter,
+  nameKey = "name",
+  color,
 }: ScatterChartProps) {
   const colors = useChartColors();
 
@@ -49,6 +59,7 @@ export function ScatterChart({
             tick={{ fontSize: 12, fill: colors.tick }}
             axisLine={{ stroke: colors.grid }}
             tickLine={false}
+            tickFormatter={xTickFormatter}
           />
           <YAxis
             type="number"
@@ -57,20 +68,25 @@ export function ScatterChart({
             tick={{ fontSize: 12, fill: colors.tick }}
             axisLine={false}
             tickLine={false}
+            tickFormatter={yTickFormatter}
+            width={56}
           />
           {zKey && <ZAxis type="number" dataKey={zKey} range={[40, 400]} />}
           <Tooltip
             cursor={{ stroke: colors.cursor, strokeDasharray: "3 3" }}
-            contentStyle={{
-              backgroundColor: colors.tooltipBg,
-              border: `1px solid ${colors.tooltipBorder}`,
-              borderRadius: "2px",
-              boxShadow: "none",
-              fontSize: 12,
-              color: colors.tooltipText,
-            }}
+            contentStyle={tooltipStyle(colors)}
+            labelStyle={tooltipLabelStyle}
+            labelFormatter={(_l: unknown, payload: ReadonlyArray<{ payload?: Record<string, unknown> }>) => String(payload?.[0]?.payload?.[nameKey] ?? "")}
+            formatter={(value: unknown, name: unknown) => [
+              name === (xLabel ?? xKey) && xTickFormatter
+                ? xTickFormatter(Number(value))
+                : name === (yLabel ?? yKey) && yTickFormatter
+                  ? yTickFormatter(Number(value))
+                  : Number(value).toLocaleString(),
+              String(name),
+            ]}
           />
-          <Scatter data={data} fill={colors.series[0]} />
+          <Scatter data={data} fill={color ?? colors.categorical[1]} fillOpacity={0.8} stroke={colors.tooltipBg} strokeWidth={1} />
         </RechartsScatterChart>
       </ResponsiveContainer>
     </div>

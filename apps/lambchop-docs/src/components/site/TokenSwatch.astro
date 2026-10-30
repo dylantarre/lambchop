@@ -2,20 +2,45 @@
 interface Props {
   label: string;
   cssVar?: string;
+  /** "rgb" tokens hold "R G B" triplets (wrapped in rgb()); "raw" tokens hold a full color. */
+  format?: "rgb" | "raw";
 }
 
 const { label, cssVar } = Astro.props;
 const varName = `--${label}`;
+const format = Astro.props.format ?? (label.startsWith("chart-") ? "raw" : "rgb");
+const color = format === "rgb" ? `rgb(var(${varName}))` : `var(${varName})`;
 ---
 
-<div class="flex items-center gap-3">
+<div class="flex items-center gap-3" data-token-swatch data-var={varName}>
   <div
-    class="h-10 w-10 rounded-lg border border-surface-border shadow-sm"
-    style={`background-color: var(${varName})`}
+    class="h-10 w-10 flex-shrink-0 rounded-card border border-surface-border"
+    style={`background-color: ${color}`}
   />
-  <div>
+  <div class="min-w-0">
     <p class="text-sm font-medium text-text">{label}</p>
-    <p class="font-mono text-xs text-text-tertiary">var({varName})</p>
+    <p class="font-mono text-xs text-text-tertiary">
+      var({varName}) <span class="text-text-muted" data-token-value></span>
+    </p>
     {cssVar && <p class="font-mono text-xs text-text-muted">{cssVar}</p>}
   </div>
 </div>
+
+<script>
+  // Show the token's current resolved value; refresh when the theme toggles.
+  function toHex(raw: string): string {
+    const t = raw.trim();
+    const m = t.match(/^(\d+)\s+(\d+)\s+(\d+)$/);
+    if (!m) return t;
+    return "#" + m.slice(1).map((n) => Number(n).toString(16).padStart(2, "0")).join("");
+  }
+  function paint() {
+    const css = getComputedStyle(document.documentElement);
+    document.querySelectorAll<HTMLElement>("[data-token-swatch]").forEach((el) => {
+      const out = el.querySelector("[data-token-value]");
+      if (out) out.textContent = toHex(css.getPropertyValue(el.dataset.var ?? ""));
+    });
+  }
+  paint();
+  new MutationObserver(paint).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+</script>

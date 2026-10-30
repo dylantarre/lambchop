@@ -5,7 +5,7 @@ const components = defineCollection({
   schema: z.object({
     name: z.string(),
     description: z.string(),
-    category: z.enum(["Primitives", "Data Display", "Charts", "Data Management", "Layout", "Marketing", "Animation"]),
+    category: z.enum(["Primitives", "Data Display", "Charts", "Data Management", "Layout", "Marketing", "Animation", "Generative"]),
     sourceFile: z.string(),
     storyId: z.string(),
   }),

@@ -1,0 +1,39 @@
+---
+name: ComparisonCard
+description: Current vs previous value with the change called out and a two-bar comparison.
+category: Generative
+sourceFile: comparison-card.tsx
+storyId: components-comparisoncard
+---
+
+## Usage
+
+```tsx
+import { ComparisonCard, formatValue } from "lmbchp";
+
+<ComparisonCard
+  label="Overall revenue"
+  current={5402.21}
+  previous={4709.48}
+  format={(v) => formatValue(v, "currency")}
+  currentLabel="October"
+  previousLabel="September"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Metric name |
+| `current` | `number` | — | Current period value |
+| `previous` | `number` | — | Previous period value |
+| `format` | `(v: number) => string` | locale number | Value formatter |
+| `currentLabel` / `previousLabel` | `string` | `"Now"` / `"Before"` | Period names on the bars |
+| `invert` | `boolean` | `false` | Treat a decrease as good (costs, churn) |
+
+## Guidance
+
+- Changes that round to 0.0% render neutral, never as a green arrow.
+- The change pill pairs color with an arrow and number, so it never relies on color alone.
+- Ask Lambert's `Comparison(label, current, previous)` renders this card and infers currency or count from the label.

@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LambertShowcase from "../components/demos/LambertShowcase.tsx";
+
+const contract = [
+  { call: "Stack(children, gap?)", renders: "Flex column", notes: "Always the root. Gap maps to fixed spacing steps." },
+  { call: "Grid(children, columns?)", renders: "Responsive grid", notes: "Never leaves empty tracks: 3 children in a 4-column grid become 3 columns." },
+  { call: 'TextBlock(text, variant?)', renders: "Heading, paragraph or Callout", notes: 'h1/h2 use the display face. "insight" renders a Callout for the closing takeaway.' },
+  { call: "StatsCard(label, value, trendValue?, …)", renders: "KpiCard", notes: "Trends that round to 0.0% render neutral. Value is replaced with the verified database figure." },
+  { call: "Comparison(label, current, previous)", renders: "ComparisonCard", notes: "Currency or count inferred from the label. Both values are verified." },
+  { call: "Metric(value, delta, deltaLabel?)", renders: "MetricTrend", notes: "Inline value with change." },
+  { call: "BarChart(title?, categories, series, height?)", renders: "ChartPanel + BarChart", notes: "More than 5 categories or names over 12 characters become ranked horizontal bars with values." },
+  { call: "LineChart(title?, labels, series, height?)", renders: "ChartPanel + LineChart", notes: "ISO dates shortened to “Oct 1”. One series gets a soft fill and an average line." },
+  { call: "AreaChart(title?, labels, series, stacked?, height?)", renders: "ChartPanel + AreaChart", notes: "Multiple series use the categorical palette." },
+  { call: "PieChart(title?, slices, donut?, height?)", renders: "ChartPanel + DonutBreakdown", notes: "Sorted, value legend with percents, tail folded into Other past 8." },
+  { call: "ComposedChart(title?, labels, bars?, lines?, dualAxis?, height?)", renders: "ChartPanel + ComposedChart", notes: "dualAxis renders two aligned charts instead of two y-scales." },
+  { call: "ScatterChart(title?, points, xLabel?, yLabel?, height?)", renders: "ChartPanel + ScatterChart", notes: "Axis formats inferred from the axis labels." },
+  { call: "DataTable(title?, headers, rows, searchable?, pageSize?)", renders: "ChartPanel + RankedTable", notes: "Sortable, ranked, formatted, with a data bar and Show all." },
+  { call: "InfoBadge(text, variant?)", renders: "Badge", notes: "default → muted, error → danger." },
+];
+---
+
+<BaseLayout title="Ask Lambert" description="How lambchop renders generated dashboards for Ask Lambert.">
+  <div class="mx-auto max-w-6xl px-page-x py-12">
+    <p class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-accent">Generative UI</p>
+    <h1 class="mb-4 font-display text-5xl uppercase leading-none tracking-wide text-text">Ask Lambert</h1>
+    <p class="max-w-3xl text-lg text-text-secondary">
+      Lambert answers a question in OpenUI Lang, a short component script. The renderer maps each call to a
+      lambchop component, infers formats from labels, and the server replaces every number it can match with
+      the exact database value before the answer settles.
+    </p>
+
+    <ol class="mt-10 grid gap-4 md:grid-cols-4">
+      {[
+        ["Ask", "A writer, owner or admin types a question in the dashboard header."],
+        ["Compose", "The model answers with component calls, scoped to what that role may see."],
+        ["Render", "Each call becomes a lambchop component as the answer streams in."],
+        ["Verify", "Numbers are checked against the database and corrected before the badge appears."],
+      ].map(([title, body], i) => (
+        <li class="rounded-card border border-surface-border bg-surface-secondary p-4">
+          <span class="font-mono text-xs text-accent">0{i + 1}</span>
+          <p class="mt-1 font-display text-xl uppercase tracking-wider text-text">{title}</p>
+          <p class="mt-1 text-sm text-text-secondary">{body}</p>
+        </li>
+      ))}
+    </ol>
+
+    <section class="mt-16">
+      <h2 class="mb-2 text-2xl font-semibold text-text">A full answer</h2>
+      <p class="mb-6 text-sm text-text-secondary">
+        Rendered live from the same components. Hover the donut or legend, sort the table, toggle the theme.
+      </p>
+      <div class="rounded-xl border border-surface-border bg-surface p-4 sm:p-6">
+        <LambertShowcase client:only="react" />
+      </div>
+    </section>
+
+    <section class="mt-16">
+      <h2 class="mb-2 text-2xl font-semibold text-text">Component contract</h2>
+      <p class="mb-6 max-w-3xl text-sm text-text-secondary">
+        Arguments are positional. Names and argument order are fixed because the verifier rewrites values by
+        position. Add new options only at the end of a signature.
+      </p>
+      <div class="overflow-x-auto rounded-card border border-surface-border">
+        <table class="w-full text-sm">
+          <thead class="bg-surface-secondary">
+            <tr class="border-b border-surface-border text-left text-xs uppercase tracking-wider text-text-tertiary">
+              <th class="px-4 py-3 font-medium">OpenUI call</th>
+              <th class="px-4 py-3 font-medium">Renders as</th>
+              <th class="px-4 py-3 font-medium">Behavior</th>
+            </tr>
+          </thead>
+          <tbody>
+            {contract.map((row) => (
+              <tr class="border-b border-surface-border/60 last:border-0 align-top">
+                <td class="whitespace-nowrap px-4 py-3 font-mono text-xs text-accent">{row.call}</td>
+                <td class="px-4 py-3 text-text">{row.renders}</td>
+                <td class="px-4 py-3 text-text-secondary">{row.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mt-16 grid gap-6 md:grid-cols-2">
+      <div class="rounded-card border border-surface-border bg-surface-secondary p-5">
+        <h3 class="mb-3 font-display text-xl uppercase tracking-wider text-text">Formatting rules</h3>
+        <ul class="list-disc space-y-1.5 pl-5 text-sm text-text-secondary">
+          <li>Series and titles mentioning revenue, earnings, RPM or payout format as dollars.</li>
+          <li>Pageviews, sessions, articles and counts format as whole numbers, compact on axes (937K).</li>
+          <li>ISO dates shorten on axes (Oct 1) and expand in tooltips (Oct 1, 2026).</li>
+          <li>A currency column in a table shares one decimal policy so values line up.</li>
+        </ul>
+      </div>
+      <div class="rounded-card border border-surface-border bg-surface-secondary p-5">
+        <h3 class="mb-3 font-display text-xl uppercase tracking-wider text-text">Chart rules</h3>
+        <ul class="list-disc space-y-1.5 pl-5 text-sm text-text-secondary">
+          <li>One series uses the gold brand color. Several series use the validated categorical palette.</li>
+          <li>Never two y-scales on one chart. A dual-axis request renders two aligned charts.</li>
+          <li>Legends only appear with two or more series. One series is named by the title.</li>
+          <li>Part-of-whole charts always list exact values and percents beside the shape.</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

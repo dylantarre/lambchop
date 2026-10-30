@@ -1,0 +1,33 @@
+---
+name: ChartPanel
+description: Standard frame for a chart, table or breakdown with a display-face title, subtitle, aside and footer slots.
+category: Generative
+sourceFile: chart-panel.tsx
+storyId: components-chartpanel
+---
+
+## Usage
+
+```tsx
+import { ChartPanel, LineChart } from "lmbchp";
+
+<ChartPanel title="Daily revenue" subtitle="Oct 1 – Oct 29, 2026" aside="$5,402">
+  <LineChart data={rows} xKey="day" lines={[{ key: "Revenue", label: "Revenue" }]} />
+</ChartPanel>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `ReactNode` | — | Heading in the display face, matching dashboard cards |
+| `subtitle` | `ReactNode` | — | One line under the title: the period, unit, or question answered |
+| `aside` | `ReactNode` | — | Right-aligned header slot for a headline number or badge |
+| `footer` | `ReactNode` | — | Source note or caption under a divider |
+| `flush` | `boolean` | `false` | Remove inner padding, for full-bleed tables |
+
+## Guidance
+
+- Every chart and table in a generated answer sits in a ChartPanel, so answers read as one dashboard.
+- Put the date range in `subtitle`. Ask Lambert derives it from the x-axis labels.
+- Keep `aside` to one value. A second number belongs in its own card.

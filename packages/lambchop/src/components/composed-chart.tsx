@@ -14,6 +14,7 @@ import {
 } from "recharts";
 import { cn } from "../lib/cn";
 import { useChartColors } from "../lib/use-chart-colors";
+import { legendFormatter, seriesColor, tooltipLabelStyle, tooltipStyle } from "../lib/chart-style";
 
 export interface ComposedBarDefinition {
   key: string;
@@ -37,6 +38,13 @@ export interface ComposedChartProps {
   height?: number;
   className?: string;
   tooltipFormatter?: (value: number) => string;
+  tooltipLabelFormatter?: (value: string) => string;
+  xTickFormatter?: (value: string) => string;
+  yTickFormatter?: (value: number) => string;
+  /** Right-axis tick formatter when dualAxis is on. */
+  yRightTickFormatter?: (value: number) => string;
+  /** Series palette. Default "brand". */
+  palette?: string[] | "categorical" | "brand";
 }
 
 export function ComposedChart({
@@ -48,6 +56,11 @@ export function ComposedChart({
   height = 300,
   className,
   tooltipFormatter,
+  tooltipLabelFormatter,
+  xTickFormatter,
+  yTickFormatter,
+  yRightTickFormatter,
+  palette = "brand",
 }: ComposedChartProps) {
   const colors = useChartColors();
 
@@ -64,12 +77,17 @@ export function ComposedChart({
             tick={{ fontSize: 12, fill: colors.tick }}
             axisLine={{ stroke: colors.grid }}
             tickLine={false}
+            tickFormatter={xTickFormatter}
+            minTickGap={24}
+            interval={data.length <= 12 ? "equidistantPreserveStart" : "preserveStartEnd"}
           />
           <YAxis
             yAxisId="left"
             tick={{ fontSize: 12, fill: colors.tick }}
             axisLine={false}
             tickLine={false}
+            tickFormatter={yTickFormatter}
+            width={56}
           />
           {dualAxis && (
             <YAxis
@@ -78,34 +96,31 @@ export function ComposedChart({
               tick={{ fontSize: 12, fill: colors.tick }}
               axisLine={false}
               tickLine={false}
+              tickFormatter={yRightTickFormatter}
+              width={56}
             />
           )}
           <Tooltip
-            contentStyle={{
-              backgroundColor: colors.tooltipBg,
-              border: `1px solid ${colors.tooltipBorder}`,
-              borderRadius: "2px",
-              boxShadow: "none",
-              fontSize: 12,
-              color: colors.tooltipText,
-            }}
+            contentStyle={tooltipStyle(colors)}
+            labelStyle={tooltipLabelStyle}
+            labelFormatter={tooltipLabelFormatter ? (l: unknown) => tooltipLabelFormatter(String(l)) : undefined}
             cursor={{ fill: colors.barCursor }}
             formatter={tooltipFormatter ? (value: unknown) => tooltipFormatter(Number(value)) : undefined}
           />
-          <Legend wrapperStyle={{ fontSize: 12, paddingTop: 8 }} iconType="circle" iconSize={8} />
+          <Legend wrapperStyle={{ fontSize: 12, paddingTop: 8 }} iconType="circle" iconSize={8} formatter={legendFormatter(colors)} />
           {bars.map((bar, index) => (
             <Bar
               key={bar.key}
               dataKey={bar.key}
               name={bar.label}
               yAxisId="left"
-              fill={bar.color ?? colors.series[index % colors.series.length]}
-              radius={[2, 2, 0, 0]}
+              fill={seriesColor(colors, index, palette, bar.color)}
+              radius={[4, 4, 0, 0]}
               maxBarSize={48}
             />
           ))}
           {lines.map((line, index) => {
-            const color = line.color ?? colors.series[(bars.length + index) % colors.series.length];
+            const color = seriesColor(colors, bars.length + index, palette, line.color);
             return (
               <Line
                 key={line.key}

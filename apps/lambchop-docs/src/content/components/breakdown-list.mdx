@@ -1,0 +1,31 @@
+---
+name: BreakdownList
+description: A legend that carries the numbers with a swatch, label, value and share bar.
+category: Generative
+sourceFile: breakdown-list.tsx
+storyId: components-breakdownlist
+---
+
+## Usage
+
+```tsx
+import { BreakdownList, formatValue } from "lmbchp";
+
+<BreakdownList items={[{ label: "Lambgoat", value: 3541.36 }, { label: "The Needle Drop", value: 1239.9 }]}
+  format={(v) => formatValue(v, "currency")} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `{ label; value; color? }[]` | — | Rows in display order |
+| `format` | `(v: number) => string` | locale number | Value formatter |
+| `showShare` | `boolean` | `true` | Show percent of total and a share bar |
+| `palette` | `"categorical" \| "brand" \| string[]` | `"categorical"` | Swatch colors, assigned in order |
+| `activeIndex` / `onActiveIndexChange` | — | — | Link hover state with a PieChart |
+
+## Guidance
+
+- Text stays in text colors. The swatch carries identity.
+- Shares under 0.1% show as `<0.1%` rather than a misleading 0.0%.
