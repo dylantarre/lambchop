@@ -29,6 +29,16 @@ export interface ScatterChartProps {
   /** Key holding each point's display name (shown as tooltip title). */
   nameKey?: string;
   color?: string;
+  /** Axis scales. "auto" switches to log when positive values span more than 100x. */
+  xScale?: "linear" | "log" | "auto";
+  yScale?: "linear" | "log" | "auto";
+}
+
+function resolveScale(values: number[], mode: "linear" | "log" | "auto"): "linear" | "log" {
+  if (mode !== "auto") return mode;
+  const finite = values.filter((v) => Number.isFinite(v));
+  if (finite.length < 3 || finite.some((v) => v <= 0)) return "linear";
+  return Math.max(...finite) / Math.min(...finite) > 100 ? "log" : "linear";
 }
 
 export function ScatterChart({
@@ -44,8 +54,12 @@ export function ScatterChart({
   yTickFormatter,
   nameKey = "name",
   color,
+  xScale = "linear",
+  yScale = "linear",
 }: ScatterChartProps) {
   const colors = useChartColors();
+  const xs = resolveScale(data.map((d) => Number(d[xKey])), xScale);
+  const ys = resolveScale(data.map((d) => Number(d[yKey])), yScale);
 
   return (
     <div className={cn("w-full", className)} role="img" aria-label="Scatter chart">
@@ -56,6 +70,7 @@ export function ScatterChart({
             type="number"
             dataKey={xKey}
             name={xLabel ?? xKey}
+            {...(xs === "log" ? { scale: "log" as const, domain: ["auto", "auto"] as [string, string] } : {})}
             tick={{ fontSize: 12, fill: colors.tick }}
             axisLine={{ stroke: colors.grid }}
             tickLine={false}
@@ -65,6 +80,7 @@ export function ScatterChart({
             type="number"
             dataKey={yKey}
             name={yLabel ?? yKey}
+            {...(ys === "log" ? { scale: "log" as const, domain: ["auto", "auto"] as [string, string] } : {})}
             tick={{ fontSize: 12, fill: colors.tick }}
             axisLine={false}
             tickLine={false}

@@ -84,7 +84,7 @@ export function BarChart({
       const label = categoryFormatter ? categoryFormatter(raw) : raw;
       return Math.max(max, label.length);
     }, 0);
-    return Math.min(190, Math.max(64, Math.round(longest * 7.4) + 16));
+    return Math.min(300, Math.max(64, Math.round(longest * 7.6) + 18));
   }, [categoryWidth, data, xKey, categoryFormatter]);
 
   const tick = { fontSize: 12, fill: colors.tick };
