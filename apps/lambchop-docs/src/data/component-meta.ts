@@ -2,7 +2,7 @@ export interface ComponentMeta {
   name: string;
   slug: string;
   description: string;
-  category: "Primitives" | "Data Display" | "Charts" | "Data Management" | "Layout" | "Marketing" | "Animation";
+  category: "Primitives" | "Data Display" | "Charts" | "Data Management" | "Layout" | "Marketing" | "Animation" | "Generative";
   sourceFile: string;
   storyId: string;
 }
@@ -219,12 +219,62 @@ export const components: ComponentMeta[] = [
     sourceFile: "stagger-container.tsx",
     storyId: "components-staggercontainer",
   },
+  // Generative (Ask Lambert)
+  {
+    name: "ChartPanel",
+    slug: "chart-panel",
+    description: "Standard frame for a chart, table or breakdown: display-face title, subtitle, aside and footer slots.",
+    category: "Generative",
+    sourceFile: "chart-panel.tsx",
+    storyId: "components-chartpanel",
+  },
+  {
+    name: "Callout",
+    slug: "callout",
+    description: "Highlighted takeaway paragraph with an accent rule and eyebrow label.",
+    category: "Generative",
+    sourceFile: "callout.tsx",
+    storyId: "components-callout",
+  },
+  {
+    name: "ComparisonCard",
+    slug: "comparison-card",
+    description: "Current vs previous value with the change called out and a two-bar comparison.",
+    category: "Generative",
+    sourceFile: "comparison-card.tsx",
+    storyId: "components-comparisoncard",
+  },
+  {
+    name: "BreakdownList",
+    slug: "breakdown-list",
+    description: "A legend that carries the numbers: swatch, label, value and share bar.",
+    category: "Generative",
+    sourceFile: "breakdown-list.tsx",
+    storyId: "components-breakdownlist",
+  },
+  {
+    name: "DonutBreakdown",
+    slug: "donut-breakdown",
+    description: "Donut chart with a linked value legend, sorted largest first, long tail folded into Other.",
+    category: "Generative",
+    sourceFile: "donut-breakdown.tsx",
+    storyId: "components-donutbreakdown",
+  },
+  {
+    name: "RankedTable",
+    slug: "ranked-table",
+    description: "Sortable table that infers number formats, aligns numerals, ranks rows and adds a data bar.",
+    category: "Generative",
+    sourceFile: "ranked-table.tsx",
+    storyId: "components-rankedtable",
+  },
 ];
 
 export const categories = [
   "Primitives",
   "Data Display",
   "Charts",
+  "Generative",
   "Data Management",
   "Layout",
   "Marketing",

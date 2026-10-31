@@ -13,6 +13,8 @@ export interface ChartColors {
   barCursor: string;
   accent: string;
   series: string[];
+  /** Validated categorical palette for multi-series and part-of-whole charts. */
+  categorical: string[];
 }
 
 const DARK_FALLBACK: ChartColors = {
@@ -35,6 +37,16 @@ const DARK_FALLBACK: ChartColors = {
     "#d47b9b",
     "#7bc4d4",
     "#e6ddd0",
+  ],
+  categorical: [
+    "#c98500",
+    "#3987e5",
+    "#199e70",
+    "#d95926",
+    "#9085e9",
+    "#d55181",
+    "#008300",
+    "#e66767",
   ],
 };
 
@@ -70,6 +82,12 @@ export function useChartColors(): ChartColors {
         series: Array.from({ length: 9 }, (_, i) =>
           readVar(el, `--chart-${i + 1}`),
         ),
+        categorical: (() => {
+          const cat = Array.from({ length: 8 }, (_, i) =>
+            readVar(el, `--chart-cat-${i + 1}`),
+          );
+          return cat.every(Boolean) ? cat : DARK_FALLBACK.categorical;
+        })(),
       };
       rerender((n) => n + 1);
     }

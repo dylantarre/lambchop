@@ -1,0 +1,31 @@
+---
+name: DonutBreakdown
+description: Donut chart with a linked value legend, sorted largest first, long tail folded into Other.
+category: Generative
+sourceFile: donut-breakdown.tsx
+storyId: components-donutbreakdown
+---
+
+## Usage
+
+```tsx
+import { DonutBreakdown, formatValue } from "lmbchp";
+
+<DonutBreakdown items={sites} format={(v) => formatValue(v, "currency")} totalLabel="October" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `{ label; value }[]` | — | Slices; zero and negative values are dropped |
+| `format` | `(v: number) => string` | locale number | Formatter for the total, legend and tooltip |
+| `totalLabel` | `string` | `"Total"` | Caption under the total in the donut hole |
+| `maxSlices` | `number` | `8` | Slices beyond this fold into "Other (n)" |
+| `height` | `number` | `240` | Donut height |
+
+## Guidance
+
+- Uses the categorical palette. Never a ramp of one hue: eight shades of gold cannot be told apart.
+- The legend lists exact values and percents, which is the accessible reading of the chart.
+- Ask Lambert's `PieChart(...)` renders this component.

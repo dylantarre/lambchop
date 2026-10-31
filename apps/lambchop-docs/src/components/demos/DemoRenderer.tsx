@@ -23,6 +23,12 @@ import FooterDemo from "./FooterDemo";
 import FadeInDemo from "./FadeInDemo";
 import ScaleInDemo from "./ScaleInDemo";
 import StaggerContainerDemo from "./StaggerContainerDemo";
+import ChartPanelDemo from "./ChartPanelDemo";
+import CalloutDemo from "./CalloutDemo";
+import ComparisonCardDemo from "./ComparisonCardDemo";
+import BreakdownListDemo from "./BreakdownListDemo";
+import DonutBreakdownDemo from "./DonutBreakdownDemo";
+import RankedTableDemo from "./RankedTableDemo";
 
 const demoMap: Record<string, React.ComponentType> = {
   "kpi-card": KpiCardDemo,
@@ -50,6 +56,12 @@ const demoMap: Record<string, React.ComponentType> = {
   "fade-in": FadeInDemo,
   "scale-in": ScaleInDemo,
   "stagger-container": StaggerContainerDemo,
+  "chart-panel": ChartPanelDemo,
+  "callout": CalloutDemo,
+  "comparison-card": ComparisonCardDemo,
+  "breakdown-list": BreakdownListDemo,
+  "donut-breakdown": DonutBreakdownDemo,
+  "ranked-table": RankedTableDemo,
 };
 
 export default function DemoRenderer({ slug }: { slug: string }) {

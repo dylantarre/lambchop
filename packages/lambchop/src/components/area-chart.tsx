@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { cn } from "../lib/cn";
 import { useChartColors } from "../lib/use-chart-colors";
+import { legendFormatter, seriesColor, tooltipLabelStyle, tooltipStyle } from "../lib/chart-style";
 
 export interface AreaDefinition {
   key: string;
@@ -30,6 +31,11 @@ export interface AreaChartProps {
   xTickFormatter?: (value: string) => string;
   yTickFormatter?: (value: number) => string;
   tooltipFormatter?: (value: number) => string;
+  tooltipLabelFormatter?: (value: string) => string;
+  /** Series palette. Default "brand". */
+  palette?: string[] | "categorical" | "brand";
+  /** Show the legend. Default true. */
+  showLegend?: boolean;
 }
 
 export function AreaChart({
@@ -42,6 +48,9 @@ export function AreaChart({
   xTickFormatter,
   yTickFormatter,
   tooltipFormatter,
+  tooltipLabelFormatter,
+  palette = "brand",
+  showLegend = true,
 }: AreaChartProps) {
   const gradientId = React.useId();
   const colors = useChartColors();
@@ -61,12 +70,12 @@ export function AreaChart({
       <ResponsiveContainer width="100%" height={height}>
         <RechartsAreaChart
           data={data}
-          margin={{ top: 8, right: 16, left: 0, bottom: 0 }}
+          margin={{ top: 8, right: 24, left: 0, bottom: 0 }}
         >
           <defs>
             {areas.map((area, index) => {
               const color =
-                area.color ?? colors.series[index % colors.series.length];
+                seriesColor(colors, index, palette, area.color);
               return (
                 <linearGradient
                   key={area.key}
@@ -93,46 +102,44 @@ export function AreaChart({
             axisLine={{ stroke: colors.grid }}
             tickLine={false}
             tickFormatter={xTickFormatter}
+            minTickGap={24}
+            interval={data.length <= 12 ? "equidistantPreserveStart" : "preserveStartEnd"}
           />
           <YAxis
             tick={{ fontSize: 12, fill: colors.tick }}
             axisLine={false}
             tickLine={false}
             tickFormatter={yTickFormatter}
+            width={56}
           />
           <Tooltip
-            contentStyle={{
-              backgroundColor: colors.tooltipBg,
-              border: `1px solid ${colors.tooltipBorder}`,
-              borderRadius: "2px",
-              boxShadow: "none",
-              fontSize: 12,
-              color: colors.tooltipText,
-            }}
+            contentStyle={tooltipStyle(colors)}
+            labelStyle={tooltipLabelStyle}
+            labelFormatter={tooltipLabelFormatter ? (l: unknown) => tooltipLabelFormatter(String(l)) : undefined}
             cursor={{ stroke: colors.cursor, strokeDasharray: "3 3" }}
             formatter={tooltipFormatter ? (value: unknown) => tooltipFormatter(Number(value)) : undefined}
             itemSorter={stacked ? () => -1 : undefined}
           />
-          <Legend
+          {showLegend && <Legend
             wrapperStyle={{ fontSize: 12, paddingTop: 8, cursor: "pointer" }}
             iconType="circle"
             iconSize={8}
             onClick={(e) => e.dataKey && toggleSeries(e.dataKey as string)}
             formatter={(value, entry) => (
-              <span style={{ color: hidden.has(entry.dataKey as string) ? colors.tick : undefined, opacity: hidden.has(entry.dataKey as string) ? 0.4 : 1 }}>{value}</span>
+              <span style={{ color: colors.tick, opacity: hidden.has(entry.dataKey as string) ? 0.4 : 1 }}>{value}</span>
             )}
             payload={stacked
               ? [...areas].reverse().map((area, i) => {
                   const origIndex = areas.length - 1 - i;
-                  const color = area.color ?? colors.series[origIndex % colors.series.length];
+                  const color = seriesColor(colors, origIndex, palette, area.color);
                   return { value: area.label, type: "circle" as const, id: area.key, dataKey: area.key, color, inactive: hidden.has(area.key) };
                 })
               : undefined
             }
-          />
+          />}
           {areas.map((area, index) => {
             const color =
-              area.color ?? colors.series[index % colors.series.length];
+              seriesColor(colors, index, palette, area.color);
             return (
               <Area
                 key={area.key}

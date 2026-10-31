@@ -60,3 +60,11 @@ export { ToastProvider, useToast, type ToastOptions, type ToastVariant } from ".
 
 // Site
 export { SiteBadge, type SiteBadgeProps } from "./site-badge";
+
+// Generative / analytics composites (used by Ask Lambert)
+export { ChartPanel, type ChartPanelProps } from "./chart-panel";
+export { Callout, type CalloutProps } from "./callout";
+export { BreakdownList, type BreakdownListProps, type BreakdownItem } from "./breakdown-list";
+export { DonutBreakdown, type DonutBreakdownProps } from "./donut-breakdown";
+export { ComparisonCard, type ComparisonCardProps } from "./comparison-card";
+export { RankedTable, type RankedTableProps, type RankedTableColumn, type CellValue } from "./ranked-table";

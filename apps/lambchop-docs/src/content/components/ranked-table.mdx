@@ -1,0 +1,35 @@
+---
+name: RankedTable
+description: Sortable table that infers number formats, aligns numerals, ranks rows and adds a data bar.
+category: Generative
+sourceFile: ranked-table.tsx
+storyId: components-rankedtable
+---
+
+## Usage
+
+```tsx
+import { RankedTable } from "lmbchp";
+
+<RankedTable
+  columns={["Title", "Author", "Site", "Revenue", "Pageviews"]}
+  rows={[["Homepage", "Staff", "Lambgoat", 911.3, 210207]]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `columns` | `(string \| { header; format? })[]` | — | Headers; formats are inferred from the header and data when omitted |
+| `rows` | `(string \| number \| null)[][]` | — | Cell values matching `columns` |
+| `pageSize` | `number` | `10` | Rows shown before "Show all" |
+| `barColumn` | `number \| null` | first currency column | Column with an inline data bar; `null` turns it off |
+| `showRank` | `boolean` | `true` | Prefix rows with their rank |
+| `sortable` | `boolean` | `true` | Click headers to sort |
+
+## Guidance
+
+- Numbers are right-aligned in tabular figures. A currency column shares one decimal policy so values line up.
+- Long first-column text clamps to two lines with the full text on hover.
+- Ask Lambert's `DataTable(...)` renders this component.

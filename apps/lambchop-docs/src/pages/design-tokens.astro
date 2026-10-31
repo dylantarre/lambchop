@@ -66,18 +66,56 @@ import TokenSwatch from "../components/site/TokenSwatch.astro";
 
     <!-- Colors: Chart -->
     <section class="mb-12">
-      <h2 class="mb-4 text-xl font-semibold text-text">Chart Series</h2>
-      <p class="mb-6 text-sm text-text-secondary">Nine distinct series colors for multi-line charts and data visualization.</p>
+      <h2 class="mb-4 text-xl font-semibold text-text">Chart: brand ramp</h2>
+      <p class="mb-6 text-sm text-text-secondary">
+        The theme's default series colors, used when a chart passes no palette. Apps may restyle them:
+        the LGM dashboard sets all nine to shades of its gold accent, which identifies the brand but cannot
+        tell series apart. Use the categorical palette below whenever color must distinguish series.
+      </p>
       <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-3">
-        <TokenSwatch label="chart-1" cssVar="chart series 1" />
-        <TokenSwatch label="chart-2" cssVar="chart series 2" />
-        <TokenSwatch label="chart-3" cssVar="chart series 3" />
-        <TokenSwatch label="chart-4" cssVar="chart series 4" />
-        <TokenSwatch label="chart-5" cssVar="chart series 5" />
-        <TokenSwatch label="chart-6" cssVar="chart series 6" />
-        <TokenSwatch label="chart-7" cssVar="chart series 7" />
-        <TokenSwatch label="chart-8" cssVar="chart series 8" />
-        <TokenSwatch label="chart-9" cssVar="chart series 9" />
+        <TokenSwatch label="chart-1" cssVar="brand series 1" />
+        <TokenSwatch label="chart-2" cssVar="brand series 2" />
+        <TokenSwatch label="chart-3" cssVar="brand series 3" />
+        <TokenSwatch label="chart-4" cssVar="brand series 4" />
+        <TokenSwatch label="chart-5" cssVar="brand series 5" />
+        <TokenSwatch label="chart-6" cssVar="brand series 6" />
+        <TokenSwatch label="chart-7" cssVar="brand series 7" />
+        <TokenSwatch label="chart-8" cssVar="brand series 8" />
+        <TokenSwatch label="chart-9" cssVar="brand series 9" />
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-semibold text-text">Chart: categorical</h2>
+      <p class="mb-4 text-sm text-text-secondary">
+        Eight hues for charts where color carries identity: sites in a stacked area, slices in a
+        donut, series in a multi-line chart. Pass <code class="font-mono text-xs">palette="categorical"</code>
+        to any chart. Gold leads so the brand still opens every chart.
+      </p>
+      <div class="mb-6 rounded-card border border-surface-border bg-surface-secondary p-4 text-sm text-text-secondary">
+        <p class="mb-2 font-medium text-text">Rules</p>
+        <ul class="list-disc space-y-1 pl-5">
+          <li>Assign slots in order and never cycle. A ninth series folds into "Other".</li>
+          <li>The order is the colorblind-safety mechanism. It passes CVD, lightness, chroma and contrast checks against both card surfaces.</li>
+          <li>Color follows the entity, not its rank: Lambgoat keeps its color when a filter removes other sites.</li>
+          <li>Legends and labels use text colors. A swatch beside the text carries the identity.</li>
+          <li>In light mode, slots 3, 4 and 6 sit under 3:1 contrast, so those charts always show direct labels or a value legend.</li>
+        </ul>
+      </div>
+      <div class="flex overflow-hidden rounded-card border border-surface-border">
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+          <div class="h-12 flex-1" style={`background-color: var(--chart-cat-${i})`} title={`chart-cat-${i}`} />
+        ))}
+      </div>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <TokenSwatch label="chart-cat-1" cssVar="gold" />
+        <TokenSwatch label="chart-cat-2" cssVar="blue" />
+        <TokenSwatch label="chart-cat-3" cssVar="aqua" />
+        <TokenSwatch label="chart-cat-4" cssVar="orange" />
+        <TokenSwatch label="chart-cat-5" cssVar="violet" />
+        <TokenSwatch label="chart-cat-6" cssVar="magenta" />
+        <TokenSwatch label="chart-cat-7" cssVar="green" />
+        <TokenSwatch label="chart-cat-8" cssVar="red" />
       </div>
     </section>
 
