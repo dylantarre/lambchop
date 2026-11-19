@@ -172,10 +172,12 @@ const lambchopPreset: Partial<Config> = {
           to: { transform: "translateX(250%)" },
         },
       },
+      // Entering animations fill backwards only: they hide content during a stagger
+      // delay, then finish and release the element instead of pinning it to a layer.
       animation: {
-        reveal: `lmbchp-reveal ${motion.duration.base}ms ${motion.easing.enter} both`,
-        enter: `lmbchp-enter ${motion.duration.base}ms ${motion.easing.enter} both`,
-        "value-in": `lmbchp-value-in ${motion.duration.base}ms ${motion.easing.enter} both`,
+        reveal: `lmbchp-reveal ${motion.duration.base}ms ${motion.easing.enter} backwards`,
+        enter: `lmbchp-enter ${motion.duration.base}ms ${motion.easing.enter} backwards`,
+        "value-in": `lmbchp-value-in ${motion.duration.base}ms ${motion.easing.enter} backwards`,
         "value-out": `lmbchp-value-out ${motion.duration.fast}ms ${motion.easing.exit} both`,
         skeleton: "lmbchp-skeleton 1.6s ease-in-out infinite",
         progress: `lmbchp-progress 1.1s ${motion.easing.move} infinite`,
