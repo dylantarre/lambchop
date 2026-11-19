@@ -31,6 +31,8 @@ export interface LineDefinition {
 export interface LineChartProps {
   data: Record<string, unknown>[];
   xKey: string;
+  /** Enables keyboard inspection for this named report. */
+  accessibleLabel?: string;
   lines: LineDefinition[];
   height?: number;
   className?: string;
@@ -55,6 +57,7 @@ export interface LineChartProps {
 export function LineChart({
   data,
   xKey,
+  accessibleLabel,
   lines,
   height = 300,
   className,
@@ -75,9 +78,12 @@ export function LineChart({
   const tick = { fontSize: 12, fill: colors.tick };
 
   return (
-    <div className={cn("w-full", className)} role="img" aria-label="Line chart">
+    <div className={cn("w-full", className)} role={accessibleLabel ? undefined : "img"} aria-label={accessibleLabel ? undefined : "Line chart"}>
       <ResponsiveContainer width="100%" height={height}>
         <RechartsComposedChart
+          accessibilityLayer={Boolean(accessibleLabel)}
+          title={accessibleLabel}
+          desc={accessibleLabel ? "Use the arrow keys to inspect each data point." : undefined}
           data={data}
           margin={{ top: 8, right: 24, left: 0, bottom: 0 }}
         >
@@ -111,6 +117,7 @@ export function LineChart({
             width={56}
           />
           <Tooltip
+            isAnimationActive={accessibleLabel ? false : undefined}
             contentStyle={tooltipStyle(colors)}
             labelStyle={tooltipLabelStyle}
             labelFormatter={tooltipLabelFormatter ? (l: unknown) => tooltipLabelFormatter(String(l)) : undefined}
@@ -153,6 +160,7 @@ export function LineChart({
             const color = seriesColor(colors, index + paletteOffset, palette, line.color);
             return (
               <Line
+                isAnimationActive={accessibleLabel ? false : undefined}
                 key={line.key}
                 dataKey={line.key}
                 name={line.label}

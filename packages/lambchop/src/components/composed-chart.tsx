@@ -32,6 +32,8 @@ export interface ComposedLineDefinition {
 export interface ComposedChartProps {
   data: Record<string, unknown>[];
   xKey: string;
+  /** Enables keyboard inspection for this named report. */
+  accessibleLabel?: string;
   bars?: ComposedBarDefinition[];
   lines?: ComposedLineDefinition[];
   dualAxis?: boolean;
@@ -50,6 +52,7 @@ export interface ComposedChartProps {
 export function ComposedChart({
   data,
   xKey,
+  accessibleLabel,
   bars = [],
   lines = [],
   dualAxis = false,
@@ -65,9 +68,12 @@ export function ComposedChart({
   const colors = useChartColors();
 
   return (
-    <div className={cn("w-full", className)} role="img" aria-label="Composed chart">
+    <div className={cn("w-full", className)} role={accessibleLabel ? undefined : "img"} aria-label={accessibleLabel ? undefined : "Composed chart"}>
       <ResponsiveContainer width="100%" height={height}>
         <RechartsComposedChart
+          accessibilityLayer={Boolean(accessibleLabel)}
+          title={accessibleLabel}
+          desc={accessibleLabel ? "Use the arrow keys to inspect each data point." : undefined}
           data={data}
           margin={{ top: 8, right: dualAxis ? 20 : 16, left: 0, bottom: 0 }}
         >
@@ -101,6 +107,7 @@ export function ComposedChart({
             />
           )}
           <Tooltip
+            isAnimationActive={accessibleLabel ? false : undefined}
             contentStyle={tooltipStyle(colors)}
             labelStyle={tooltipLabelStyle}
             labelFormatter={tooltipLabelFormatter ? (l: unknown) => tooltipLabelFormatter(String(l)) : undefined}
@@ -110,6 +117,7 @@ export function ComposedChart({
           <Legend wrapperStyle={{ fontSize: 12, paddingTop: 8 }} iconType="circle" iconSize={8} formatter={legendFormatter(colors)} />
           {bars.map((bar, index) => (
             <Bar
+              isAnimationActive={accessibleLabel ? false : undefined}
               key={bar.key}
               dataKey={bar.key}
               name={bar.label}
@@ -123,6 +131,7 @@ export function ComposedChart({
             const color = seriesColor(colors, bars.length + index, palette, line.color);
             return (
               <Line
+                isAnimationActive={accessibleLabel ? false : undefined}
                 key={line.key}
                 dataKey={line.key}
                 name={line.label}
