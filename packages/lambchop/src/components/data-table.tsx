@@ -8,6 +8,7 @@ import {
   flexRender,
   type ColumnDef,
   type SortingState,
+  type ColumnOrderState,
 } from "@tanstack/react-table";
 import { cn } from "../lib/cn";
 
@@ -24,6 +25,33 @@ export interface DataTableProps<TData> {
   hidePagination?: boolean;
   tableFixed?: boolean;
   initialSorting?: SortingState;
+  /**
+   * Let the viewer reorder columns: drag a header onto another, or focus a
+   * header's grip and press Left/Right. Requires every column to have an id
+   * (accessor columns get one from their key).
+   */
+  reorderable?: boolean;
+  /** localStorage key that remembers this viewer's column order (per browser). */
+  columnOrderKey?: string;
+}
+
+function readStoredOrder(key: string | undefined): string[] | null {
+  if (!key || typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(key);
+    const parsed = raw ? JSON.parse(raw) : null;
+    return Array.isArray(parsed) && parsed.every((x) => typeof x === "string") ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Keep a saved order valid as columns change: drop removed ids, append new ones in place. */
+function reconcileOrder(saved: string[] | null, ids: string[]): string[] {
+  if (!saved) return ids;
+  const kept = saved.filter((id) => ids.includes(id));
+  for (const [i, id] of ids.entries()) if (!kept.includes(id)) kept.splice(Math.min(i, kept.length), 0, id);
+  return kept;
 }
 
 export function DataTable<TData>({
@@ -38,8 +66,45 @@ export function DataTable<TData>({
   hidePagination = false,
   tableFixed = false,
   initialSorting,
+  reorderable = false,
+  columnOrderKey,
 }: DataTableProps<TData>) {
   const [sorting, setSorting] = React.useState<SortingState>(initialSorting ?? []);
+  const defaultOrder = React.useMemo(
+    () => columns.map((c, i) => String(c.id ?? (c as { accessorKey?: string }).accessorKey ?? i)),
+    [columns],
+  );
+  const [columnOrder, setColumnOrder] = React.useState<ColumnOrderState>(defaultOrder);
+  // Saved order is read after mount so server and client render the same default first.
+  React.useEffect(() => {
+    if (reorderable) setColumnOrder(reconcileOrder(readStoredOrder(columnOrderKey), defaultOrder));
+  }, [reorderable, columnOrderKey, defaultOrder]);
+  const [announcement, setAnnouncement] = React.useState("");
+  const [dragId, setDragId] = React.useState<string | null>(null);
+  const [overId, setOverId] = React.useState<string | null>(null);
+  const isCustomOrder = reorderable && columnOrder.join("|") !== defaultOrder.join("|");
+
+  const saveOrder = React.useCallback((next: string[]) => {
+    setColumnOrder(next);
+    if (!columnOrderKey) return;
+    try {
+      if (next.join("|") === defaultOrder.join("|")) window.localStorage.removeItem(columnOrderKey);
+      else window.localStorage.setItem(columnOrderKey, JSON.stringify(next));
+    } catch {
+      /* storage unavailable: the order still applies for this visit */
+    }
+  }, [columnOrderKey, defaultOrder]);
+
+  const moveColumn = React.useCallback((id: string, toIndex: number, label: string) => {
+    const from = columnOrder.indexOf(id);
+    const to = Math.max(0, Math.min(columnOrder.length - 1, toIndex));
+    if (from < 0 || from === to) return;
+    const next = [...columnOrder];
+    next.splice(from, 1);
+    next.splice(to, 0, id);
+    saveOrder(next);
+    setAnnouncement(`${label} moved to column ${to + 1} of ${next.length}`);
+  }, [columnOrder, saveOrder]);
   const [globalFilter, setGlobalFilter] = React.useState("");
 
   // Increment generation when loading transitions false → triggers row re-animation
@@ -58,8 +123,10 @@ export function DataTable<TData>({
     state: {
       sorting,
       globalFilter,
+      columnOrder,
     },
     onSortingChange: setSorting,
+    onColumnOrderChange: setColumnOrder,
     onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -74,6 +141,20 @@ export function DataTable<TData>({
 
   return (
     <div className={cn("flex flex-col gap-3", className)}>
+      {reorderable && (
+        <span className="sr-only" aria-live="polite">{announcement}</span>
+      )}
+      {isCustomOrder && (
+        <div className="-mb-2 flex justify-end px-3">
+          <button
+            type="button"
+            className="text-xs text-text-secondary underline-offset-2 hover:text-text hover:underline"
+            onClick={() => { saveOrder(defaultOrder); setAnnouncement("Columns reset to the default order"); }}
+          >
+            Reset columns
+          </button>
+        </div>
+      )}
       {searchable && (
         <div className="relative w-full max-w-sm">
           <svg
@@ -135,6 +216,8 @@ export function DataTable<TData>({
                 {headerGroup.headers.map((header) => {
                   const canSort = header.column.getCanSort();
                   const sorted = header.column.getIsSorted();
+                  const colId = header.column.id;
+                  const headerLabel = typeof header.column.columnDef.header === "string" ? header.column.columnDef.header : colId;
 
                   return (
                     <th
@@ -143,7 +226,25 @@ export function DataTable<TData>({
                       className={cn(
                         "border-b border-surface-border px-3 py-2 text-left font-medium text-text-secondary",
                         canSort && "cursor-pointer select-none",
+                        reorderable && "transition-[box-shadow,opacity] duration-fast ease-move",
+                        reorderable && dragId === colId && "opacity-50",
+                        reorderable && overId === colId && dragId !== colId && "shadow-[inset_2px_0_0_rgb(var(--accent-strong))]",
                       )}
+                      draggable={reorderable || undefined}
+                      onDragStart={reorderable ? (e) => { setDragId(colId); e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", colId); } : undefined}
+                      onDragOver={reorderable ? (e) => { if (dragId) { e.preventDefault(); setOverId(colId); } } : undefined}
+                      onDragLeave={reorderable ? () => setOverId((o) => (o === colId ? null : o)) : undefined}
+                      onDrop={reorderable ? (e) => {
+                        e.preventDefault();
+                        if (dragId && dragId !== colId) {
+                          const dragged = table.getColumn(dragId);
+                          const dl = typeof dragged?.columnDef.header === "string" ? dragged.columnDef.header : dragId;
+                          moveColumn(dragId, columnOrder.indexOf(colId), dl);
+                        }
+                        setDragId(null);
+                        setOverId(null);
+                      } : undefined}
+                      onDragEnd={reorderable ? () => { setDragId(null); setOverId(null); } : undefined}
                       onClick={
                         canSort
                           ? header.column.getToggleSortingHandler()
@@ -160,6 +261,30 @@ export function DataTable<TData>({
                       }
                     >
                       <div className="flex items-center gap-1">
+                        {reorderable && (
+                          <button
+                            type="button"
+                            aria-label={`Move ${headerLabel} column. Use left and right arrow keys.`}
+                            title="Drag, or focus and use the arrow keys, to move this column"
+                            className="-ml-1 cursor-grab rounded-button px-0.5 text-text-muted hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong"
+                            onClick={(e) => e.stopPropagation()}
+                            onKeyDown={(e) => {
+                              if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+                              e.preventDefault();
+                              e.stopPropagation();
+                              const grip = e.currentTarget;
+                              moveColumn(colId, columnOrder.indexOf(colId) + (e.key === "ArrowLeft" ? -1 : 1), headerLabel);
+                              // Keep focus on the moved column's grip.
+                              requestAnimationFrame(() => grip.focus());
+                            }}
+                          >
+                            <svg aria-hidden="true" width="8" height="12" viewBox="0 0 8 12" fill="currentColor">
+                              <circle cx="2" cy="2" r="1" /><circle cx="6" cy="2" r="1" />
+                              <circle cx="2" cy="6" r="1" /><circle cx="6" cy="6" r="1" />
+                              <circle cx="2" cy="10" r="1" /><circle cx="6" cy="10" r="1" />
+                            </svg>
+                          </button>
+                        )}
                         {header.isPlaceholder
                           ? null
                           : flexRender(
