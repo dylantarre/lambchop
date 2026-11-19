@@ -18,6 +18,8 @@ export interface KpiCardProps {
   className?: string;
   /** Extra classes for the value, e.g. "text-accent" for the headline number. */
   valueClassName?: string;
+  /** Use a compact value size for dense, fixed-column strips. */
+  compactValue?: boolean;
   /** The value is loading: the label stays, the value's space is held by a placeholder. */
   pending?: boolean;
   /** The number behind `value`. When given, a change rolls in the direction it moved. */
@@ -35,6 +37,7 @@ export function KpiCard({
   icon,
   className,
   valueClassName,
+  compactValue,
   pending = false,
   numericValue,
   revealDelay,
@@ -51,6 +54,7 @@ export function KpiCard({
 
   return (
     <div
+      data-slot="kpi"
       className={cn(
         "flex h-full flex-col rounded-card border border-surface-border bg-surface p-card-p shadow-card",
         className,
@@ -65,7 +69,11 @@ export function KpiCard({
 
       <div className="mt-2 flex items-end justify-between gap-4">
         <Pending pending={pending} revealDelay={revealDelay} placeholder={<Skeleton className="h-4/5 w-3/4 min-w-16" />} className="min-w-0">
-          <div className={cn("text-3xl font-semibold tabular-nums text-text", valueClassName)}>
+          <div
+            data-slot="kpi-value"
+            data-custom-size={compactValue || undefined}
+            className={cn("text-3xl font-semibold tabular-nums text-text", compactValue && "text-base sm:text-2xl", valueClassName)}
+          >
             <ValueTransition value={value} numeric={numericValue} previousVisible={previousVisible} />
           </div>
         </Pending>

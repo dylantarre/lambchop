@@ -1,6 +1,8 @@
 import type { Config } from "tailwindcss";
 import { motion } from "./lib/motion";
 
+import { reportTheme } from "./report-theme";
+
 const withOpacity = (variable: string) => `rgb(var(${variable}) / <alpha-value>)`;
 
 const BREAKPOINTS = {
@@ -13,6 +15,7 @@ const BREAKPOINTS = {
 };
 
 const lambchopPreset: Partial<Config> = {
+  plugins: [reportTheme],
   theme: {
     screens: BREAKPOINTS,
     extend: {

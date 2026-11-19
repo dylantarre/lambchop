@@ -31,6 +31,8 @@ export interface BarDefinition {
 export interface BarChartProps {
   data: Record<string, unknown>[];
   xKey: string;
+  /** Enables keyboard inspection for this named report. */
+  accessibleLabel?: string;
   bars: BarDefinition[];
   height?: number;
   /** "vertical" = columns (default), "horizontal" = bars growing right. */
@@ -59,6 +61,7 @@ export interface BarChartProps {
 export function BarChart({
   data,
   xKey,
+  accessibleLabel,
   bars,
   height = 300,
   layout = "vertical",
@@ -93,9 +96,12 @@ export function BarChart({
   const crowded = !horizontal && data.length > 6;
 
   return (
-    <div className={cn("w-full", className)} role="img" aria-label="Bar chart">
+    <div className={cn("w-full", className)} role={accessibleLabel ? undefined : "img"} aria-label={accessibleLabel ? undefined : "Bar chart"}>
       <ResponsiveContainer width="100%" height={height}>
         <RechartsBarChart
+          accessibilityLayer={Boolean(accessibleLabel)}
+          title={accessibleLabel}
+          desc={accessibleLabel ? "Use the arrow keys to inspect each data point." : undefined}
           data={data}
           layout={horizontal ? "vertical" : "horizontal"}
           margin={{
@@ -153,6 +159,7 @@ export function BarChart({
             tickLine={false}
           />
           <Tooltip
+            isAnimationActive={accessibleLabel ? false : undefined}
             contentStyle={tooltipStyle(colors)}
             labelStyle={tooltipLabelStyle}
             labelFormatter={(_label, payload) => {
@@ -174,6 +181,7 @@ export function BarChart({
             const fill = seriesColor(colors, index, palette, bar.color);
             return (
               <Bar
+                isAnimationActive={accessibleLabel ? false : undefined}
                 key={bar.key}
                 dataKey={bar.key}
                 name={bar.label}

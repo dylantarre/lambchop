@@ -54,6 +54,16 @@ export interface AreaChartProps {
   annotateMax?: (x: string, value: number) => string;
   /** One-sentence description for screen readers, e.g. "Daily earnings, Nov 1 to Nov 17. Highest: Nov 6, $42.40." */
   summary?: string;
+  /**
+   * "report": a single series gets a 2.5px line over a light flat fill (the
+   * report theme's quieter treatment). Default keeps the existing styling.
+   */
+  appearance?: "default" | "report";
+  /**
+   * Name for keyboard inspection. When set, the chart takes focus and the left
+   * and right arrow keys move the tooltip one data point at a time.
+   */
+  accessibleLabel?: string;
 }
 
 export function AreaChart({
@@ -73,7 +83,10 @@ export function AreaChart({
   xTicks,
   annotateMax,
   summary,
+  appearance = "default",
+  accessibleLabel,
 }: AreaChartProps) {
+  const singleReportSeries = appearance === "report" && areas.length === 1;
   const gradientId = React.useId();
   const colors = useChartColors();
   const reduced = usePrefersReducedMotion();
@@ -139,9 +152,15 @@ export function AreaChart({
         className,
       )}
     >
-      <div role="img" aria-label={summary ?? `Area chart of ${areas.map((a) => a.label).join(", ")}`}>
+      <div
+        role={accessibleLabel ? undefined : "img"}
+        aria-label={accessibleLabel ? undefined : summary ?? `Area chart of ${areas.map((a) => a.label).join(", ")}`}
+      >
       <ResponsiveContainer width="100%" height={height}>
         <RechartsAreaChart
+          accessibilityLayer={Boolean(accessibleLabel)}
+          title={accessibleLabel}
+          desc={accessibleLabel ? `${summary ? summary + " " : ""}Use the left and right arrow keys to inspect each day.` : undefined}
           data={data}
           margin={{ top: peak ? 28 : 8, right: 24, left: 0, bottom: 0 }}
           onMouseMove={(state) => setReading(Boolean(state?.isTooltipActive))}
@@ -233,9 +252,9 @@ export function AreaChart({
                 name={area.label}
                 type={curve}
                 stroke={color}
-                strokeWidth={isStacked ? 1.5 : 2}
-                fill={isStacked ? color : `url(#${gradientId}-${area.key})`}
-                fillOpacity={isStacked ? 0.75 : 1}
+                strokeWidth={singleReportSeries ? 2.5 : isStacked ? 1.5 : 2}
+                fill={singleReportSeries || isStacked ? color : `url(#${gradientId}-${area.key})`}
+                fillOpacity={singleReportSeries ? 0.1 : isStacked ? 0.75 : 1}
                 stackId={isStacked ? "stack" : undefined}
                 dot={false}
                 // Range changes crossfade via the surrounding layout (see Pending);

@@ -14,6 +14,7 @@ export interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement>
 function CardTitle({ className, ...props }: CardTitleProps) {
   return (
     <h3
+      data-slot="card-title"
       className={cn("font-display text-xl uppercase tracking-wider text-card-foreground", className)}
       {...props}
     />
@@ -49,6 +50,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
 function CardRoot({ className, ...props }: CardProps) {
   return (
     <div
+      data-slot="card"
       className={cn(
         "rounded-card border-2 border-surface-border bg-card text-card-foreground",
         className,
