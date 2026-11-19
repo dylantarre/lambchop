@@ -42,6 +42,7 @@
     --chart-tooltip-border: #d6cfc5;
     --chart-tooltip-text: #1a1a1a;
     --chart-cursor: #b8b0a5;
+    --chart-neutral: #8f887e; /* bars for "everyone else": 3:1 on surface and card */
     --chart-active-dot: #1a1a1a;
     --chart-bar-cursor: rgba(0, 0, 0, 0.06);
 
@@ -109,6 +110,7 @@
     --chart-tooltip-border: #262626;
     --chart-tooltip-text: #e6ddd0;
     --chart-cursor: #3a3a3a;
+    --chart-neutral: #626262; /* 3:1 on dark surface and card */
     --chart-active-dot: #e6ddd0;
     --chart-bar-cursor: rgba(255, 255, 255, 0.04);
 

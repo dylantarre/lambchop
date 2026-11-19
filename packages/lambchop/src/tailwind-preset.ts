@@ -82,6 +82,9 @@ const lambchopPreset: Partial<Config> = {
           foreground: withOpacity("--card-foreground"),
         },
         border: withOpacity("--border"),
+        chart: {
+          neutral: "var(--chart-neutral)",
+        },
       },
       fontFamily: {
         display: ["Bebas Neue", "Impact", "sans-serif"],
@@ -131,6 +134,11 @@ const lambchopPreset: Partial<Config> = {
       },
       fontVariantNumeric: {
         tabular: "tabular-nums",
+      },
+      backgroundImage: {
+        // Accent/10 tint as an image layer, so it can sit on an opaque surface color
+        // (bg-surface-secondary bg-highlight) and stay legible while moving over content.
+        highlight: "linear-gradient(rgb(var(--accent) / 0.1), rgb(var(--accent) / 0.1))",
       },
       // Motion tokens (see lib/motion.ts): duration-fast|base|slow, ease-enter|exit|move.
       transitionDuration: {
