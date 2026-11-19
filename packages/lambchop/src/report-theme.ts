@@ -95,13 +95,7 @@ export const reportTheme = plugin(({ addBase, addComponents, theme }) => {
     },
     // Gold details (light mode only). Solid gold, never a tint and never dark gold.
     ":root:not(.dark)[data-report-view]": {
-      // Selected filters (Pill, report-filter) and the active nav tab: gold behind ink text.
-      "& button[aria-pressed='true']": {
-        backgroundColor: "rgb(var(--gold))", color: "rgb(var(--text))", borderColor: "transparent",
-      },
-      "& .report-shell > nav a[aria-current='page']": {
-        backgroundColor: "rgb(var(--gold))", color: "rgb(var(--text))",
-      },
+      // Selected states (filters, the active nav tab) stay charcoal: gold is kept for earnings.
       // The payout: a solid gold edge on its KPI and on the payout total.
       "& .report-payout": { boxShadow: "inset 0 3px 0 rgb(var(--gold))" },
       "& .report-metrics .report-payout": { boxShadow: "inset 0 3px 0 rgb(var(--gold)), 0 0 0 1px rgb(var(--surface-border))" },
