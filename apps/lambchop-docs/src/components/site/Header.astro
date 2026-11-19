@@ -56,6 +56,15 @@ const currentPath = Astro.url.pathname;
       ))}
       <span class="mx-2 h-4 w-px bg-surface-border" />
       <button
+        id="report-toggle"
+        type="button"
+        aria-pressed="false"
+        title="Preview the opt-in report theme"
+        class="rounded-button px-2 py-1 text-xs font-medium text-text-secondary hover:text-text hover:bg-surface-hover transition-colors aria-pressed:bg-surface-inverse aria-pressed:text-text-inverse"
+      >
+        Report theme
+      </button>
+      <button
         id="theme-toggle"
         type="button"
         aria-label="Toggle dark mode"
@@ -75,6 +84,18 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <script is:inline>
+  (function () {
+    const btn = document.getElementById("report-toggle");
+    if (!btn) return;
+    const sync = () => btn.setAttribute("aria-pressed", String(document.documentElement.hasAttribute("data-report-view")));
+    sync();
+    btn.addEventListener("click", () => {
+      const on = !document.documentElement.hasAttribute("data-report-view");
+      document.documentElement.toggleAttribute("data-report-view", on);
+      localStorage.setItem("lambchop-report", on ? "on" : "off");
+      sync();
+    });
+  })();
   document.getElementById("theme-toggle")?.addEventListener("click", () => {
     const isDark = document.documentElement.classList.toggle("dark");
     localStorage.setItem("lambchop-theme", isDark ? "dark" : "light");
