@@ -91,8 +91,13 @@ export function AreaChart({
   }, [annotateMax, data, areas, xKey]);
   const [hidden, setHidden] = React.useState<Set<string>>(new Set());
   // While the pointer reads the chart the tooltip carries the detail, so the
-  // peak label steps aside instead of colliding with it.
-  const [reading, setReading] = React.useState(false);
+  // peak label steps aside instead of colliding with it. Toggled as a DOM
+  // attribute (not React state) so hovering never re-renders a long series.
+  const frameRef = React.useRef<HTMLDivElement>(null);
+  const setReading = (on: boolean) => {
+    const el = frameRef.current;
+    if (el && el.dataset.reading !== String(on)) el.dataset.reading = String(on);
+  };
 
   const toggleSeries = React.useCallback((dataKey: string) => {
     setHidden((prev) => {
@@ -103,8 +108,37 @@ export function AreaChart({
     });
   }, []);
 
+  const srTable = React.useMemo(() => (
+      <table className="sr-only">
+          <caption>{summary ?? areas.map((a) => a.label).join(", ")}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{xKey}</th>
+              {areas.map((a) => <th key={a.key} scope="col">{a.label}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((row, i) => (
+              <tr key={i}>
+                <th scope="row">{tooltipLabelFormatter ? tooltipLabelFormatter(String(row[xKey])) : String(row[xKey])}</th>
+                {areas.map((a) => (
+                  <td key={a.key}>{tooltipFormatter ? tooltipFormatter(Number(row[a.key])) : String(row[a.key])}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+  ), [data, areas, xKey, summary, tooltipLabelFormatter, tooltipFormatter]);
+
   return (
-    <div className={cn("w-full", className)}>
+    <div
+      ref={frameRef}
+      className={cn(
+        "w-full [&_.recharts-reference-dot_.recharts-label]:transition-opacity [&_.recharts-reference-dot_.recharts-label]:duration-fast",
+        "[&[data-reading=true]_.recharts-reference-dot_.recharts-label]:opacity-0",
+        className,
+      )}
+    >
       <div role="img" aria-label={summary ?? `Area chart of ${areas.map((a) => a.label).join(", ")}`}>
       <ResponsiveContainer width="100%" height={height}>
         <RechartsAreaChart
@@ -227,7 +261,7 @@ export function AreaChart({
               strokeWidth={2}
               ifOverflow="extendDomain"
               label={{
-                value: reading ? "" : annotateMax(peak.x, peak.y),
+                value: annotateMax(peak.x, peak.y),
                 position: "top",
                 offset: 10,
                 fontSize: 12,
@@ -239,25 +273,7 @@ export function AreaChart({
         </RechartsAreaChart>
       </ResponsiveContainer>
       </div>
-      <table className="sr-only">
-        <caption>{summary ?? areas.map((a) => a.label).join(", ")}</caption>
-        <thead>
-          <tr>
-            <th scope="col">{xKey}</th>
-            {areas.map((a) => <th key={a.key} scope="col">{a.label}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, i) => (
-            <tr key={i}>
-              <th scope="row">{tooltipLabelFormatter ? tooltipLabelFormatter(String(row[xKey])) : String(row[xKey])}</th>
-              {areas.map((a) => (
-                <td key={a.key}>{tooltipFormatter ? tooltipFormatter(Number(row[a.key])) : String(row[a.key])}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {srTable}
     </div>
   );
 }
