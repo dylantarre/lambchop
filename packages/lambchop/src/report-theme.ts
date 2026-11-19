@@ -106,8 +106,11 @@ export const reportTheme = plugin(({ addBase, addComponents, theme }) => {
       "& .report-payout": { boxShadow: "inset 0 3px 0 rgb(var(--gold))" },
       "& .report-metrics .report-payout": { boxShadow: "inset 0 3px 0 rgb(var(--gold)), 0 0 0 1px rgb(var(--surface-border))" },
       "& [data-payout-total]": { boxShadow: "inset 4px 0 0 rgb(var(--gold))" },
-      // Earnings chart: ink line, no fill under it, saturated gold dots with an ink ring.
+      // Earnings chart: a saturated gold line with no fill under it, and gold dots with an
+      // ink ring. The line is about 1.8:1 on white, so the values stay available through
+      // the labeled best day, the tooltip, keyboard inspection and the screen-reader table.
       "& .report-trend .recharts-area-area": { fillOpacity: "0" },
+      "& .report-trend .recharts-area-curve": { stroke: "rgb(var(--gold))" },
       "& .report-trend .recharts-reference-dot circle, & .report-trend .recharts-active-dot circle": {
         fill: "rgb(var(--gold))", stroke: "rgb(var(--text))", strokeWidth: "2px",
       },
