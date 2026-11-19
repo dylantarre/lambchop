@@ -37,6 +37,8 @@ const { title, description = "Open-source React component library for analytics 
         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         const shouldDark = stored ? stored === "dark" : prefersDark;
         document.documentElement.classList.toggle("dark", shouldDark);
+        // Preview Lambchop's opt-in report theme (Header toggle).
+        if (localStorage.getItem("lambchop-report") === "on") document.documentElement.setAttribute("data-report-view", "");
       })();
     </script>
   </head>
