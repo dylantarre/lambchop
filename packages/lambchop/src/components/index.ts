@@ -61,6 +61,7 @@ export { Pending, type PendingProps } from "./pending";
 export { LoadingBar, type LoadingBarProps } from "./loading-bar";
 export { ValueTransition, type ValueTransitionProps } from "./value-transition";
 export { Meter, type MeterProps } from "./meter";
+export { ErrorState, type ErrorStateProps } from "./error-state";
 export { ShareStrip, type ShareStripProps, type ShareSegment } from "./share-strip";
 export { ToastProvider, useToast, type ToastOptions, type ToastVariant } from "./toast";
 
