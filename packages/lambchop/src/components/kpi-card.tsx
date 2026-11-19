@@ -22,6 +22,8 @@ export interface KpiCardProps {
   pending?: boolean;
   /** The number behind `value`. When given, a change rolls in the direction it moved. */
   numericValue?: number;
+  /** Stagger the value's reveal after loading (ms). */
+  revealDelay?: number;
 }
 
 export function KpiCard({
@@ -35,6 +37,7 @@ export function KpiCard({
   valueClassName,
   pending = false,
   numericValue,
+  revealDelay,
 }: KpiCardProps) {
   // A value that arrives after a loading state replaces one nobody could see,
   // so only the new value animates in.
@@ -61,7 +64,7 @@ export function KpiCard({
       </div>
 
       <div className="mt-2 flex items-end justify-between gap-4">
-        <Pending pending={pending} placeholder={<Skeleton className="h-4/5 w-3/4 min-w-16" />} className="min-w-0">
+        <Pending pending={pending} revealDelay={revealDelay} placeholder={<Skeleton className="h-4/5 w-3/4 min-w-16" />} className="min-w-0">
           <div className={cn("text-3xl font-semibold tabular-nums text-text", valueClassName)}>
             <ValueTransition value={value} numeric={numericValue} previousVisible={previousVisible} />
           </div>
