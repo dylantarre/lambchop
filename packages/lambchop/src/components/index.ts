@@ -62,6 +62,7 @@ export { LoadingBar, type LoadingBarProps } from "./loading-bar";
 export { ValueTransition, type ValueTransitionProps } from "./value-transition";
 export { Meter, type MeterProps } from "./meter";
 export { ErrorState, type ErrorStateProps } from "./error-state";
+export { Pill, PillGroup, type PillProps, type PillGroupProps } from "./pill";
 export { ShareStrip, type ShareStripProps, type ShareSegment } from "./share-strip";
 export { ToastProvider, useToast, type ToastOptions, type ToastVariant } from "./toast";
 
