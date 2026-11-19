@@ -21,6 +21,9 @@ export const reportTheme = plugin(({ addBase, addComponents, theme }) => {
       "--chart-tick": "rgb(var(--text-secondary))",
     },
     ":root:not(.dark)[data-report-view]": {
+      // Saturated gold for light-mode details. Never text on white (about 1.8:1):
+      // only fills behind ink text, solid edges, and ringed chart dots.
+      "--gold": "245 179 1",
       "--surface": "247 248 250",
       "--surface-secondary": "255 255 255",
       "--surface-tertiary": "237 239 242",
@@ -89,6 +92,28 @@ export const reportTheme = plugin(({ addBase, addComponents, theme }) => {
       "@media (prefers-reduced-motion: reduce)": {
         "&, & *": { animationDuration: "0.01ms !important", transitionDuration: "0.01ms !important" },
       },
+    },
+    // Gold details (light mode only). Solid gold, never a tint and never dark gold.
+    ":root:not(.dark)[data-report-view]": {
+      // Selected filters (Pill, report-filter) and the active nav tab: gold behind ink text.
+      "& button[aria-pressed='true']": {
+        backgroundColor: "rgb(var(--gold))", color: "rgb(var(--text))", borderColor: "transparent",
+      },
+      "& .report-shell > nav a[aria-current='page']": {
+        backgroundColor: "rgb(var(--gold))", color: "rgb(var(--text))",
+      },
+      // The payout: a solid gold edge on its KPI and on the payout total.
+      "& .report-payout": { boxShadow: "inset 0 3px 0 rgb(var(--gold))" },
+      "& .report-metrics .report-payout": { boxShadow: "inset 0 3px 0 rgb(var(--gold)), 0 0 0 1px rgb(var(--surface-border))" },
+      "& [data-payout-total]": { boxShadow: "inset 4px 0 0 rgb(var(--gold))" },
+      // Earnings chart: ink line, no fill under it, saturated gold dots with an ink ring.
+      "& .report-trend .recharts-area-area": { fillOpacity: "0" },
+      "& .report-trend .recharts-reference-dot circle, & .report-trend .recharts-active-dot circle": {
+        fill: "rgb(var(--gold))", stroke: "rgb(var(--text))", strokeWidth: "2px",
+      },
+      // The viewer's leaderboard row, bar and word-pool slice.
+      "& [data-current]": { boxShadow: "inset 3px 0 0 rgb(var(--gold))" },
+      "& [data-current] .bg-accent-strong, & [role='img'] > .bg-accent-strong": { backgroundColor: "rgb(var(--gold))" },
     },
     "[data-report-view] .report-metrics": {
       overflow: "hidden", gap: "0", border: "1px solid rgb(var(--surface-border))",
