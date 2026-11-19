@@ -27,6 +27,7 @@
     --accent: 180 122 9;
     --accent-light: 254 243 199;
     --accent-dark: 146 64 14;
+    --accent-strong: 144 88 0; /* #905800: 5.0:1 on surface, 4.6:1 on accent/10 */
 
     --revenue: 45 122 107;
     --revenue-bg: 232 245 240;
@@ -86,13 +87,14 @@
 
     --text: 230 221 208;
     --text-secondary: 168 168 168;
-    --text-tertiary: 120 120 120;
+    --text-tertiary: 142 142 142; /* 4.5:1 on every dark surface, incl. accent/10 */
     --text-inverse: 14 14 14;
-    --text-muted: 120 120 120;
+    --text-muted: 142 142 142;
 
     --accent: 252 211 77;
     --accent-light: 254 243 199;
     --accent-dark: 212 160 23;
+    --accent-strong: 252 211 77; /* the accent already clears AA on dark surfaces */
 
     --revenue: 91 154 139;
     --revenue-bg: 26 47 42;
@@ -102,7 +104,7 @@
     --warning-bg: 47 37 24;
 
     --chart-grid: #262626;
-    --chart-tick: #787878;
+    --chart-tick: #8e8e8e;
     --chart-tooltip-bg: #141414;
     --chart-tooltip-border: #262626;
     --chart-tooltip-text: #e6ddd0;
@@ -135,7 +137,7 @@
     --primary: 252 211 77;
     --primary-foreground: 14 14 14;
     --muted: 31 31 31;
-    --muted-foreground: 120 120 120;
+    --muted-foreground: 142 142 142;
     --card: 20 20 20;
     --card-foreground: 230 221 208;
     --border: 38 38 38;

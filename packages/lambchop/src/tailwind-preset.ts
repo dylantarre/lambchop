@@ -46,6 +46,10 @@ const lambchopPreset: Partial<Config> = {
           DEFAULT: withOpacity("--accent"),
           light: withOpacity("--accent-light"),
           dark: withOpacity("--accent-dark"),
+          // Same hue as DEFAULT at a lightness that meets WCAG AA (4.5:1) on every light
+          // surface, including accent/10 highlights. Use for text below 24px and for
+          // fills that carry light text. DEFAULT stays for large display numbers and marks.
+          strong: withOpacity("--accent-strong"),
         },
         // Semantic: revenue
         revenue: {
