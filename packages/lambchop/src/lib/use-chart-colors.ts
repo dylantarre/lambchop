@@ -19,7 +19,7 @@ export interface ChartColors {
 
 const DARK_FALLBACK: ChartColors = {
   grid: "#262626",
-  tick: "#787878",
+  tick: "#8e8e8e",
   tooltipBg: "#141414",
   tooltipBorder: "#262626",
   tooltipText: "#e6ddd0",

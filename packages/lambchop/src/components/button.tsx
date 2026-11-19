@@ -9,7 +9,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-primary text-primary-foreground font-display uppercase tracking-wider hover:opacity-90",
+          // accent-strong: light label on it is 5.0:1 (the base accent was 3.1:1).
+          "bg-accent-strong text-text-inverse font-display uppercase tracking-wider hover:opacity-90",
         secondary:
           "border-2 border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background",
         ghost:

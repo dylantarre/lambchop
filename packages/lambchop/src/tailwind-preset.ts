@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { motion } from "./lib/motion";
 
 const withOpacity = (variable: string) => `rgb(var(${variable}) / <alpha-value>)`;
 
@@ -45,6 +46,10 @@ const lambchopPreset: Partial<Config> = {
           DEFAULT: withOpacity("--accent"),
           light: withOpacity("--accent-light"),
           dark: withOpacity("--accent-dark"),
+          // Same hue as DEFAULT at a lightness that meets WCAG AA (4.5:1) on every light
+          // surface, including accent/10 highlights. Use for text below 24px and for
+          // fills that carry light text. DEFAULT stays for large display numbers and marks.
+          strong: withOpacity("--accent-strong"),
         },
         // Semantic: revenue
         revenue: {
@@ -77,6 +82,9 @@ const lambchopPreset: Partial<Config> = {
           foreground: withOpacity("--card-foreground"),
         },
         border: withOpacity("--border"),
+        chart: {
+          neutral: "var(--chart-neutral)",
+        },
       },
       fontFamily: {
         display: ["Bebas Neue", "Impact", "sans-serif"],
@@ -127,7 +135,52 @@ const lambchopPreset: Partial<Config> = {
       fontVariantNumeric: {
         tabular: "tabular-nums",
       },
+      backgroundImage: {
+        // Accent/10 tint as an image layer, so it can sit on an opaque surface color
+        // (bg-surface-secondary bg-highlight) and stay legible while moving over content.
+        highlight: "linear-gradient(rgb(var(--accent) / 0.1), rgb(var(--accent) / 0.1))",
+      },
+      // Motion tokens (see lib/motion.ts): duration-fast|base|slow, ease-enter|exit|move.
+      transitionDuration: {
+        fast: `${motion.duration.fast}ms`,
+        base: `${motion.duration.base}ms`,
+        slow: `${motion.duration.slow}ms`,
+      },
+      transitionTimingFunction: {
+        enter: motion.easing.enter,
+        exit: motion.easing.exit,
+        move: motion.easing.move,
+      },
+      keyframes: {
+        "lmbchp-reveal": { from: { opacity: "0" }, to: { opacity: "1" } },
+        "lmbchp-enter": {
+          from: { opacity: "0", transform: "translateY(6px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "lmbchp-skeleton": { "0%, 100%": { opacity: "1" }, "50%": { opacity: "0.55" } },
+        // Value roll: --lmbchp-value-shift is +0.4em (rising), -0.4em (falling) or 0.
+        "lmbchp-value-in": {
+          from: { opacity: "0", transform: "translateY(var(--lmbchp-value-shift, 0))" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "lmbchp-value-out": {
+          from: { opacity: "1", transform: "translateY(0)" },
+          to: { opacity: "0", transform: "translateY(calc(var(--lmbchp-value-shift, 0) * -1))" },
+        },
+        "lmbchp-progress": {
+          from: { transform: "translateX(-100%)" },
+          to: { transform: "translateX(250%)" },
+        },
+      },
+      // Entering animations fill backwards only: they hide content during a stagger
+      // delay, then finish and release the element instead of pinning it to a layer.
       animation: {
+        reveal: `lmbchp-reveal ${motion.duration.base}ms ${motion.easing.enter} backwards`,
+        enter: `lmbchp-enter ${motion.duration.base}ms ${motion.easing.enter} backwards`,
+        "value-in": `lmbchp-value-in ${motion.duration.base}ms ${motion.easing.enter} backwards`,
+        "value-out": `lmbchp-value-out ${motion.duration.fast}ms ${motion.easing.exit} both`,
+        skeleton: "lmbchp-skeleton 1.6s ease-in-out infinite",
+        progress: `lmbchp-progress 1.1s ${motion.easing.move} infinite`,
         "fade-in-up": "fade-in-up 0.5s ease-out both",
         "fade-in-down": "fade-in-down 0.5s ease-out both",
         "fade-in-left": "fade-in-left 0.5s ease-out both",
