@@ -146,6 +146,15 @@ const lambchopPreset: Partial<Config> = {
           to: { opacity: "1", transform: "translateY(0)" },
         },
         "lmbchp-skeleton": { "0%, 100%": { opacity: "1" }, "50%": { opacity: "0.55" } },
+        // Value roll: --lmbchp-value-shift is +0.4em (rising), -0.4em (falling) or 0.
+        "lmbchp-value-in": {
+          from: { opacity: "0", transform: "translateY(var(--lmbchp-value-shift, 0))" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "lmbchp-value-out": {
+          from: { opacity: "1", transform: "translateY(0)" },
+          to: { opacity: "0", transform: "translateY(calc(var(--lmbchp-value-shift, 0) * -1))" },
+        },
         "lmbchp-progress": {
           from: { transform: "translateX(-100%)" },
           to: { transform: "translateX(250%)" },
@@ -154,6 +163,8 @@ const lambchopPreset: Partial<Config> = {
       animation: {
         reveal: `lmbchp-reveal ${motion.duration.base}ms ${motion.easing.enter} both`,
         enter: `lmbchp-enter ${motion.duration.base}ms ${motion.easing.enter} both`,
+        "value-in": `lmbchp-value-in ${motion.duration.base}ms ${motion.easing.enter} both`,
+        "value-out": `lmbchp-value-out ${motion.duration.fast}ms ${motion.easing.exit} both`,
         skeleton: "lmbchp-skeleton 1.6s ease-in-out infinite",
         progress: `lmbchp-progress 1.1s ${motion.easing.move} infinite`,
         "fade-in-up": "fade-in-up 0.5s ease-out both",

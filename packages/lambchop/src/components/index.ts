@@ -59,6 +59,7 @@ export { FormInput, FormSelect, FormTextarea, type FormInputProps, type FormSele
 export { Skeleton, type SkeletonProps } from "./skeleton";
 export { Pending, type PendingProps } from "./pending";
 export { LoadingBar, type LoadingBarProps } from "./loading-bar";
+export { ValueTransition, type ValueTransitionProps } from "./value-transition";
 export { ToastProvider, useToast, type ToastOptions, type ToastVariant } from "./toast";
 
 // Site
