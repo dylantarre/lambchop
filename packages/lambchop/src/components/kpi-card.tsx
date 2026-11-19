@@ -3,6 +3,8 @@ import { cn } from "../lib/cn";
 import { useChartColors } from "../lib/use-chart-colors";
 import { isFlat } from "../lib/format";
 import { Sparkline } from "./sparkline";
+import { Pending } from "./pending";
+import { Skeleton } from "./skeleton";
 
 export interface KpiCardProps {
   label: string;
@@ -15,6 +17,8 @@ export interface KpiCardProps {
   className?: string;
   /** Extra classes for the value, e.g. "text-accent" for the headline number. */
   valueClassName?: string;
+  /** The value is loading: the label stays, the value's space is held by a placeholder. */
+  pending?: boolean;
 }
 
 export function KpiCard({
@@ -26,6 +30,7 @@ export function KpiCard({
   icon,
   className,
   valueClassName,
+  pending = false,
 }: KpiCardProps) {
   const colors = useChartColors();
   const flat = trend ? isFlat(trend.value) : false;
@@ -45,7 +50,9 @@ export function KpiCard({
       </div>
 
       <div className="mt-2 flex items-end justify-between gap-4">
-        <div className={cn("text-3xl font-semibold tabular-nums text-text", valueClassName)}>{value}</div>
+        <Pending pending={pending} placeholder={<Skeleton className="h-4/5 w-3/4 min-w-16" />} className="min-w-0">
+          <div className={cn("text-3xl font-semibold tabular-nums text-text", valueClassName)}>{value}</div>
+        </Pending>
         {sparklineData && sparklineData.length > 1 && (
           <Sparkline
             data={sparklineData}

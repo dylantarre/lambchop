@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { motion } from "./lib/motion";
 
 const withOpacity = (variable: string) => `rgb(var(${variable}) / <alpha-value>)`;
 
@@ -127,7 +128,34 @@ const lambchopPreset: Partial<Config> = {
       fontVariantNumeric: {
         tabular: "tabular-nums",
       },
+      // Motion tokens (see lib/motion.ts): duration-fast|base|slow, ease-enter|exit|move.
+      transitionDuration: {
+        fast: `${motion.duration.fast}ms`,
+        base: `${motion.duration.base}ms`,
+        slow: `${motion.duration.slow}ms`,
+      },
+      transitionTimingFunction: {
+        enter: motion.easing.enter,
+        exit: motion.easing.exit,
+        move: motion.easing.move,
+      },
+      keyframes: {
+        "lmbchp-reveal": { from: { opacity: "0" }, to: { opacity: "1" } },
+        "lmbchp-enter": {
+          from: { opacity: "0", transform: "translateY(6px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "lmbchp-skeleton": { "0%, 100%": { opacity: "1" }, "50%": { opacity: "0.55" } },
+        "lmbchp-progress": {
+          from: { transform: "translateX(-100%)" },
+          to: { transform: "translateX(250%)" },
+        },
+      },
       animation: {
+        reveal: `lmbchp-reveal ${motion.duration.base}ms ${motion.easing.enter} both`,
+        enter: `lmbchp-enter ${motion.duration.base}ms ${motion.easing.enter} both`,
+        skeleton: "lmbchp-skeleton 1.6s ease-in-out infinite",
+        progress: `lmbchp-progress 1.1s ${motion.easing.move} infinite`,
         "fade-in-up": "fade-in-up 0.5s ease-out both",
         "fade-in-down": "fade-in-down 0.5s ease-out both",
         "fade-in-left": "fade-in-left 0.5s ease-out both",

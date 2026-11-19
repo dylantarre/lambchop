@@ -56,6 +56,9 @@ export { Dialog, type DialogProps } from "./dialog";
 export { FormInput, FormSelect, FormTextarea, type FormInputProps, type FormSelectProps, type FormTextareaProps } from "./form-field";
 
 // Feedback
+export { Skeleton, type SkeletonProps } from "./skeleton";
+export { Pending, type PendingProps } from "./pending";
+export { LoadingBar, type LoadingBarProps } from "./loading-bar";
 export { ToastProvider, useToast, type ToastOptions, type ToastVariant } from "./toast";
 
 // Site
